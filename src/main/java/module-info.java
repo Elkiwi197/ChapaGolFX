@@ -1,8 +1,8 @@
-module org.example.chapagolfx {
+module controllers {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens org.example.chapagolfx to javafx.fxml;
+    opens controllers to javafx.fxml;
     exports org.example.chapagolfx;
 }
