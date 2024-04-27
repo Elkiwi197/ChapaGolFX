@@ -12,13 +12,15 @@ public class ControladorLoginPage {
     public PasswordField textoContrasena;
     public PasswordField contrasenaAdmin;
 
-    public void cargarPantallaUsuario(ActionEvent actionEvent) {
-    }
-
-    public void cargarPantallaAdministrador(ActionEvent actionEvent) {
-    }
-
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         this.borderPane = controladorPrincipal;
+    }
+
+    public void cargarLandingUsuario(ActionEvent actionEvent) {
+        borderPane.cargarLandingUsuario();
+    }
+
+    public void cargarLandingAdministrador(ActionEvent actionEvent) {
+        borderPane.cargarLandingAdministrador();
     }
 }

@@ -4,29 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/Portero.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/login_page.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Primer commit - fallo al cargar login">
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/chapagolfx/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -51,9 +39,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2fe7t6PSF6YkRELeZRShsbfmWH3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -113,19 +101,39 @@
       <option name="presentableId" value="Default" />
       <updated>1714149905338</updated>
       <workItem from="1714149906429" duration="6642000" />
+      <workItem from="1714157431761" duration="662000" />
+      <workItem from="1714214109447" duration="5439000" />
     </task>
+    <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
+      <option name="closed" value="true" />
+      <created>1714157492005</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714157492005</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Primer commit - fallo al cargar login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primer commit - fallo al cargar login" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
