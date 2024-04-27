@@ -1,6 +1,7 @@
 package service;
 
 import dao.DAOequipos;
+import javafx.collections.ObservableList;
 
 public class ServiceEquipos {
     DAOequipos daoEquipos = new DAOequipos();
@@ -10,4 +11,7 @@ public class ServiceEquipos {
     }
 
 
+    public ObservableList<String> devolverListaEquipos() {
+        return daoEquipos.devolverListaEquipos();
+    }
 }

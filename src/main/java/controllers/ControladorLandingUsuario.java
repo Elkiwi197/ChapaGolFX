@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -16,5 +17,10 @@ public class ControladorLandingUsuario {
     private ControladorPrincipal borderPane;
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         borderPane = controladorPrincipal;
+    }
+
+
+    public void cargarSeleccionarEquipoAmigo(ActionEvent actionEvent) {
+        borderPane.cargarSeleccionarEquipoAmigo();
     }
 }

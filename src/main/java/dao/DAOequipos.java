@@ -2,6 +2,8 @@ package dao;
 
 import domain.Equipo;
 import domain.Jugador;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,5 +55,13 @@ public class DAOequipos {
         barcelona.setTitulares(titularesBarcelona);
         liga.add(barcelona);
 
+    }
+
+    public ObservableList<String> devolverListaEquipos() {
+        ObservableList<String> lista = FXCollections.observableArrayList();;
+        for (Equipo equipo: liga) {
+            lista.add(equipo.getNombre());
+        }
+        return lista;
     }
 }

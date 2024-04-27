@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorSeleccionarEquiposAmigo">
+   <children>
+      <ChoiceBox fx:id="selectorEquipoJ1" layoutX="76.0" layoutY="129.0" prefWidth="150.0" />
+      <Button fx:id="botonJugarAmigo" layoutX="274.0" layoutY="228.0" mnemonicParsing="false" onAction="#cargarJugarAmigo" text="Jugar" />
+      <Label fx:id="labelEligeJ1" layoutX="103.0" layoutY="81.0" text="Elige tu equipo, J1" />
+      <Label fx:id="labelEligeJ2" layoutX="406.0" layoutY="81.0" text="Elige tu equipo, J2" />
+      <ChoiceBox fx:id="selectorEquipoJ2" layoutX="379.0" layoutY="129.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

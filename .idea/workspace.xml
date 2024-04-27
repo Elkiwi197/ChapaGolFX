@@ -4,16 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Primer commit - fallo al cargar login">
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Segundo commit - Carga landings usuario y administrador">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/seleccionar_equipos_amigo.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLoginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login_page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login_page.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +106,8 @@
       <updated>1714149905338</updated>
       <workItem from="1714149906429" duration="6642000" />
       <workItem from="1714157431761" duration="662000" />
-      <workItem from="1714214109447" duration="5439000" />
+      <workItem from="1714214109447" duration="5664000" />
+      <workItem from="1714230437736" duration="6101000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -112,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714157492005</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Segundo commit - Carga landings usuario y administrador">
+      <option name="closed" value="true" />
+      <created>1714221801953</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714221801953</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,22 +133,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primer commit - fallo al cargar login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primer commit - fallo al cargar login" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Segundo commit - Carga landings usuario y administrador" />
+    <option name="LAST_COMMIT_MESSAGE" value="Segundo commit - Carga landings usuario y administrador" />
   </component>
 </project>

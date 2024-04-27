@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +20,14 @@ public class ControladorPrincipal implements Initializable {
     private FXMLLoader loaderLogin = new FXMLLoader();
     private FXMLLoader loaderLandingUsuario = new FXMLLoader();
     private FXMLLoader loaderLandingAdministrador = new FXMLLoader();
+    private FXMLLoader loaderSeleccionarEquiposAmigo = new FXMLLoader();
+    private FXMLLoader loaderJugarAmigo = new FXMLLoader();
     //CONTROLADORES
     public ControladorLoginPage controladorLoginPage;
     public ControladorLandingUsuario controladorLandingUsuario;
     public ControladorLandingAdministrador controladorLandingAdministrador;
+    public ControladorSeleccionarEquiposAmigo controladorSeleccionarEquiposAmigo;
+    public ControladorJugarAmigo controladorJugarAmigo;
     //PANES
     @FXML
     private AnchorPane loginAnchorPane;
@@ -30,6 +35,10 @@ public class ControladorPrincipal implements Initializable {
     private AnchorPane landingUsuarioAnchorPane;
     @FXML
     private AnchorPane landingAdministradorAnchorPane;
+    @FXML
+    private AnchorPane seleccionarEquipoAmigoAnchorPane;
+    @FXML
+    private AnchorPane jugarAmigoAnchorPane;
     //CLASES DE LOGICA
     ServiceEquipos serviceEquipos = new ServiceEquipos();
 
@@ -37,7 +46,7 @@ public class ControladorPrincipal implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         serviceEquipos.init();
-        cargarLogin ();
+        cargarLogin();
     }
 
     private void cargarLogin() {
@@ -54,28 +63,61 @@ public class ControladorPrincipal implements Initializable {
     }
 
     public void cargarLandingUsuario() {
-        try{
-            if (landingUsuarioAnchorPane == null){
-             landingUsuarioAnchorPane = loaderLandingUsuario.load(getClass().getResourceAsStream("/fxml/landing_usuario.fxml"));
-             controladorLandingUsuario = loaderLandingUsuario.getController();
-             controladorLandingUsuario.setBorderPane(this);
+        try {
+            if (landingUsuarioAnchorPane == null) {
+                landingUsuarioAnchorPane = loaderLandingUsuario.load(getClass().getResourceAsStream("/fxml/landing_usuario.fxml"));
+                controladorLandingUsuario = loaderLandingUsuario.getController();
+                controladorLandingUsuario.setBorderPane(this);
             }
             pantallaPrincipal.setCenter(landingUsuarioAnchorPane);
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error al cargar landing usuario");
         }
     }
 
     public void cargarLandingAdministrador() {
-        try{
-            if (landingAdministradorAnchorPane == null){
+        try {
+            if (landingAdministradorAnchorPane == null) {
                 landingAdministradorAnchorPane = loaderLandingAdministrador.load(getClass().getResourceAsStream("/fxml/landing_administrador.fxml"));
                 controladorLandingAdministrador = loaderLandingAdministrador.getController();
                 controladorLandingAdministrador.setBorderPane(this);
             }
             pantallaPrincipal.setCenter(landingAdministradorAnchorPane);
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error al cargar landing administrador");
         }
+    }
+
+    public void cargarSeleccionarEquipoAmigo() {
+        try {
+            if (seleccionarEquipoAmigoAnchorPane == null) {
+                seleccionarEquipoAmigoAnchorPane = loaderSeleccionarEquiposAmigo.load(getClass().getResourceAsStream("/fxml/seleccionar_equipos_amigo.fxml"));
+                controladorSeleccionarEquiposAmigo = loaderSeleccionarEquiposAmigo.getController();
+                controladorSeleccionarEquiposAmigo.setBorderPane(this);
+            }
+            controladorSeleccionarEquiposAmigo.init();
+            pantallaPrincipal.setCenter(seleccionarEquipoAmigoAnchorPane);
+        } catch (IOException e) {
+            System.out.println("Error al cargar seleccionar equipo amigo");
+        }
+    }
+
+    public void cargarJugarAmigo(String equipoJ1, String equipoJ2) {
+        try {
+            if (jugarAmigoAnchorPane == null) {
+                jugarAmigoAnchorPane = loaderJugarAmigo.load(getClass().getResourceAsStream("/fxml/jugar_amigo.fxml"));
+                controladorJugarAmigo = loaderJugarAmigo.getController();
+                controladorJugarAmigo.setBorderPane(this);
+            }
+            controladorJugarAmigo.init();
+            pantallaPrincipal.setCenter(jugarAmigoAnchorPane);
+        } catch (IOException e) {
+            System.out.println("Error al cargar jugar con un amigo");
+        }
+
+    }
+
+    public ObservableList<String> devolverListaEquipos() {
+        return serviceEquipos.devolverListaEquipos();
     }
 }
