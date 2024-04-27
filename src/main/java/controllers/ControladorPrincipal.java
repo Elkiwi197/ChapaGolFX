@@ -46,7 +46,7 @@ public class ControladorPrincipal implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         serviceEquipos.init();
-        cargarLogin();
+        cargarJugarAmigo(null, null); //CAMBIAR A CARGAR  LOGIN
     }
 
     private void cargarLogin() {

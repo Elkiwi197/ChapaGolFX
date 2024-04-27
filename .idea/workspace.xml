@@ -4,21 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Segundo commit - Carga landings usuario y administrador">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/seleccionar_equipos_amigo.fxml" afterDir="false" />
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Tercer commit - Carga el campo pintado de ajedrez">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/porteriaLocal.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/porteriaVisitante.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/puntoPenalti.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeAbajo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeArriba.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeIzquierda.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerechaAbajo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerechaArriba.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroCuadrado.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaInferiorDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaInferiorIzquierda.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaSuperiorDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaSuperiorIzquierda.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroSinBordes.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeAbajo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeArriba.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeIzquierda.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerechaAbajo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerechaArriba.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroCuadrado.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaInferiorDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaInferiorIzquierda.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaSuperiorDerecha.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaSuperiorIzquierda.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroSinBordes.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/chapagolfx/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_administrador.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/landing_usuario.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login_page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login_page.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,13 +71,16 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2fe7t6PSF6YkRELeZRShsbfmWH3" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Launcher.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -107,7 +134,9 @@
       <workItem from="1714149906429" duration="6642000" />
       <workItem from="1714157431761" duration="662000" />
       <workItem from="1714214109447" duration="5664000" />
-      <workItem from="1714230437736" duration="6101000" />
+      <workItem from="1714230437736" duration="6160000" />
+      <workItem from="1714237400696" duration="3599000" />
+      <workItem from="1714241303219" duration="14786000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -125,15 +154,25 @@
       <option name="project" value="LOCAL" />
       <updated>1714221801953</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Tercer commit - Carga el campo pintado de ajedrez">
+      <option name="closed" value="true" />
+      <created>1714236641500</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714236641500</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Primer commit - fallo al cargar login" />
     <MESSAGE value="Segundo commit - Carga landings usuario y administrador" />
-    <option name="LAST_COMMIT_MESSAGE" value="Segundo commit - Carga landings usuario y administrador" />
+    <MESSAGE value="Tercer commit - Carga el campo pintado de ajedrez" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tercer commit - Carga el campo pintado de ajedrez" />
   </component>
 </project>
