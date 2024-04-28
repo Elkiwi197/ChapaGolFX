@@ -128,13 +128,13 @@ public class ControladorJugarAmigo {
                         } else {
                             ruta = "/images/verdeOscuroBordeAbajo.jpg";
                         }
-                    }else if (i == 10 || i == 11) { // Centro del campo
+                    } else if (i == 10 || i == 11) { // Centro del campo
                         if (i == 10) {
                             ruta = "/images/verdeOscuroBordeDerecha.jpg";
                         } else {
                             ruta = "/images/verdeOscuroBordeIzquierda.jpg";
                         }
-                    }  else if (i == 2 && j == 7) { // Punto de penalti
+                    } else if (i == 2 && j == 7) { // Punto de penalti
                         ruta = "/images/verdeOscuroCuadrado.jpg";
                     } else {
                         ruta = "/images/verdeOscuroSinBordes.jpg";
@@ -167,34 +167,42 @@ public class ControladorJugarAmigo {
                         }
                     }
                 }
-                if (i>=9 && i <= 12){ // Galleta
-                    if (i==9){
-                        if (j==6){
-                            ruta = "/images/verdeOscuroEsquinaSuperiorIzquierda.jpg";
-                        } else if (j==7) {
+                if (i >= 9 && i <= 12) { // Galleta
+                    if (i == 9) {
+                        if (j == 5) {
+                            ruta = "/images/verdeClaroEsquinaInferiorDerecha.jpg";
+                        } else if (j == 6) {
+                            ruta = "/images/verdeOscuroBordeIzquierda.jpg";
+                        } else if (j == 7) {
                             ruta = "/images/verdeClaroBordeIzquierda.jpg";
-                        } else if (j==8) {
-                            ruta = "/images/verdeOscuroEsquinaInferiorIzquierda.jpg";
+                        } else if (j == 8) {
+                            ruta = "/images/verdeOscuroBordeIzquierda.jpg";
+                        } else if (j == 9) {
+                            ruta = "/images/verdeClaroEsquinaSuperiorDerecha.jpg";
                         }
                     } else if (i == 10) {
-                        if (j == 5){
-                            ruta = "/images/verdeOscuroBordesIzquierdaDerechaArriba.jpg";
+                        if (j == 5) {
+                            ruta = "/images/verdeOscuroEsquinaSuperiorDerecha.jpg";
                         } else if (j == 9) {
-                            ruta = "/images/verdeOscuroBordesIzquierdaDerechaAbajo.jpg";
+                            ruta = "/images/verdeOscuroEsquinaInferiorDerecha.jpg";
                         }
-                    } else if (i==11) {
-                        if (j == 5){
-                            ruta = "/images/verdeClaroBordesIzquierdaDerechaArriba.jpg";
+                    } else if (i == 11) {
+                        if (j == 5) {
+                            ruta = "/images/verdeClaroEsquinaSuperiorIzquierda.jpg";
                         } else if (j == 9) {
-                            ruta = "/images/verdeClaroBordesIzquierdaDerechaAbajo.jpg";
+                            ruta = "/images/verdeClaroEsquinaInferiorIzquierda.jpg";
                         }
                     } else {
-                        if (j==6){
-                            ruta = "/images/verdeClaroEsquinaSuperiorDerecha.jpg";
-                        } else if (j==7) {
+                        if (j == 5) {
+                            ruta = "/images/verdeOscuroEsquinaInferiorIzquierda.jpg";
+                        } else if (j == 6) {
+                            ruta = "/images/verdeClaroBordeDerecha.jpg";
+                        } else if (j == 7) {
                             ruta = "/images/verdeOscuroBordeDerecha.jpg";
-                        } else if (j==8) {
-                            ruta = "/images/verdeClaroEsquinaInferiorDerecha.jpg";
+                        } else if (j == 8) {
+                            ruta = "/images/verdeClaroBordeDerecha.jpg";
+                        } else if (j==9) {
+                            ruta = "/images/verdeOscuroEsquinaSuperiorIzquierda.jpg";
                         }
                     }
                 }

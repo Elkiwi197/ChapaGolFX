@@ -4,45 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Tercer commit - Carga el campo pintado de ajedrez">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gradas4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/porteriaLocal.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/porteriaVisitante.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/puntoPenalti.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeAbajo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeArriba.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeIzquierda.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerechaAbajo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerechaArriba.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroCuadrado.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaInferiorDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaInferiorIzquierda.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaSuperiorDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaSuperiorIzquierda.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeClaroSinBordes.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeAbajo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeArriba.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeIzquierda.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerechaAbajo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerechaArriba.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroCuadrado.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaInferiorDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaInferiorIzquierda.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaSuperiorDerecha.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaSuperiorIzquierda.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroSinBordes.jpg" afterDir="false" />
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Cuarto commit - Imprime el campo de futbol con todas las lineas importantes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,26 +42,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Launcher.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/1DAM/PROGRAMACION/ChapaGol/ChapaGolFX/src/main/resources/fxml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.25287357",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/1DAM/PROGRAMACION/ChapaGol/ChapaGolFX/src/main/resources/fxml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.25287357&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\1DAM\PROGRAMACION\ChapaGol\ChapaGolFX\src\main\resources\fxml" />
@@ -136,7 +100,8 @@
       <workItem from="1714214109447" duration="5664000" />
       <workItem from="1714230437736" duration="6160000" />
       <workItem from="1714237400696" duration="3599000" />
-      <workItem from="1714241303219" duration="14786000" />
+      <workItem from="1714241303219" duration="15030000" />
+      <workItem from="1714305460445" duration="715000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -162,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714236641500</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cuarto commit - Imprime el campo de futbol con todas las lineas importantes">
+      <option name="closed" value="true" />
+      <created>1714258967060</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714258967060</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +146,7 @@
     <MESSAGE value="Primer commit - fallo al cargar login" />
     <MESSAGE value="Segundo commit - Carga landings usuario y administrador" />
     <MESSAGE value="Tercer commit - Carga el campo pintado de ajedrez" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tercer commit - Carga el campo pintado de ajedrez" />
+    <MESSAGE value="Cuarto commit - Imprime el campo de futbol con todas las lineas importantes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cuarto commit - Imprime el campo de futbol con todas las lineas importantes" />
   </component>
 </project>
