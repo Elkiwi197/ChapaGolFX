@@ -33,4 +33,8 @@ public class Portero extends Jugador {
         this.spd = spd;
         this.pos = pos;
     }
+
+    public Portero(String nombre, int dorsal, String posicion) {
+        super(nombre, dorsal, posicion);
+    }
 }

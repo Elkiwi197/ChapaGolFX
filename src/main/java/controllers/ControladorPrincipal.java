@@ -1,5 +1,7 @@
 package controllers;
 
+import domain.Equipo;
+import domain.Juego;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,12 +43,20 @@ public class ControladorPrincipal implements Initializable {
     private AnchorPane jugarAmigoAnchorPane;
     //CLASES DE LOGICA
     ServiceEquipos serviceEquipos = new ServiceEquipos();
+    Juego juego = new Juego();
 
+    public Juego getJuego() {
+        return juego;
+    }
+
+    public void setJuego(Juego juego) {
+        this.juego = juego;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         serviceEquipos.init();
-        cargarJugarAmigo(null, null); //CAMBIAR A CARGAR  LOGIN
+        cargarLogin(); //CAMBIAR A CARGAR  LOGIN
     }
 
     private void cargarLogin() {
@@ -109,6 +119,9 @@ public class ControladorPrincipal implements Initializable {
                 controladorJugarAmigo = loaderJugarAmigo.getController();
                 controladorJugarAmigo.setBorderPane(this);
             }
+            Equipo local = serviceEquipos.devolverEquipo(equipoJ1);
+            Equipo visitante = serviceEquipos.devolverEquipo(equipoJ2);
+            juego.jugarAmigo(local, visitante);
             controladorJugarAmigo.init();
             pantallaPrincipal.setCenter(jugarAmigoAnchorPane);
         } catch (IOException e) {

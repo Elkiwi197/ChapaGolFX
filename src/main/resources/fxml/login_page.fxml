@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:controller="controllers.ControladorLoginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorLoginPage">
    <children>
-      <Button fx:id="botonJugar" layoutX="126.0" layoutY="187.0" mnemonicParsing="false" onAction="#cargarLandingUsuario" text="Jugar" />
-      <Button fx:id="botonAdministrar" layoutX="358.0" layoutY="187.0" mnemonicParsing="false" onAction="#cargarLandingAdministrador" text="Administrar" />
-      <PasswordField fx:id="contrasenaAdmin" layoutX="314.0" layoutY="232.0" />
+      <Button fx:id="botonJugar" layoutX="331.0" layoutY="183.0" mnemonicParsing="false" onAction="#cargarLandingUsuario" text="Jugar" />
+      <Button fx:id="botonAdministrar" layoutX="563.0" layoutY="183.0" mnemonicParsing="false" onAction="#cargarLandingAdministrador" text="Administrar" />
+      <PasswordField fx:id="contrasenaAdmin" layoutX="519.0" layoutY="228.0" />
    </children>
 </AnchorPane>

@@ -1,25 +1,28 @@
 package dao;
 
+import common.Colores;
 import domain.Equipo;
 import domain.Jugador;
+import domain.Portero;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DAOequipos {
-    private List<Equipo> liga = new ArrayList<Equipo>();
+    private List<Equipo> liga = new ArrayList<>();
 
     public void init(){
-        Equipo realMadrid = new Equipo("Real Madrid", 0, null, "4-4-2", null, null);
+        Equipo realMadrid = new Equipo("Real Madrid", 0, null, "4-4-2", Color.WHITE, Color.DARKBLUE, Color.YELLOWGREEN, null, null, false);
         List<Jugador> plantillaRealMadrid = new ArrayList<>();
         Jugador[] titularesRealMadrid = new Jugador[11];
-        plantillaRealMadrid.add(new Jugador("Thibaut Courtois", 1, "PO"));
-        plantillaRealMadrid.add(new Jugador("Dani Carvajal", 2, "LD"));
+        plantillaRealMadrid.add(new Portero("Thibaut Courtois", 1, "PO"));
+        plantillaRealMadrid.add(new Jugador("Ferland Mendy", 23, "LI"));
         plantillaRealMadrid.add(new Jugador("Eder Militao", 3, "CB"));
         plantillaRealMadrid.add(new Jugador("David Alaba", 4, "CB"));
-        plantillaRealMadrid.add(new Jugador("Ferland Mendy", 23, "LI"));
+        plantillaRealMadrid.add(new Jugador("Dani Carvajal", 2, "LD"));
         plantillaRealMadrid.add(new Jugador("Jude Bellingham", 5, "MC"));
         plantillaRealMadrid.add(new Jugador("Toni Kroos", 8, "MC"));
         plantillaRealMadrid.add(new Jugador("Luka Modric", 10, "MC"));
@@ -33,15 +36,15 @@ public class DAOequipos {
         realMadrid.setTitulares(titularesRealMadrid);
         liga.add(realMadrid);
 
-        Equipo barcelona = new Equipo("FC Barcelona", 0, null, "4-3-3", null, null);
+        Equipo barcelona = new Equipo("FC Barcelona", 0, null, "4-3-3", Color.RED, Color.BLUE, Color.ORANGE, null, null, false);
         List<Jugador> plantillaBarcelona = new ArrayList<>();
         Jugador[] titularesBarcelona = new Jugador[11];
 
-        plantillaBarcelona.add(new Jugador("Ter Stegen", 1, "PO"));
+        plantillaBarcelona.add(new Portero("Ter Stegen", 1, "PO"));
         plantillaBarcelona.add(new Jugador("Joao Cancelo", 2, "LD"));
-        plantillaBarcelona.add(new Jugador("Alejandro Balde", 3, "LI"));
         plantillaBarcelona.add(new Jugador("Joules Koundé", 23, "CB"));
         plantillaBarcelona.add(new Jugador("Ronald Araújo", 4, "CB"));
+        plantillaBarcelona.add(new Jugador("Alejandro Balde", 3, "LI"));
         plantillaBarcelona.add(new Jugador("Pedri", 8, "MC"));
         plantillaBarcelona.add(new Jugador("Ilkay Gundogan", 22, "MC"));
         plantillaBarcelona.add(new Jugador("Frenkie de Jong", 21, "MC"));
@@ -63,5 +66,15 @@ public class DAOequipos {
             lista.add(equipo.getNombre());
         }
         return lista;
+    }
+
+    public Equipo devolverEquipo(String nombreEquipo) {
+        Equipo equipo = new Equipo();
+        for (Equipo equipoDevolver : liga) {
+            if (equipoDevolver.getNombre().equals(nombreEquipo)){
+                equipo = equipoDevolver;
+            }
+        }
+        return equipo;
     }
 }

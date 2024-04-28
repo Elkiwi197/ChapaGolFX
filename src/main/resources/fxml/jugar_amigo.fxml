@@ -2,9 +2,9 @@
 
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorJugarAmigo">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorJugarAmigo">
     <children>
-        <GridPane fx:id="gridPane" layoutX="84.0" layoutY="14.0" prefHeight="300.0" prefWidth="440.0">
+        <GridPane fx:id="gridPane" layoutX="170.0" prefHeight="450.0" prefWidth="660.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

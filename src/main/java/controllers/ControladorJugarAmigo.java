@@ -1,17 +1,22 @@
 package controllers;
 
 import domain.Equipo;
+import domain.Jugador;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.util.Objects;
 
 public class ControladorJugarAmigo {
 
     private ControladorPrincipal borderPane;
-    private Equipo equipoLocal; //J1
-    private Equipo equipoVisitante; //J2
+
     public GridPane gridPane;
 
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
@@ -19,9 +24,12 @@ public class ControladorJugarAmigo {
     }
 
     public void init() {
+
         cargarCampo();
+        cargarJugadores();
         // cargarFotos();
     }
+
 
     private void cargarFotos() {
     }
@@ -201,23 +209,71 @@ public class ControladorJugarAmigo {
                             ruta = "/images/verdeOscuroBordeDerecha.jpg";
                         } else if (j == 8) {
                             ruta = "/images/verdeClaroBordeDerecha.jpg";
-                        } else if (j==9) {
+                        } else if (j == 9) {
                             ruta = "/images/verdeOscuroEsquinaSuperiorIzquierda.jpg";
                         }
                     }
                 }
 
+                StackPane stackPane = new StackPane(); // Crear un StackPane para combinar el fondo y el círculo del jugador
+
                 Image imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream(ruta)));
                 BackgroundImage imagenFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
 
                 Background fondo = new Background(imagenFondo);
+                stackPane.setBackground(fondo);
                 pane.setBackground(fondo);
-                gridPane.add(pane, i, j);
+                gridPane.add(stackPane, i, j);
 
             }
         }
     }
 
+    private void cargarJugadores() {
+        for (int i = 0; i < borderPane.getJuego().getCampo()[0].length; i++) { //22
+            for (int j = 0; j < borderPane.getJuego().getCampo().length; j++) { //15
+                if (borderPane.getJuego().hayJugadorEn(j, i)) {
+                    Pane pane = (Pane) gridPane.getChildren().get(i * 15 + j);
+                    Jugador jugador = borderPane.getJuego().devolverJugador(j, i);
+                    Equipo equipo = new Equipo();
+
+                    // Cargar camisetas
+                    if (i <= 10) {
+                        equipo = borderPane.getJuego().getEquipoLocal();
+                    } else {
+                        equipo = borderPane.getJuego().getEquipoVisitante();
+                    }
+                    Circle chapa = new Circle(10);
+                    Text dorsal = new Text(String.valueOf(jugador.getDorsal()));
+
+                    // Pinta las camisetas
+                    if (jugador.getClass().getSimpleName().equals("Portero")){
+                        // Si es un portero
+                        chapa.setFill(equipo.getColorTerciario());
+                    } else {
+                        chapa.setFill(equipo.getColorPrincipal());
+                        // Si es un jugador de campo
+                    }
+
+                    // Cargar dorsales
+                    dorsal.setFill(equipo.getColorSecundario());
+                    dorsal.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+
+
+                    // Calcula el centro del pane
+                    double centerX = pane.getWidth() / 2;
+                    double centerY = pane.getHeight() / 2;
+
+                    // Pone el circulo en el centro del pane
+                    chapa.setCenterX(centerX);
+                    chapa.setCenterY(centerY);
+
+                    // Mete la camiseta y el dorsal en el pane
+                    pane.getChildren().addAll(chapa, dorsal);
+
+                }
+            }
+        }
+    }
 
 }
-
