@@ -4,39 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Septimo commit - Estadisticas de los jugadores">
-      <change afterPath="$PROJECT_DIR$/src/main/java/common/Jugada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/balon.png" afterDir="false" />
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/puntoPenalti.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/puntoPenalti.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeAbajo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordeAbajo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeArriba.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordeArriba.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordeDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordeIzquierda.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordeIzquierda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordesIzquierdaDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerechaAbajo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordesIzquierdaDerechaAbajo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroBordesIzquierdaDerechaArriba.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroBordesIzquierdaDerechaArriba.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroCuadrado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroCuadrado.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaInferiorDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroEsquinaInferiorDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaInferiorIzquierda.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroEsquinaInferiorIzquierda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaSuperiorDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroEsquinaSuperiorDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroEsquinaSuperiorIzquierda.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroEsquinaSuperiorIzquierda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeClaroSinBordes.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeClaroSinBordes.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeAbajo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordeAbajo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeArriba.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordeArriba.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordeDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordeIzquierda.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordeIzquierda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordesIzquierdaDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerechaAbajo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordesIzquierdaDerechaAbajo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroBordesIzquierdaDerechaArriba.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroBordesIzquierdaDerechaArriba.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroCuadrado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroCuadrado.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaInferiorDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroEsquinaInferiorDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaInferiorIzquierda.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroEsquinaInferiorIzquierda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaSuperiorDerecha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroEsquinaSuperiorDerecha.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroEsquinaSuperiorIzquierda.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroEsquinaSuperiorIzquierda.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/verdeOscuroSinBordes.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/campo/verdeOscuroSinBordes.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +111,8 @@
       <workItem from="1714310236324" duration="7927000" />
       <workItem from="1714336186732" duration="9119000" />
       <workItem from="1714381666713" duration="2902000" />
-      <workItem from="1714386934765" duration="6967000" />
+      <workItem from="1714386934765" duration="7663000" />
+      <workItem from="1714401051375" duration="20187000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -196,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714383980321</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas">
+      <option name="closed" value="true" />
+      <created>1714396976818</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1714396976818</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +193,7 @@
     <MESSAGE value="Quinto commit - Imprime el campo mejor" />
     <MESSAGE value="Sexto commit - Imprime el campo con los jugadores en el campo (no tiene en cuenta el saque)" />
     <MESSAGE value="Septimo commit - Estadisticas de los jugadores" />
-    <option name="LAST_COMMIT_MESSAGE" value="Septimo commit - Estadisticas de los jugadores" />
+    <MESSAGE value="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas" />
   </component>
 </project>

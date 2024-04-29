@@ -2,41 +2,89 @@ package controllers;
 
 import domain.Equipo;
 import domain.Jugador;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.lang.classfile.Superclass;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ControladorJugarAmigo {
 
+    public Button botonMover;
+    public Button botonPasar;
+    public Button botonRegatear;
+    public Button botonTirar;
+    public Button botonMeterPierna;
+    public Label labelPA;
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane;
-    private Equipo equipoLocal;
-    private Equipo equipoVisitante;
+    private Equipo equipoLocal = new Equipo();
+    private Equipo equipoVisitante = new Equipo();
+    private ImageView balon = new ImageView();
+
+    private int ultimaFilaSeleccionada;
+    private int ultimaColumnaSeleccionada;
 
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         borderPane = controladorPrincipal;
     }
 
     public void init() {
-
+        cargarBalon();
+        cargarEquipos();
         cargarCampo();
         cargarJugadores();
         // cargarFotos();
     }
 
+    private void cargarEquipos() {
+        //Preguntar a Gema si se puede hacer de otra forma mejor
+        //Preguntar a Gema si esto crea objetos nuevos con nuevas direcciones de RAM
 
-    private void cargarFotos() {
+        equipoLocal.setNombre(borderPane.getJuego().getEquipoLocal().getNombre());
+        equipoLocal.setTitulares(borderPane.getJuego().getEquipoLocal().getTitulares());
+        equipoLocal.setPlantilla(borderPane.getJuego().getEquipoLocal().getPlantilla());
+        equipoLocal.setAlineacion(borderPane.getJuego().getEquipoLocal().getAlineacion());
+        equipoLocal.setColorPrincipal(borderPane.getJuego().getEquipoLocal().getColorPrincipal());
+        equipoLocal.setColorSecundario(borderPane.getJuego().getEquipoLocal().getColorSecundario());
+        equipoLocal.setColorTerciario(borderPane.getJuego().getEquipoLocal().getColorTerciario());
+
+        equipoVisitante.setNombre(borderPane.getJuego().getEquipoVisitante().getNombre());
+        equipoVisitante.setTitulares(borderPane.getJuego().getEquipoVisitante().getTitulares());
+        equipoVisitante.setPlantilla(borderPane.getJuego().getEquipoVisitante().getPlantilla());
+        equipoVisitante.setAlineacion(borderPane.getJuego().getEquipoVisitante().getAlineacion());
+        equipoVisitante.setColorPrincipal(borderPane.getJuego().getEquipoVisitante().getColorPrincipal());
+        equipoVisitante.setColorSecundario(borderPane.getJuego().getEquipoVisitante().getColorSecundario());
+        equipoVisitante.setColorTerciario(borderPane.getJuego().getEquipoVisitante().getColorTerciario());
+
+
     }
+
+    private void cargarBalon() {
+        String ruta = "/images/balon.png";
+        Image imageBalon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(ruta)));
+
+        balon.setImage(imageBalon);
+        balon.setFitHeight(10);
+        balon.setFitWidth(10);
+    }
+
 
     private void cargarCampo() {
         Pane pane;
@@ -226,9 +274,20 @@ public class ControladorJugarAmigo {
 
                 Background fondo = new Background(imagenFondo);
                 stackPane.setBackground(fondo);
-                pane.setBackground(fondo);
+                stackPane.setId(String.valueOf(i).concat("-").concat(String.valueOf(j)));
                 gridPane.add(stackPane, i, j);
 
+
+                // Añado el event listener para poder seleccionar jugadores
+                int fila = j;
+                int columna = i;
+
+                stackPane.setOnMouseClicked(e -> {
+                    System.out.println("PULSADO: FILA " + fila + "   COLUMNA " + columna);
+                    ultimaFilaSeleccionada = fila;
+                    ultimaColumnaSeleccionada = columna;
+                    mostrarOpciones(fila, columna);
+                });
             }
         }
     }
@@ -242,8 +301,7 @@ public class ControladorJugarAmigo {
                     Jugador jugador = borderPane.getJuego().devolverJugador(j, i);
 
                     // Cargar camisetas
-                    equipoLocal = borderPane.getJuego().getEquipoLocal();
-                    equipoVisitante = borderPane.getJuego().getEquipoVisitante();
+
 
                     Circle camiseta = new Circle(10);
                     Text dorsal = new Text(String.valueOf(jugador.getDorsal()));
@@ -302,34 +360,109 @@ public class ControladorJugarAmigo {
                     double centroY = pane.getHeight() / 2;
                     double posDorsalX = centroX;
                     double posDorsalY = centroY;
+                    double centroBalonX = centroX;
 
-                    // Pone el circulo en el lado correspondiente del pane
 
-
-                    if (dorsal.getFill() == equipoLocal.getColorSecundario()) { // Si es un jugador local
-                        StackPane.setAlignment(camiseta, Pos.CENTER_LEFT);
-                        StackPane.setAlignment(dorsal, Pos.CENTER);
-                        posDorsalX = posDorsalX - 10;
-                        StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX));                        posDorsalX = posDorsalX + 10;
-                    } else { // Si es un jugador visitante
-                        StackPane.setAlignment(camiseta, Pos.CENTER_RIGHT);
-                        StackPane.setAlignment(dorsal, Pos.CENTER);
-                        posDorsalX = posDorsalX + 10;
-                        StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX)); // Ajusta los márgenes para la posición del dorsal
+                    // Si el jugador tiene el balon mueve la chapa al lado correspondiente
+                    // del pane y le mete el balon en el lado contrario
+                    if (jugador.isTieneBalon()) {
+                        if (dorsal.getFill() == equipoLocal.getColorSecundario()) { // Si es un jugador local
+                            StackPane.setAlignment(camiseta, Pos.CENTER_LEFT);
+                            StackPane.setAlignment(dorsal, Pos.CENTER);
+                            StackPane.setAlignment(balon, Pos.CENTER_RIGHT);
+                            posDorsalX = posDorsalX - 10;
+                            StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX));
+                        } else { // Si es un jugador visitante
+                            StackPane.setAlignment(camiseta, Pos.CENTER_RIGHT);
+                            StackPane.setAlignment(dorsal, Pos.CENTER);
+                            StackPane.setAlignment(balon, Pos.CENTER_LEFT);
+                            posDorsalX = posDorsalX + 10;
+                            StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX)); // Ajusta los márgenes para la posición del dorsal
+                        }
+                        stackPane.getChildren().addAll(camiseta, dorsal, balon);
+                    } else { // Si el jugador no tiene el balon carga la chapa y ya
+                        stackPane.getChildren().addAll(camiseta, dorsal);
                     }
-                    stackPane.getChildren().addAll(camiseta, dorsal);
+
 
                     camiseta.setCenterX(centroX);
                     camiseta.setCenterY(centroY);
+
+
                     pane.getChildren().add(stackPane);
-
-                    // Mete la camiseta y el dorsal en el pane
-                    pane.getChildren().addAll(camiseta, dorsal);
-                    // pane.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(2),new Insets(2))));
-
                 }
             }
         }
     }
 
+    public void mostrarOpciones(int fila, int columna) {
+        ocultarOpciones();
+        ocultarCasillasIluminadas();
+        if (borderPane.getJuego().getCampo()[fila][columna] != null) {
+            if (borderPane.getJuego().esTurnoDeJugador(fila, columna)) {
+                if (borderPane.getJuego().hayPosibleMovimiento(fila, columna)) {
+                    botonMover.setVisible(true); //Falta comprobar que se pueda mover
+                }
+                if (borderPane.getJuego().devolverJugador(fila, columna).isTieneBalon()) { // Si tiene el balon muestra pasar, tirar y regatear
+                    botonPasar.setVisible(true);
+                    botonTirar.setVisible(true);
+                }
+                if (borderPane.getJuego().hayRivalAlrededor(fila, columna, borderPane.getJuego().isTurno())) {
+                    if (borderPane.getJuego().devolverJugador(fila, columna).isTieneBalon()) { // Si tiene el balon muestra pasar, tirar y regatear
+                        botonRegatear.setVisible(true);
+                    } else {
+                        botonMeterPierna.setVisible(true);
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    /**
+     * Oculta todos los botones
+     */
+    private void ocultarOpciones() {
+        botonMover.setVisible(false);
+        botonPasar.setVisible(false);
+        botonTirar.setVisible(false);
+        botonRegatear.setVisible(false);
+        botonMeterPierna.setVisible(false);
+    }
+
+    public void moverJugador(ActionEvent actionEvent) {
+
+
+        // iluminarCasillasPosibles(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
+
+
+    }
+
+    private void iluminarCasillasPosibles(int fila, int columna) {
+        // No funciona bien
+        for (int i = fila - 1; i <= fila + 1; i++) {
+            for (int j = columna - 1; j <= columna + 1; j++) {
+                if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
+                    Rectangle casillaIluminada = new Rectangle(20, 20);
+                    casillaIluminada.setStroke(Color.BLACK);
+                    casillaIluminada.setFill(Color.DEEPPINK);
+                    if (!borderPane.getJuego().hayJugadorEn(i, j)) {
+                        gridPane.add(casillaIluminada, j, i);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Quita la iluminacion de las casillas iluminadas
+     */
+    private void ocultarCasillasIluminadas() {
+
+    }
+
+    public StackPane devolverStackPane(int fila, int columna) {
+        return (StackPane) gridPane.lookup(STR."\{fila}-\{columna}");
+    }
 }

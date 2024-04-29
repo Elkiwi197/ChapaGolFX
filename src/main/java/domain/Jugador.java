@@ -2,9 +2,11 @@ package domain;
 
 
 public class Jugador {
-    String nombre;
-    int dorsal;
-    String posicion;
+    private String nombre;
+    private int dorsal;
+    private String posicion;
+
+    private boolean tieneBalon = false;
 
     int pac;
     int sho;
@@ -104,5 +106,13 @@ public class Jugador {
 
     public void setPhy(int phy) {
         this.phy = phy;
+    }
+
+    public boolean isTieneBalon() {
+        return tieneBalon;
+    }
+
+    public void setTieneBalon(boolean tieneBalon) {
+        this.tieneBalon = tieneBalon;
     }
 }

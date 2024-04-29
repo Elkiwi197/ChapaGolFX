@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorJugarAmigo">
     <children>
@@ -47,5 +49,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
+      <Button fx:id="botonMover" layoutX="84.0" layoutY="506.0" mnemonicParsing="false" onAction="#moverJugador" prefHeight="69.0" prefWidth="95.0" text="Mover" />
+      <Button fx:id="botonPasar" layoutX="208.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Pasar" />
+      <Button fx:id="botonRegatear" layoutX="452.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Regatear" />
+      <Button fx:id="botonTirar" layoutX="329.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Tirar" />
+      <Button fx:id="botonMeterPierna" layoutX="579.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Meter pierna" />
+      <Label fx:id="labelPA" layoutX="722.0" layoutY="510.0" prefHeight="61.0" prefWidth="241.0" text="PA restantes:">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
