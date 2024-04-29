@@ -1,6 +1,5 @@
 package domain;
 
-import common.Colores;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
