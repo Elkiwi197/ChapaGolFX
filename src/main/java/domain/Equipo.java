@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Equipo {
+public class Equipo implements Cloneable {
     private String nombre;
     private int puntos;
     private String historialDePartidos;
@@ -114,5 +114,13 @@ public class Equipo {
 
     public void setSaca(boolean saca) {
         this.saca = saca;
+    }
+    public Equipo clone(){
+
+        try {
+            return (Equipo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

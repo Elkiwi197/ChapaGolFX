@@ -49,6 +49,13 @@ public class Juego {
         this.PA = PA;
     }
 
+    public void comprobarTurno() {
+        if (PA == 0){
+            PA = 5;
+            turno = !turno;
+        }
+    }
+
     public void jugarAmigo(Equipo local, Equipo visitante) {
         turno = true;
         equipoLocal = local;
@@ -271,12 +278,14 @@ public class Juego {
             for (Jugador jugador : equipoLocal.getPlantilla()) {
                 if (jugador == jugadorSeleccionado) {
                     esSuTurno = true;
+                    break;
                 }
             }
         } else {
             for (Jugador jugador : equipoVisitante.getPlantilla()) {
                 if (jugador == jugadorSeleccionado) {
                     esSuTurno = true;
+                    break;
                 }
             }
         }
@@ -323,6 +332,14 @@ public class Juego {
         }
         return hayMovimiento;
     }
+
+    public void moverJugador(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal){
+        campo[filaFinal][columnaFinal] = campo[filaInicial][columnaInicial];
+        campo[filaInicial][columnaInicial] = null;
+        actualizarCampoConsola();
+    }
+
+    //Meter los metodos de abajo en otra clase (comprobar vertical/horizontal/diagonal y saltos)
 
     public boolean movimientoValido(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
         boolean valido = false;

@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas">
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="Noveno commit - Haciendo comprobar movimiento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +115,9 @@
       <workItem from="1714336186732" duration="9119000" />
       <workItem from="1714381666713" duration="2902000" />
       <workItem from="1714386934765" duration="7663000" />
-      <workItem from="1714401051375" duration="20187000" />
+      <workItem from="1714401051375" duration="20240000" />
+      <workItem from="1714465496305" duration="12278000" />
+      <workItem from="1714493544305" duration="5574000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -178,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714396976818</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Noveno commit - Haciendo comprobar movimiento">
+      <option name="closed" value="true" />
+      <created>1714424964082</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714424964082</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +207,7 @@
     <MESSAGE value="Sexto commit - Imprime el campo con los jugadores en el campo (no tiene en cuenta el saque)" />
     <MESSAGE value="Septimo commit - Estadisticas de los jugadores" />
     <MESSAGE value="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Octavo commit - muestra los jugadores a la izquierda o derecha de las casillas" />
+    <MESSAGE value="Noveno commit - Haciendo comprobar movimiento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Noveno commit - Haciendo comprobar movimiento" />
   </component>
 </project>

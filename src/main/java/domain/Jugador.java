@@ -1,7 +1,7 @@
 package domain;
 
 
-public class Jugador {
+public class Jugador implements Cloneable {
     private String nombre;
     private int dorsal;
     private String posicion;
@@ -114,5 +114,13 @@ public class Jugador {
 
     public void setTieneBalon(boolean tieneBalon) {
         this.tieneBalon = tieneBalon;
+    }
+
+    public Jugador clonarJugador(){
+        try {
+            return (Jugador) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

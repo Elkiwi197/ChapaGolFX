@@ -72,9 +72,13 @@ public class DAOequipos {
         Equipo equipo = new Equipo();
         for (Equipo equipoDevolver : liga) {
             if (equipoDevolver.getNombre().equals(nombreEquipo)) {
-                equipo = equipoDevolver;
+                equipo = (Equipo) equipoDevolver.clone();
             }
         }
         return equipo;
+    }
+
+    public Equipo devolverEquipoRepetido(String nombreEquipo) {
+return new Equipo();
     }
 }

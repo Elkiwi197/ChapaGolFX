@@ -19,9 +19,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.lang.classfile.Superclass;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ControladorJugarAmigo {
 
@@ -46,10 +44,15 @@ public class ControladorJugarAmigo {
     }
 
     public void init() {
+        ocultarOpciones();
         cargarBalon();
         cargarEquipos();
         cargarCampo();
         cargarJugadores();
+        actualizarContador();
+        borderPane.getJuego().setPA(5);
+
+
         // cargarFotos();
     }
 
@@ -287,6 +290,7 @@ public class ControladorJugarAmigo {
                     ultimaFilaSeleccionada = fila;
                     ultimaColumnaSeleccionada = columna;
                     mostrarOpciones(fila, columna);
+                    ocultarCasillasIluminadas();
                 });
             }
         }
@@ -377,7 +381,7 @@ public class ControladorJugarAmigo {
                             StackPane.setAlignment(dorsal, Pos.CENTER);
                             StackPane.setAlignment(balon, Pos.CENTER_LEFT);
                             posDorsalX = posDorsalX + 10;
-                            StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX)); // Ajusta los márgenes para la posición del dorsal
+                            StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX));
                         }
                         stackPane.getChildren().addAll(camiseta, dorsal, balon);
                     } else { // Si el jugador no tiene el balon carga la chapa y ya
@@ -395,13 +399,15 @@ public class ControladorJugarAmigo {
         }
     }
 
+
     public void mostrarOpciones(int fila, int columna) {
         ocultarOpciones();
-        ocultarCasillasIluminadas();
+        //ocultarCasillasIluminadas();
+        actualizarContador();
         if (borderPane.getJuego().getCampo()[fila][columna] != null) {
             if (borderPane.getJuego().esTurnoDeJugador(fila, columna)) {
                 if (borderPane.getJuego().hayPosibleMovimiento(fila, columna)) {
-                    botonMover.setVisible(true); //Falta comprobar que se pueda mover
+                    botonMover.setVisible(true);
                 }
                 if (borderPane.getJuego().devolverJugador(fila, columna).isTieneBalon()) { // Si tiene el balon muestra pasar, tirar y regatear
                     botonPasar.setVisible(true);
@@ -433,36 +439,85 @@ public class ControladorJugarAmigo {
 
     public void moverJugador(ActionEvent actionEvent) {
 
-
-        // iluminarCasillasPosibles(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
-
+        iluminarCasillasPosibles();
 
     }
 
-    private void iluminarCasillasPosibles(int fila, int columna) {
-        // No funciona bien
-        for (int i = fila - 1; i <= fila + 1; i++) {
-            for (int j = columna - 1; j <= columna + 1; j++) {
+    public void iluminarCasillasPosibles() {
+        int fila = ultimaFilaSeleccionada;
+        int columna = ultimaColumnaSeleccionada;
+        for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
+            for (int j = ultimaColumnaSeleccionada - 1; j <= ultimaColumnaSeleccionada + 1; j++) {
                 if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
-                    Rectangle casillaIluminada = new Rectangle(20, 20);
-                    casillaIluminada.setStroke(Color.BLACK);
-                    casillaIluminada.setFill(Color.DEEPPINK);
+
+                    if (gridPane.lookup("#" + i + "-" + j) instanceof StackPane) {
+                        System.out.println("Instancia de stackpane en fila " + i + " columna " + j);
+                    }
+
+                    // Creacion del cuadrado que recibe el evento
+
+                    Rectangle cuadradoGuia = new Rectangle(30, 30); // Cambiar dimensiones a 30, 30
+                    cuadradoGuia.setFill(Color.WHITE);
+                    cuadradoGuia.setOpacity(0.5);
+                    int columnaIluminada = j;
+                    int filaIluminada = i;
+
+                    // Creacion del evento
+                    cuadradoGuia.setOnMouseClicked(e -> {
+                        System.out.println("PULSADO CASILLA ILUMINADA: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
+                        borderPane.getJuego().moverJugador(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+                        moverJugadorConsola(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+
+                        borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
+                        borderPane.getJuego().comprobarTurno();
+                        actualizarContador();
+
+                    });
+
+                    // Meto el cuadrado en el StackPane correspondiente
                     if (!borderPane.getJuego().hayJugadorEn(i, j)) {
-                        gridPane.add(casillaIluminada, j, i);
+                        devolverStackPane(i, j).getChildren().add(cuadradoGuia);
+                        casillasIluminadas.add(i + "-" + j);
+
                     }
                 }
             }
         }
     }
 
+    private void moverJugadorConsola(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
+        StackPane casillaInicial = devolverStackPane(filaInicial, columnaInicial);
+        StackPane casillaFinal = devolverStackPane(filaFinal, columnaFinal);
+
+        casillaFinal.getChildren().addAll(casillaInicial.getChildren());
+        casillaInicial.getChildren().clear();
+
+        ocultarCasillasIluminadas();
+    }
+
+    private Set<String> casillasIluminadas = new HashSet<>();
+
     /**
      * Quita la iluminacion de las casillas iluminadas
      */
     private void ocultarCasillasIluminadas() {
-
+        for (String coordenadas : casillasIluminadas) {
+            int fila = Integer.parseInt(coordenadas.split("-")[0]);
+            int columna = Integer.parseInt(coordenadas.split("-")[1]);
+            StackPane stackPane = devolverStackPane(fila, columna);
+            if (stackPane != null) {
+                // Elimina los cuadrados rosas de esta celda
+                stackPane.getChildren().removeIf(node -> node instanceof Rectangle);
+            }
+        }
+        casillasIluminadas.clear();
     }
 
     public StackPane devolverStackPane(int fila, int columna) {
-        return (StackPane) gridPane.lookup(STR."\{fila}-\{columna}");
+        return (StackPane) gridPane.lookup("#" + columna + "-" + fila);
+    }
+
+    public void actualizarContador() {
+        labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
     }
 }

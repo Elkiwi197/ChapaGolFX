@@ -119,8 +119,11 @@ public class ControladorPrincipal implements Initializable {
                 controladorJugarAmigo = loaderJugarAmigo.getController();
                 controladorJugarAmigo.setBorderPane(this);
             }
-            Equipo local = serviceEquipos.devolverEquipo(equipoJ1);
-            Equipo visitante = serviceEquipos.devolverEquipo(equipoJ2);
+            // If para comprobar si esta repetido
+            Equipo local;
+            Equipo visitante;
+                local = serviceEquipos.devolverEquipo(equipoJ1);
+                visitante = serviceEquipos.devolverEquipo(equipoJ2);
             juego.jugarAmigo(local, visitante);
             controladorJugarAmigo.init();
             pantallaPrincipal.setCenter(jugarAmigoAnchorPane);

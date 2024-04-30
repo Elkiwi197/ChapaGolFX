@@ -19,4 +19,8 @@ public class ServiceEquipos {
     public Equipo devolverEquipo(String nombreEquipo) {
        return daoEquipos.devolverEquipo(nombreEquipo);
     }
+
+    public Equipo devolverEquipoRepetido(String nombreEquipo) {
+        return daoEquipos.devolverEquipoRepetido(nombreEquipo);
+    }
 }
