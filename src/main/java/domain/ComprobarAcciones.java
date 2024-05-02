@@ -6,20 +6,8 @@ import java.util.List;
 public abstract class ComprobarAcciones {
     public static boolean movimientoValido(Jugador[][] campo, int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
         boolean valido = false;
-        if (campo[filaFinal][columnaFinal] == null) {
-            if (esMovimientoVertical(filaInicial, columnaInicial, filaFinal, columnaFinal)) {
-                if (saltoVertical(filaInicial, filaFinal) == 1) {
-                    valido = true;
-                }
-            } else if (esMovimientoHorizontal(filaInicial, columnaInicial, filaFinal, columnaFinal)) {
-                if (saltoHorizontal(columnaInicial, columnaFinal) == 1) {
-                    valido = true;
-                }
-            } else if (esMovimientoDiagonal(filaInicial, columnaInicial, filaFinal, columnaFinal)) {
-                if (saltoVertical(filaInicial, filaFinal) == 1) {
-                    valido = true;
-                }
-            }
+        if (Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) == 1 || Math.abs(saltoVertical(filaInicial, filaFinal)) == 1  || Math.abs(saltoDiagonal(filaInicial, filaFinal, columnaInicial, columnaFinal)) == 1){
+            valido = true;
         }
         return valido;
     }

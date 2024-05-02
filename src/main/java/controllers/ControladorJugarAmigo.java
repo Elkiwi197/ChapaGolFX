@@ -6,7 +6,6 @@ import domain.Jugador;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,6 +29,7 @@ public class ControladorJugarAmigo {
     public Button botonMeterPierna;
     public Label labelPA;
     public Label labelMarcador;
+    public Label labelTurno;
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane;
@@ -52,7 +52,7 @@ public class ControladorJugarAmigo {
         cargarEquipos();
         cargarCampo();
         cargarJugadores();
-        actualizarContador();
+        actualizarAvisos();
         borderPane.getJuego().setPA(5);
 
 
@@ -97,8 +97,8 @@ public class ControladorJugarAmigo {
         String ruta = "";
 
 
-        for (int i = 0; i < 22; i++) {
-            for (int j = 0; j < 15; j++) {
+        for (int i = 0; i < borderPane.getJuego().getCampo()[0].length; i++) {
+            for (int j = 0; j < borderPane.getJuego().getCampo().length; j++) {
 
                 pane = new Pane();
 
@@ -389,14 +389,14 @@ public class ControladorJugarAmigo {
                             StackPane.setAlignment(camiseta, Pos.CENTER_LEFT);
                             StackPane.setAlignment(dorsal, Pos.CENTER_RIGHT);
                             StackPane.setAlignment(balon, Pos.CENTER_RIGHT);
-                            posDorsalX = 20 - dorsal.getLayoutBounds().getWidth()/2;
-                            StackPane.setMargin(dorsal, new Insets(0,posDorsalX,0,0));
+                            posDorsalX = 20 - dorsal.getLayoutBounds().getWidth() / 2;
+                            StackPane.setMargin(dorsal, new Insets(0, posDorsalX, 0, 0));
                         } else { // Si es un jugador visitante
                             StackPane.setAlignment(camiseta, Pos.CENTER_RIGHT);
                             StackPane.setAlignment(dorsal, Pos.CENTER_LEFT);
                             StackPane.setAlignment(balon, Pos.CENTER_LEFT);
-                            posDorsalX = 20 - dorsal.getLayoutBounds().getWidth()/2;
-                            StackPane.setMargin(dorsal, new Insets(0, 0,0,posDorsalX));
+                            posDorsalX = 20 - dorsal.getLayoutBounds().getWidth() / 2;
+                            StackPane.setMargin(dorsal, new Insets(0, 0, 0, posDorsalX));
                         }
                     } else { // Si el jugador no tiene el balon carga la chapa y ya
                         stackPane.getChildren().addAll(camiseta, dorsal);
@@ -414,10 +414,15 @@ public class ControladorJugarAmigo {
     }
 
 
+    /**
+     * Muestra los botones en funcion de las acciones que puede hacer el jugador seleccionado
+     * @param fila Fila donde se encuentra el jugador seleccionado
+     * @param columna Columna donde se encuentra el jugador seleccionado
+     */
     public void mostrarOpciones(int fila, int columna) {
         ocultarOpciones();
         //ocultarCasillasIluminadas();
-        actualizarContador();
+        actualizarAvisos();
         if (borderPane.getJuego().getCampo()[fila][columna] != null) {
             if (ComprobarAcciones.esTurnoDeJugador(borderPane.getJuego(), fila, columna)) {
                 if (ComprobarAcciones.hayPosibleMovimiento(borderPane.getJuego().getCampo(), fila, columna)) {
@@ -452,23 +457,17 @@ public class ControladorJugarAmigo {
     }
 
     public void moverJugador(ActionEvent actionEvent) {
-
         iluminarPosiblesMovimientos();
-        consumirPA();
-
-
     }
 
     public void iluminarPosiblesMovimientos() {
+        ocultarCasillasIluminadas();
         int fila = ultimaFilaSeleccionada;
         int columna = ultimaColumnaSeleccionada;
         for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
             for (int j = ultimaColumnaSeleccionada - 1; j <= ultimaColumnaSeleccionada + 1; j++) {
                 if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
 
-                    if (gridPane.lookup("#" + i + "-" + j) instanceof StackPane) {
-                        System.out.println("Instancia de stackpane en fila " + i + " columna " + j);
-                    }
 
                     // Creacion del cuadrado que recibe el evento
 
@@ -480,7 +479,10 @@ public class ControladorJugarAmigo {
                     cuadradoGuia.setOnMouseClicked(e -> {
                         System.out.println("PULSADO CASILLA ILUMINADA: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
                         borderPane.getJuego().moverJugador(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+                        //cargarJugadores();
                         moverJugadorConsola(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+                        consumirPA();
+
                     });
 
                     // Meto el cuadrado en el StackPane correspondiente
@@ -505,57 +507,101 @@ public class ControladorJugarAmigo {
     }
 
     public void pasarBalon(ActionEvent actionEvent) {
+        int filaPasador = ultimaFilaSeleccionada;
+        int columnaPasador = ultimaColumnaSeleccionada;
+
+        iluminarCompaneros();
 
     }
 
-    public void regatear(ActionEvent actionEvent) {
-    }
+    private void iluminarCompaneros() {
+        ocultarCasillasIluminadas();
+        for (int i = 0; i < borderPane.getJuego().getCampo().length; i++) {
+            for (int j = 0; j <borderPane.getJuego().getCampo()[0].length ; j++) {
+                if (ComprobarAcciones.hayJugadorEn(borderPane.juego.getCampo(), i, j)){
+                    if (!ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)){
 
-    public void tirarApuerta(ActionEvent actionEvent) {
-        borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
-        ocultarOpciones();
-        actualizarContador();
-        cargarJugadores();
-    }
+                        // Creacion del cuadrado que recibe el evento
+                        Rectangle casillaIluminada = crearCasillaIluminada();
 
-    public void hacerEntrada(ActionEvent actionEvent) {
-    }
+                        int filaIluminada = i;
+                        int columnaIluminada = j;
 
-    /**
-     * Quita la iluminacion de las casillas iluminadas
-     */
-    private void ocultarCasillasIluminadas() {
-        for (String coordenadas : casillasIluminadas) {
-            int fila = Integer.parseInt(coordenadas.split("-")[0]);
-            int columna = Integer.parseInt(coordenadas.split("-")[1]);
-            StackPane stackPane = devolverStackPane(fila, columna);
-            if (stackPane != null) {
-                // Elimina los cuadrados rosas de esta celda
-                stackPane.getChildren().removeIf(node -> node instanceof Rectangle);
+                        // Creacion del evento
+                        casillaIluminada.setOnMouseClicked(e -> {
+                            System.out.println("PULSADO PASE: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
+
+                            borderPane.getJuego().pasarBalon(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+
+                            ocultarCasillasIluminadas();
+                            cargarJugadores();
+                            consumirPA();
+                        });
+
+
+                        devolverStackPane(i, j).getChildren().add(casillaIluminada);
+                        casillasIluminadas.add(i + "-" + j);
+
+                    }
+                }
             }
         }
-        casillasIluminadas.clear();
     }
 
-    public void actualizarContador() {
-        labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
+public void regatear(ActionEvent actionEvent) {
+}
+
+public void tirarApuerta(ActionEvent actionEvent) {
+    borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
+    ocultarOpciones();
+    actualizarAvisos();
+    cargarJugadores();
+}
+
+public void hacerEntrada(ActionEvent actionEvent) {
+}
+
+/**
+ * Quita la iluminacion de las casillas iluminadas
+ */
+private void ocultarCasillasIluminadas() {
+    for (String coordenadas : casillasIluminadas) {
+        int fila = Integer.parseInt(coordenadas.split("-")[0]);
+        int columna = Integer.parseInt(coordenadas.split("-")[1]);
+        StackPane stackPane = devolverStackPane(fila, columna);
+        if (stackPane != null) {
+            // Elimina los cuadrados rosas de esta celda
+            stackPane.getChildren().removeIf(node -> node instanceof Rectangle);
+        }
     }
+    casillasIluminadas.clear();
+}
+
+public void actualizarAvisos() {
+    labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
+    if (borderPane.getJuego().isTurno()) {
+        labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoLocal().getNombre());
+    } else {
+        labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoVisitante().getNombre());
+    }
+    labelMarcador.setText(borderPane.getJuego().getEquipoLocal().getNombre() + " " + borderPane.getJuego().getGolesLocal() + " - " + borderPane.getJuego().getGolesVisitante() + " " + borderPane.getJuego().getEquipoVisitante().getNombre());
+}
 
 
-    public StackPane devolverStackPane(int fila, int columna) {
-        return (StackPane) gridPane.lookup("#" + columna + "-" + fila);
-    }
+public StackPane devolverStackPane(int fila, int columna) {
+    return (StackPane) gridPane.lookup("#" + columna + "-" + fila);
+}
 
-    public Rectangle crearCasillaIluminada() {
-        Rectangle cuadradoGuia = new Rectangle(30, 30);
-        cuadradoGuia.setFill(Color.WHITE);
-        cuadradoGuia.setOpacity(0.5);
-        return cuadradoGuia;
-    }
+public Rectangle crearCasillaIluminada() {
+    Rectangle cuadradoGuia = new Rectangle(30, 30);
+    cuadradoGuia.setFill(Color.WHITE);
+    cuadradoGuia.setOpacity(0.5);
+    return cuadradoGuia;
+}
 
-    private void consumirPA() {
-        borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
-        borderPane.getJuego().comprobarTurno();
-        actualizarContador();
-    }
+private void consumirPA() {
+    borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
+    borderPane.getJuego().comprobarTurno();
+    actualizarAvisos();
+}
 }

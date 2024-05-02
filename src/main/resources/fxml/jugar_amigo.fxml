@@ -64,5 +64,6 @@
             <Font size="31.0" />
          </font>
       </Label>
+      <Label fx:id="labelTurno" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="95.0" text="Turno de " />
     </children>
 </AnchorPane>
