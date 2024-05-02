@@ -50,13 +50,18 @@
             </rowConstraints>
         </GridPane>
       <Button fx:id="botonMover" layoutX="84.0" layoutY="506.0" mnemonicParsing="false" onAction="#moverJugador" prefHeight="69.0" prefWidth="95.0" text="Mover" />
-      <Button fx:id="botonPasar" layoutX="208.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Pasar" />
-      <Button fx:id="botonRegatear" layoutX="452.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Regatear" />
-      <Button fx:id="botonTirar" layoutX="329.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Tirar" />
-      <Button fx:id="botonMeterPierna" layoutX="579.0" layoutY="506.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="95.0" text="Meter pierna" />
+      <Button fx:id="botonPasar" layoutX="208.0" layoutY="506.0" mnemonicParsing="false" onAction="#pasarBalon" prefHeight="69.0" prefWidth="95.0" text="Pasar" />
+      <Button fx:id="botonRegatear" layoutX="452.0" layoutY="506.0" mnemonicParsing="false" onAction="#regatear" prefHeight="69.0" prefWidth="95.0" text="Regatear" />
+      <Button fx:id="botonTirar" layoutX="329.0" layoutY="506.0" mnemonicParsing="false" onAction="#tirarApuerta" prefHeight="69.0" prefWidth="95.0" text="Tirar" />
+      <Button fx:id="botonMeterPierna" layoutX="579.0" layoutY="506.0" mnemonicParsing="false" onAction="#hacerEntrada" prefHeight="69.0" prefWidth="95.0" text="Meter pierna" />
       <Label fx:id="labelPA" layoutX="722.0" layoutY="510.0" prefHeight="61.0" prefWidth="241.0" text="PA restantes:">
          <font>
             <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelMarcador" alignment="CENTER" layoutX="203.0" layoutY="452.0" prefHeight="50.0" prefWidth="593.0" text="MARCADOR">
+         <font>
+            <Font size="31.0" />
          </font>
       </Label>
     </children>

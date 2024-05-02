@@ -1,12 +1,12 @@
 package domain;
 
 public class Portero extends Jugador {
-    int div;
-    int han;
-    int kic;
-    int ref;
-    int spd;
-    int pos;
+    private int div;
+    private int han;
+    private int kic;
+    private int ref;
+    private int spd;
+    private int pos;
 
     public Portero() {
     }
@@ -36,5 +36,53 @@ public class Portero extends Jugador {
 
     public Portero(String nombre, int dorsal, String posicion) {
         super(nombre, dorsal, posicion);
+    }
+
+    public int getDiv() {
+        return div;
+    }
+
+    public void setDiv(int div) {
+        this.div = div;
+    }
+
+    public int getHan() {
+        return han;
+    }
+
+    public void setHan(int han) {
+        this.han = han;
+    }
+
+    public int getKic() {
+        return kic;
+    }
+
+    public void setKic(int kic) {
+        this.kic = kic;
+    }
+
+    public int getRef() {
+        return ref;
+    }
+
+    public void setRef(int ref) {
+        this.ref = ref;
+    }
+
+    public int getSpd() {
+        return spd;
+    }
+
+    public void setSpd(int spd) {
+        this.spd = spd;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
     }
 }

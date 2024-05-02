@@ -26,7 +26,7 @@ public class DAOequipos {
         plantillaRealMadrid.add(new Jugador("Toni Kroos", 8, "MC", 51, 80, 90, 81, 70, 71));
         plantillaRealMadrid.add(new Jugador("Luka Modric", 10, "MC", 81, 80, 91, 90, 75, 70));
         plantillaRealMadrid.add(new Jugador("Eduardo Camavinga", 12, "MC", 79, 66, 80, 82, 76, 80));
-        plantillaRealMadrid.add(new Jugador("Vinicius Junior", 7, "DC", 97, 85, 81, 92, 31, 72));
+            plantillaRealMadrid.add(new Jugador("Vinicius Junior", 7, "DC", 97, 85, 81, 92, 31, 72));
         plantillaRealMadrid.add(new Jugador("Rodrygo Goes", 11, "DC", 91, 86, 83, 90, 35, 66));
         realMadrid.setPlantilla(plantillaRealMadrid);
         for (int i = 0; i < 11; i++) {

@@ -1,5 +1,6 @@
 package controllers;
 
+import domain.ComprobarAcciones;
 import domain.Equipo;
 import domain.Jugador;
 import javafx.event.ActionEvent;
@@ -18,7 +19,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.lang.classfile.Superclass;
 import java.util.*;
 
 public class ControladorJugarAmigo {
@@ -29,6 +29,7 @@ public class ControladorJugarAmigo {
     public Button botonTirar;
     public Button botonMeterPierna;
     public Label labelPA;
+    public Label labelMarcador;
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane;
@@ -38,6 +39,8 @@ public class ControladorJugarAmigo {
 
     private int ultimaFilaSeleccionada;
     private int ultimaColumnaSeleccionada;
+
+    private Set<String> casillasIluminadas = new HashSet<>();
 
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         borderPane = controladorPrincipal;
@@ -297,9 +300,19 @@ public class ControladorJugarAmigo {
     }
 
     private void cargarJugadores() {
+        // Primero vacio el campo
         for (int i = 0; i < borderPane.getJuego().getCampo()[0].length; i++) { //22
             for (int j = 0; j < borderPane.getJuego().getCampo().length; j++) { //15
-                if (borderPane.getJuego().hayJugadorEn(j, i)) {
+                if (gridPane.lookup("#" + i + "-" + j) instanceof StackPane) {
+                    ((StackPane) gridPane.lookup("#" + i + "-" + j)).getChildren().clear();
+                }
+            }
+        }
+
+        //Luego meto los jugadores
+        for (int i = 0; i < borderPane.getJuego().getCampo()[0].length; i++) { //22
+            for (int j = 0; j < borderPane.getJuego().getCampo().length; j++) { //15
+                if (ComprobarAcciones.hayJugadorEn(borderPane.getJuego().getCampo(), j, i)) {
                     Pane pane = (Pane) gridPane.getChildren().get(i * 15 + j);
                     StackPane stackPane = new StackPane();
                     Jugador jugador = borderPane.getJuego().devolverJugador(j, i);
@@ -312,7 +325,7 @@ public class ControladorJugarAmigo {
 
                     // Pinta las camisetas
                     if (equipoLocal.getColorPrincipal() != equipoVisitante.getColorPrincipal()) { // Si los colores de las camisetas son diferentes
-                        if (i <= 10) { // Si es jugador local
+                        if (ComprobarAcciones.esJugadorLocal(borderPane.getJuego(), j, i)) { // Si es jugador local
                             if (jugador.getClass().getSimpleName().equals("Portero")) {
                                 // Si es un portero
                                 camiseta.setFill(equipoLocal.getColorTerciario());
@@ -360,30 +373,31 @@ public class ControladorJugarAmigo {
                     dorsal.setFont(Font.font("Arial", FontWeight.BOLD, 12));
 
                     // Calcula el centro de la camiseta
-                    double centroX = (pane.getWidth() / 2);
+                    double centroX = pane.getWidth() / 2;
                     double centroY = pane.getHeight() / 2;
                     double posDorsalX = centroX;
                     double posDorsalY = centroY;
                     double centroBalonX = centroX;
 
+                    // NO AGREGA BIEN LOS JUGADORES CON BALON
 
                     // Si el jugador tiene el balon mueve la chapa al lado correspondiente
                     // del pane y le mete el balon en el lado contrario
                     if (jugador.isTieneBalon()) {
+                        stackPane.getChildren().addAll(camiseta, dorsal, balon);
                         if (dorsal.getFill() == equipoLocal.getColorSecundario()) { // Si es un jugador local
                             StackPane.setAlignment(camiseta, Pos.CENTER_LEFT);
-                            StackPane.setAlignment(dorsal, Pos.CENTER);
+                            StackPane.setAlignment(dorsal, Pos.CENTER_RIGHT);
                             StackPane.setAlignment(balon, Pos.CENTER_RIGHT);
-                            posDorsalX = posDorsalX - 10;
-                            StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX));
+                            posDorsalX = 20 - dorsal.getLayoutBounds().getWidth()/2;
+                            StackPane.setMargin(dorsal, new Insets(0,posDorsalX,0,0));
                         } else { // Si es un jugador visitante
                             StackPane.setAlignment(camiseta, Pos.CENTER_RIGHT);
-                            StackPane.setAlignment(dorsal, Pos.CENTER);
+                            StackPane.setAlignment(dorsal, Pos.CENTER_LEFT);
                             StackPane.setAlignment(balon, Pos.CENTER_LEFT);
-                            posDorsalX = posDorsalX + 10;
-                            StackPane.setMargin(dorsal, new Insets(posDorsalY, 0, 0, posDorsalX));
+                            posDorsalX = 20 - dorsal.getLayoutBounds().getWidth()/2;
+                            StackPane.setMargin(dorsal, new Insets(0, 0,0,posDorsalX));
                         }
-                        stackPane.getChildren().addAll(camiseta, dorsal, balon);
                     } else { // Si el jugador no tiene el balon carga la chapa y ya
                         stackPane.getChildren().addAll(camiseta, dorsal);
                     }
@@ -405,15 +419,15 @@ public class ControladorJugarAmigo {
         //ocultarCasillasIluminadas();
         actualizarContador();
         if (borderPane.getJuego().getCampo()[fila][columna] != null) {
-            if (borderPane.getJuego().esTurnoDeJugador(fila, columna)) {
-                if (borderPane.getJuego().hayPosibleMovimiento(fila, columna)) {
+            if (ComprobarAcciones.esTurnoDeJugador(borderPane.getJuego(), fila, columna)) {
+                if (ComprobarAcciones.hayPosibleMovimiento(borderPane.getJuego().getCampo(), fila, columna)) {
                     botonMover.setVisible(true);
                 }
                 if (borderPane.getJuego().devolverJugador(fila, columna).isTieneBalon()) { // Si tiene el balon muestra pasar, tirar y regatear
                     botonPasar.setVisible(true);
                     botonTirar.setVisible(true);
                 }
-                if (borderPane.getJuego().hayRivalAlrededor(fila, columna, borderPane.getJuego().isTurno())) {
+                if (ComprobarAcciones.hayRivalAlrededor(borderPane.getJuego(), fila, columna, borderPane.getJuego().isTurno())) {
                     if (borderPane.getJuego().devolverJugador(fila, columna).isTieneBalon()) { // Si tiene el balon muestra pasar, tirar y regatear
                         botonRegatear.setVisible(true);
                     } else {
@@ -439,11 +453,13 @@ public class ControladorJugarAmigo {
 
     public void moverJugador(ActionEvent actionEvent) {
 
-        iluminarCasillasPosibles();
+        iluminarPosiblesMovimientos();
+        consumirPA();
+
 
     }
 
-    public void iluminarCasillasPosibles() {
+    public void iluminarPosiblesMovimientos() {
         int fila = ultimaFilaSeleccionada;
         int columna = ultimaColumnaSeleccionada;
         for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
@@ -456,9 +472,7 @@ public class ControladorJugarAmigo {
 
                     // Creacion del cuadrado que recibe el evento
 
-                    Rectangle cuadradoGuia = new Rectangle(30, 30); // Cambiar dimensiones a 30, 30
-                    cuadradoGuia.setFill(Color.WHITE);
-                    cuadradoGuia.setOpacity(0.5);
+                    Rectangle cuadradoGuia = crearCasillaIluminada();
                     int columnaIluminada = j;
                     int filaIluminada = i;
 
@@ -467,15 +481,10 @@ public class ControladorJugarAmigo {
                         System.out.println("PULSADO CASILLA ILUMINADA: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
                         borderPane.getJuego().moverJugador(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
                         moverJugadorConsola(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
-
-                        borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
-                        borderPane.getJuego().comprobarTurno();
-                        actualizarContador();
-
                     });
 
                     // Meto el cuadrado en el StackPane correspondiente
-                    if (!borderPane.getJuego().hayJugadorEn(i, j)) {
+                    if (!ComprobarAcciones.hayJugadorEn(borderPane.getJuego().getCampo(), i, j)) {
                         devolverStackPane(i, j).getChildren().add(cuadradoGuia);
                         casillasIluminadas.add(i + "-" + j);
 
@@ -495,7 +504,22 @@ public class ControladorJugarAmigo {
         ocultarCasillasIluminadas();
     }
 
-    private Set<String> casillasIluminadas = new HashSet<>();
+    public void pasarBalon(ActionEvent actionEvent) {
+
+    }
+
+    public void regatear(ActionEvent actionEvent) {
+    }
+
+    public void tirarApuerta(ActionEvent actionEvent) {
+        borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
+        ocultarOpciones();
+        actualizarContador();
+        cargarJugadores();
+    }
+
+    public void hacerEntrada(ActionEvent actionEvent) {
+    }
 
     /**
      * Quita la iluminacion de las casillas iluminadas
@@ -513,11 +537,25 @@ public class ControladorJugarAmigo {
         casillasIluminadas.clear();
     }
 
+    public void actualizarContador() {
+        labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
+    }
+
+
     public StackPane devolverStackPane(int fila, int columna) {
         return (StackPane) gridPane.lookup("#" + columna + "-" + fila);
     }
 
-    public void actualizarContador() {
-        labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
+    public Rectangle crearCasillaIluminada() {
+        Rectangle cuadradoGuia = new Rectangle(30, 30);
+        cuadradoGuia.setFill(Color.WHITE);
+        cuadradoGuia.setOpacity(0.5);
+        return cuadradoGuia;
+    }
+
+    private void consumirPA() {
+        borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
+        borderPane.getJuego().comprobarTurno();
+        actualizarContador();
     }
 }
