@@ -416,7 +416,8 @@ public class ControladorJugarAmigo {
 
     /**
      * Muestra los botones en funcion de las acciones que puede hacer el jugador seleccionado
-     * @param fila Fila donde se encuentra el jugador seleccionado
+     *
+     * @param fila    Fila donde se encuentra el jugador seleccionado
      * @param columna Columna donde se encuentra el jugador seleccionado
      */
     public void mostrarOpciones(int fila, int columna) {
@@ -507,19 +508,15 @@ public class ControladorJugarAmigo {
     }
 
     public void pasarBalon(ActionEvent actionEvent) {
-        int filaPasador = ultimaFilaSeleccionada;
-        int columnaPasador = ultimaColumnaSeleccionada;
-
         iluminarCompaneros();
-
     }
 
     private void iluminarCompaneros() {
         ocultarCasillasIluminadas();
         for (int i = 0; i < borderPane.getJuego().getCampo().length; i++) {
-            for (int j = 0; j <borderPane.getJuego().getCampo()[0].length ; j++) {
-                if (ComprobarAcciones.hayJugadorEn(borderPane.juego.getCampo(), i, j)){
-                    if (!ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)){
+            for (int j = 0; j < borderPane.getJuego().getCampo()[0].length; j++) {
+                if (ComprobarAcciones.hayJugadorEn(borderPane.juego.getCampo(), i, j)) {
+                    if (!ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)) {
 
                         // Creacion del cuadrado que recibe el evento
                         Rectangle casillaIluminada = crearCasillaIluminada();
@@ -535,7 +532,8 @@ public class ControladorJugarAmigo {
 
                             ocultarCasillasIluminadas();
                             cargarJugadores();
-                            consumirPA();
+                            // consumirPA();
+                            borderPane.getJuego().comprobarTurno();
                         });
 
 
@@ -548,60 +546,101 @@ public class ControladorJugarAmigo {
         }
     }
 
-public void regatear(ActionEvent actionEvent) {
-}
+    public void regatear(ActionEvent actionEvent) {
+        iluminarRivalesRegateables();
+    }
 
-public void tirarApuerta(ActionEvent actionEvent) {
-    borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
-    ocultarOpciones();
-    actualizarAvisos();
-    cargarJugadores();
-}
+    private void iluminarRivalesRegateables() {
 
-public void hacerEntrada(ActionEvent actionEvent) {
-}
+    }
 
-/**
- * Quita la iluminacion de las casillas iluminadas
- */
-private void ocultarCasillasIluminadas() {
-    for (String coordenadas : casillasIluminadas) {
-        int fila = Integer.parseInt(coordenadas.split("-")[0]);
-        int columna = Integer.parseInt(coordenadas.split("-")[1]);
-        StackPane stackPane = devolverStackPane(fila, columna);
-        if (stackPane != null) {
-            // Elimina los cuadrados rosas de esta celda
-            stackPane.getChildren().removeIf(node -> node instanceof Rectangle);
+    public void tirarApuerta(ActionEvent actionEvent) {
+        borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
+        ocultarOpciones();
+        actualizarAvisos();
+        cargarJugadores();
+    }
+
+    public void hacerEntrada(ActionEvent actionEvent) {
+        iluminarRivalesEntrables();
+    }
+
+    private void iluminarRivalesEntrables() {
+        for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
+            for (int j = ultimaColumnaSeleccionada - 1; j <= ultimaColumnaSeleccionada + 1; j++) {
+                if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
+                    if (borderPane.getJuego().getCampo()[i][j] != null){
+                        if (ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)){
+                            //Creo la casilla iluminada y la añado
+                            Rectangle casillaIluminada = crearCasillaIluminada();
+                            casillaIluminada.setId(i+"-"+j);
+                            StackPane casillaRival = (StackPane) gridPane.lookup("#" + j + "-" + i);
+
+                            int filaIluminada = i;
+                            int columnaIluminada = j;
+
+                            // Creacion del evento
+                            casillaIluminada.setOnMouseClicked(e -> {
+                                System.out.println("PULSADO ENTRADA: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
+
+                                borderPane.getJuego().hacerEntrada(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+
+                                ocultarCasillasIluminadas();
+                                cargarJugadores();
+                                //consumirPA();
+                                borderPane.getJuego().comprobarTurno();
+                            });
+
+                            devolverStackPane(i, j).getChildren().add(casillaIluminada);
+                            casillasIluminadas.add(i + "-" + j);
+                        }
+                    }
+                }
+            }
         }
     }
-    casillasIluminadas.clear();
-}
 
-public void actualizarAvisos() {
-    labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
-    if (borderPane.getJuego().isTurno()) {
-        labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoLocal().getNombre());
-    } else {
-        labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoVisitante().getNombre());
+    /**
+     * Quita la iluminacion de las casillas iluminadas
+     */
+    private void ocultarCasillasIluminadas() {
+        for (String coordenadas : casillasIluminadas) {
+            int fila = Integer.parseInt(coordenadas.split("-")[0]);
+            int columna = Integer.parseInt(coordenadas.split("-")[1]);
+            StackPane stackPane = (StackPane) devolverStackPane(fila, columna);
+            if (stackPane != null) {
+                // Elimina los cuadrados rosas de esta celda
+                stackPane.getChildren().removeIf(node -> node instanceof Rectangle);
+            }
+        }
+        casillasIluminadas.clear();
     }
-    labelMarcador.setText(borderPane.getJuego().getEquipoLocal().getNombre() + " " + borderPane.getJuego().getGolesLocal() + " - " + borderPane.getJuego().getGolesVisitante() + " " + borderPane.getJuego().getEquipoVisitante().getNombre());
-}
+
+    public void actualizarAvisos() {
+        labelPA.setText("PA restantes: " + borderPane.getJuego().getPA());
+        if (borderPane.getJuego().isTurno()) {
+            labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoLocal().getNombre());
+        } else {
+            labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoVisitante().getNombre());
+        }
+        labelMarcador.setText(borderPane.getJuego().getEquipoLocal().getNombre() + " " + borderPane.getJuego().getGolesLocal() + " - " + borderPane.getJuego().getGolesVisitante() + " " + borderPane.getJuego().getEquipoVisitante().getNombre());
+    }
 
 
-public StackPane devolverStackPane(int fila, int columna) {
-    return (StackPane) gridPane.lookup("#" + columna + "-" + fila);
-}
+    public StackPane devolverStackPane(int fila, int columna) {
+        return (StackPane) gridPane.lookup("#" + columna + "-" + fila);
+    }
 
-public Rectangle crearCasillaIluminada() {
-    Rectangle cuadradoGuia = new Rectangle(30, 30);
-    cuadradoGuia.setFill(Color.WHITE);
-    cuadradoGuia.setOpacity(0.5);
-    return cuadradoGuia;
-}
+    public Rectangle crearCasillaIluminada() {
+        Rectangle cuadradoGuia = new Rectangle(30, 30);
+        cuadradoGuia.setFill(Color.WHITE);
+        cuadradoGuia.setOpacity(0.5);
+        return cuadradoGuia;
+    }
 
-private void consumirPA() {
-    borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
-    borderPane.getJuego().comprobarTurno();
-    actualizarAvisos();
-}
+    private void consumirPA() {
+        borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
+        borderPane.getJuego().comprobarTurno();
+        actualizarAvisos();
+    }
 }

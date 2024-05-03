@@ -93,7 +93,7 @@ public class Juego {
                 if (campo[i][j] == null) {
                     System.out.print("|  |");
                 } else {
-                    if (campo[i][j]. getDorsal() <10){
+                    if (campo[i][j].getDorsal() < 10) {
                         System.out.print("|" + campo[i][j].getDorsal() + " |");
                     } else {
                         System.out.print("|" + campo[i][j].getDorsal() + "|");
@@ -581,7 +581,7 @@ public class Juego {
 
                 // Quito al receptor de la banda si lo hubiera
                 int filaBanda;
-                if (columnaReceptor < 7) {
+                if (filaReceptor < 7) {
                     filaBanda = 0;
                 } else {
                     filaBanda = 14;
@@ -660,6 +660,8 @@ public class Juego {
         if (pase < probabilidad) {
             PA = 0;
             comprobarTurno(); // Cambia el turno
+        } else {
+            PA--;
         }
 
     }
@@ -772,5 +774,28 @@ public class Juego {
 
     }
 
+    public void regatear(int filaRegateador, int columnaRegateador, int filaDefensor, int columnaDefensor) {
+        int regate = (int) (Math.random()*campo[filaRegateador][columnaRegateador].getDri()+1);
+        int defensa = (int) (Math.random()*campo[filaDefensor][columnaDefensor].getDef()+1);
 
+        if (regate > defensa){ // Si el regate es exitoso
+            Jugador aux = campo[filaDefensor][columnaDefensor];
+            campo[filaDefensor][columnaDefensor] = campo[filaRegateador][columnaRegateador];
+            campo[filaRegateador][columnaRegateador] = aux;
+        } else { // Si el regate no es exitoso
+            Jugador aux = campo[filaRegateador][columnaRegateador];
+            campo[filaRegateador][columnaRegateador].setTieneBalon(false);
+            campo[filaDefensor][columnaDefensor].setTieneBalon(true);
+            campo[filaRegateador][columnaRegateador] = campo[filaDefensor][columnaDefensor];
+            campo[filaDefensor][columnaDefensor] = aux;
+            PA = 0;
+        }
+        comprobarTurno();
+        
+    }
+
+    public void hacerEntrada(int filaDefensa, int columnaDefensa, int filaDelantero, int columnaDelantero) {
+        
+
+    }
 }
