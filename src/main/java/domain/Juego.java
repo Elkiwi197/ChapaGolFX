@@ -775,10 +775,10 @@ public class Juego {
     }
 
     public void regatear(int filaRegateador, int columnaRegateador, int filaDefensor, int columnaDefensor) {
-        int regate = (int) (Math.random()*campo[filaRegateador][columnaRegateador].getDri()+1);
-        int defensa = (int) (Math.random()*campo[filaDefensor][columnaDefensor].getDef()+1);
+        int regate = (int) (Math.random() * campo[filaRegateador][columnaRegateador].getDri() + 1);
+        int defensa = (int) (Math.random() * campo[filaDefensor][columnaDefensor].getDef() + 1);
 
-        if (regate > defensa){ // Si el regate es exitoso
+        if (regate > defensa) { // Si el regate es exitoso
             Jugador aux = campo[filaDefensor][columnaDefensor];
             campo[filaDefensor][columnaDefensor] = campo[filaRegateador][columnaRegateador];
             campo[filaRegateador][columnaRegateador] = aux;
@@ -791,11 +791,65 @@ public class Juego {
             PA = 0;
         }
         comprobarTurno();
-        
+
     }
 
     public void hacerEntrada(int filaDefensa, int columnaDefensa, int filaDelantero, int columnaDelantero) {
-        
+        boolean falta = false;
+        int entrada = (int) (Math.random() * campo[filaDefensa][columnaDefensa].getDef() + 1);
+        int reflejos = (int) (Math.random() * campo[filaDelantero][columnaDelantero].getPac() + 1);
+        int fuerzaDefensa = (int) (Math.random() * campo[filaDefensa][columnaDefensa].getPhy() + 1);
+        int fuerzaDelantero = (int) (Math.random() * campo[filaDelantero][columnaDelantero].getPhy() + 1);
 
+        if (campo[filaDelantero][columnaDelantero].isTieneBalon()) { // Si el delantero tiene el balon
+            if (entrada > reflejos) { // Si la entrada es exitosa
+                campo[filaDelantero][columnaDelantero].setTieneBalon(false);
+                campo[filaDefensa][columnaDefensa].setTieneBalon(true);
+            } else { // Si la entrada no es exitosa
+                if (entrada <= 10) { // Si es menor o igual que 10 se saca roja
+                    System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " clavo los tacos, roja");
+                    campo[filaDefensa][columnaDefensa] = null;
+                } else if (entrada <= 30) { // Si es menor o igual que 30 se saca amarilla
+                    if (!campo[filaDefensa][columnaDefensa].isTieneAmarilla()) { // Si no tiene amarilla
+                        System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " pisó a" + campo[filaDelantero][columnaDelantero].getNombre() + ", amarilla");
+                        campo[filaDefensa][columnaDefensa].setTieneAmarilla(true);
+                    } else { // Si tiene amarilla (doble amarilla)
+                        System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " cometió dos faltas de amarilla, roja");
+                        campo[filaDefensa][columnaDefensa].setTieneAmarilla(false);
+                        campo[filaDefensa][columnaDefensa] = null;
+                    }
+                }
+                falta = true;
+            }
+        } else { // Si el delantero no tiene el balon
+            System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " hizo entrada a un jugador sin balon, roja");
+            campo[filaDefensa][columnaDefensa] = null;
+            falta = true;
+        }
+        if (falta) {
+            quitarBalon();
+            campo[filaDelantero][columnaDelantero].setTieneBalon(true);
+            if (ComprobarAcciones.esPenalti(turno, filaDelantero, columnaDelantero)) {
+                System.out.println("PENALTI");
+                cargarJugadoresEnCampoRAM(Jugada.PENALTI);
+            }
+            PA = 0;
+
+        }
+
+        comprobarTurno();
+
+    }
+
+    private void quitarBalon() {
+        for (int i = 0; i < campo.length; i++) {
+            for (int j = 0; j < campo[0].length; j++) {
+                if (campo[i][j] != null){
+                    if (campo[i][j].isTieneBalon()){
+                        campo[i][j].setTieneBalon(false);
+                    }
+                }
+            }
+        }
     }
 }

@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="12 commit - Pase hecho correctamente (testear)">
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="13 commit - Pase testeado y regate hecho">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ComprobarAcciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ComprobarAcciones.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +121,7 @@
       <workItem from="1714606794855" duration="50000" />
       <workItem from="1714647623880" duration="32615000" />
       <workItem from="1714741466974" duration="1205000" />
-      <workItem from="1714752358629" duration="4903000" />
+      <workItem from="1714752358629" duration="7366000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -217,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714692050880</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="13 commit - Pase testeado y regate hecho">
+      <option name="closed" value="true" />
+      <created>1714758235765</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1714758235765</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,14 +247,15 @@
     <MESSAGE value="10 commit - Mueve los jugadores correctamente" />
     <MESSAGE value="11 commit - Tiro a puerta hecho correctamente" />
     <MESSAGE value="12 commit - Pase hecho correctamente (testear)" />
-    <option name="LAST_COMMIT_MESSAGE" value="12 commit - Pase hecho correctamente (testear)" />
+    <MESSAGE value="13 commit - Pase testeado y regate hecho" />
+    <option name="LAST_COMMIT_MESSAGE" value="13 commit - Pase testeado y regate hecho" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java</url>
-          <line>630</line>
+          <line>661</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

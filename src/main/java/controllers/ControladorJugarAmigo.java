@@ -551,7 +551,38 @@ public class ControladorJugarAmigo {
     }
 
     private void iluminarRivalesRegateables() {
+        for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
+            for (int j = ultimaColumnaSeleccionada - 1; j <= ultimaColumnaSeleccionada + 1; j++) {
+                if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
+                    if (borderPane.getJuego().getCampo()[i][j] != null){
+                        if (ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)){
+                            //Creo la casilla iluminada y la añado
+                            Rectangle casillaIluminada = crearCasillaIluminada();
+                            casillaIluminada.setId(i+"-"+j);
+                            StackPane casillaRival = (StackPane) gridPane.lookup("#" + j + "-" + i);
 
+                            int filaIluminada = i;
+                            int columnaIluminada = j;
+
+                            // Creacion del evento
+                            casillaIluminada.setOnMouseClicked(e -> {
+                                System.out.println("PULSADO REGATE: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
+
+                                borderPane.getJuego().regatear(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+
+                                ocultarCasillasIluminadas();
+                                cargarJugadores();
+                                //consumirPA();
+                                borderPane.getJuego().comprobarTurno();
+                            });
+
+                            devolverStackPane(i, j).getChildren().add(casillaIluminada);
+                            casillasIluminadas.add(i + "-" + j);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void tirarApuerta(ActionEvent actionEvent) {

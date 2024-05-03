@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class ComprobarAcciones {
     public static boolean movimientoValido(Jugador[][] campo, int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
         boolean valido = false;
-        if (Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) == 1 || Math.abs(saltoVertical(filaInicial, filaFinal)) == 1  || Math.abs(saltoDiagonal(filaInicial, filaFinal, columnaInicial, columnaFinal)) == 1){
+        if (Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) == 1 || Math.abs(saltoVertical(filaInicial, filaFinal)) == 1 || Math.abs(saltoDiagonal(filaInicial, filaFinal, columnaInicial, columnaFinal)) == 1) {
             valido = true;
         }
         return valido;
@@ -157,17 +157,32 @@ public abstract class ComprobarAcciones {
 
     /**
      * Recibe un campo y unas coordenadas y devuelve de que equipo es el jugador de las coordenadas
+     *
      * @return true si es jugador del equipo local, false si es jugador del equipo visitante
      */
-    public static boolean esJugadorLocal(Juego juego, int fila, int columna){
+    public static boolean esJugadorLocal(Juego juego, int fila, int columna) {
         boolean esLocal = false;
-        if (juego.getCampo()[fila][columna] != null){
+        if (juego.getCampo()[fila][columna] != null) {
             for (Jugador jugador : juego.getEquipoLocal().getPlantilla()) {
-                if (juego.getCampo()[fila][columna].getNombre().equals(jugador.getNombre())){
+                if (juego.getCampo()[fila][columna].getNombre().equals(jugador.getNombre())) {
                     esLocal = true;
                 }
             }
         }
         return esLocal;
+    }
+
+    public static boolean esPenalti(boolean turno, int filaDelantero, int columnaDelantero) {
+        boolean penalti = false;
+        if (turno) { // Si la falta la hace el equipo local
+            if (filaDelantero >= 3 && filaDelantero<= 11 && columnaDelantero >= 0 && columnaDelantero <= 3){
+                    penalti = true;
+                }
+        } else { // Si la falta la hace el equipo visitante
+            if (filaDelantero >= 3 && filaDelantero<= 11 && columnaDelantero >= 18 && columnaDelantero <= 21){
+                penalti = true;
+            }
+        }
+        return penalti ;
     }
 }

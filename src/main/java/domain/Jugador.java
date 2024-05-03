@@ -7,6 +7,7 @@ public class Jugador implements Cloneable {
     private String posicion;
 
     private boolean tieneBalon = false;
+    private boolean tieneAmarilla = false;
 
     int pac;
     int sho;
@@ -60,6 +61,22 @@ public class Jugador implements Cloneable {
         this.posicion = posicion;
     }
 
+    public boolean isTieneBalon() {
+        return tieneBalon;
+    }
+
+    public void setTieneBalon(boolean tieneBalon) {
+        this.tieneBalon = tieneBalon;
+    }
+
+    public boolean isTieneAmarilla() {
+        return tieneAmarilla;
+    }
+
+    public void setTieneAmarilla(boolean tieneAmarilla) {
+        this.tieneAmarilla = tieneAmarilla;
+    }
+
     public int getPac() {
         return pac;
     }
@@ -106,14 +123,6 @@ public class Jugador implements Cloneable {
 
     public void setPhy(int phy) {
         this.phy = phy;
-    }
-
-    public boolean isTieneBalon() {
-        return tieneBalon;
-    }
-
-    public void setTieneBalon(boolean tieneBalon) {
-        this.tieneBalon = tieneBalon;
     }
 
     public Jugador clonarJugador(){
