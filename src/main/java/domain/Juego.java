@@ -450,6 +450,147 @@ public class Juego {
                 }
                 break;
             case PENALTI:
+                if (turno) { // Si tira el equipo local
+                    // COLOCO AL EQUIPO LOCAL
+                    campo[7][0] = equipoLocal.getTitulares()[0];
+                    //Defensas
+                    campo[2][9] = equipoLocal.getTitulares()[1];
+                    campo[5][7] = equipoLocal.getTitulares()[2];
+                    campo[9][7] = equipoLocal.getTitulares()[3];
+                    campo[12][9] = equipoLocal.getTitulares()[4];
+                    //Centrocampistas y delanteros
+                    switch (equipoLocal.getAlineacion()) {
+                        case "4-4-2":
+                            //Centrocampistas
+                            campo[4][13] = equipoLocal.getTitulares()[5];
+                            campo[7][15] = equipoLocal.getTitulares()[6];
+                            campo[9][16] = equipoLocal.getTitulares()[7];
+                            campo[11][13] = equipoLocal.getTitulares()[8];
+
+                            //Delanteros
+                            campo[4][17] = equipoLocal.getTitulares()[9];
+                            campo[7][19] = equipoLocal.getTitulares()[10];
+                            break;
+                        case "4-3-3":
+                            //Centrocampistas
+                            campo[4][13] = equipoLocal.getTitulares()[5];
+                            campo[7][15] = equipoLocal.getTitulares()[6];
+                            campo[11][13] = equipoLocal.getTitulares()[7];
+
+                            //Delanteros
+                            campo[4][17] = equipoLocal.getTitulares()[8];
+                            campo[7][19] = equipoLocal.getTitulares()[9];
+                            campo[9][16] = equipoLocal.getTitulares()[10];
+                            break;
+                    }
+                    campo[7][19].setTieneBalon(true);
+
+                    // COLOCO AL EQUIPO VISITANTE
+                    // Portero
+                    campo[7][21] = equipoVisitante.getTitulares()[0];
+                    // Defensas
+                    campo[12][20] = equipoVisitante.getTitulares()[1];
+                    campo[10][17] = equipoVisitante.getTitulares()[2];
+                    campo[5][16] = equipoVisitante.getTitulares()[3];
+                    campo[2][20] = equipoVisitante.getTitulares()[4];
+                    // Centrocampistas y delanteros
+                    switch (equipoVisitante.getAlineacion()) {
+                        case "4-4-2":
+                            //Centrocampistas
+                            campo[12][14] = equipoVisitante.getTitulares()[5];
+                            campo[8][15] = equipoVisitante.getTitulares()[6];
+                            campo[6][15] = equipoVisitante.getTitulares()[7];
+                            campo[3][14] = equipoVisitante.getTitulares()[8];
+
+                            //Delanteros
+                            campo[8][9] = equipoVisitante.getTitulares()[9];
+                            campo[6][9] = equipoVisitante.getTitulares()[10];
+                            break;
+                        case "4-3-3":
+                            //Centrocampistas
+                            campo[12][14] = equipoVisitante.getTitulares()[5];
+                            campo[8][6] = equipoVisitante.getTitulares()[6];
+                            campo[3][14] = equipoVisitante.getTitulares()[7];
+
+                            //Delanteros
+                            campo[8][9] = equipoVisitante.getTitulares()[8];
+                            campo[6][6] = equipoVisitante.getTitulares()[9];
+                            campo[6][9] = equipoVisitante.getTitulares()[10];
+                            break;
+                    }
+
+
+                } else { // Si tira el equipo visitante
+                    // COLOCO AL EQUIPO LOCAL
+                    //Portero
+                    campo[7][0] = equipoLocal.getTitulares()[0];
+                    //Defensas
+                    campo[2][1] = equipoLocal.getTitulares()[1];
+                    campo[5][5] = equipoLocal.getTitulares()[2];
+                    campo[10][4] = equipoLocal.getTitulares()[3];
+                    campo[12][1] = equipoLocal.getTitulares()[4];
+                    //Centrocampistas y delanteros
+                    switch (equipoLocal.getAlineacion()) {
+                        case "4-4-2":
+                            //Centrocampistas
+                            campo[3][7] = equipoLocal.getTitulares()[5];
+                            campo[6][6] = equipoLocal.getTitulares()[6];
+                            campo[8][6] = equipoLocal.getTitulares()[7];
+                            campo[11][7] = equipoLocal.getTitulares()[8];
+
+                            //Delanteros
+                            campo[6][12] = equipoLocal.getTitulares()[9];
+                            campo[8][12] = equipoLocal.getTitulares()[10];
+                            break;
+                        case "4-3-3":
+                            //Centrocampistas
+                            campo[3][7] = equipoLocal.getTitulares()[5];
+                            campo[6][6] = equipoLocal.getTitulares()[6];
+                            campo[11][7] = equipoLocal.getTitulares()[7];
+
+                            //Delanteros
+                            campo[6][12] = equipoLocal.getTitulares()[8];
+                            campo[8][6] = equipoLocal.getTitulares()[9];
+                            campo[8][12] = equipoLocal.getTitulares()[10];
+                            break;
+                    }
+
+                    // COLOCO AL EQUIPO VISITANTE
+                    // Portero
+                    campo[7][21] = equipoVisitante.getTitulares()[0];
+                    // Defensas
+                    campo[12][12] = equipoVisitante.getTitulares()[1];
+                    campo[9][14] = equipoVisitante.getTitulares()[2];
+                    campo[5][14] = equipoVisitante.getTitulares()[3];
+                    campo[2][12] = equipoVisitante.getTitulares()[4];
+                    // Centrocampistas y delanteros
+                    switch (equipoVisitante.getAlineacion()) {
+                        case "4-4-2":
+                            //Centrocampistas
+                            campo[10][8] = equipoVisitante.getTitulares()[5];
+                            campo[9][5] = equipoVisitante.getTitulares()[6];
+                            campo[7][6] = equipoVisitante.getTitulares()[7];
+                            campo[4][8] = equipoVisitante.getTitulares()[8];
+
+                            //Delanteros
+                            campo[7][2] = equipoVisitante.getTitulares()[9];
+                            campo[4][4] = equipoVisitante.getTitulares()[10];
+                            break;
+                        case "4-3-3":
+                            //Centrocampistas
+                            campo[10][8] = equipoVisitante.getTitulares()[5];
+                            campo[7][6] = equipoVisitante.getTitulares()[6];
+                            campo[4][8] = equipoVisitante.getTitulares()[7];
+
+                            //Delanteros
+                            campo[9][5] = equipoVisitante.getTitulares()[8];
+                            campo[7][2] = equipoVisitante.getTitulares()[9];
+                            campo[4][4] = equipoVisitante.getTitulares()[10];
+                            break;
+                    }
+                    campo[7][2].setTieneBalon(true);
+
+                }
                 break;
             default:
 
@@ -543,7 +684,6 @@ public class Juego {
             cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
         } else if (resultado.contains("corner")) {
             cargarJugadoresEnCampoRAM(Jugada.CORNER);
-            PA = PA + 2;
         } else if (resultado.contains("portero")) {
             PA = 0;
             comprobarTurno();
@@ -828,24 +968,27 @@ public class Juego {
         }
         if (falta) {
             quitarBalon();
-            campo[filaDelantero][columnaDelantero].setTieneBalon(true);
+            PA = 0;
+            comprobarTurno();
             if (ComprobarAcciones.esPenalti(turno, filaDelantero, columnaDelantero)) {
                 System.out.println("PENALTI");
                 cargarJugadoresEnCampoRAM(Jugada.PENALTI);
+            } else {
+                campo[filaDelantero][columnaDelantero].setTieneBalon(true);
             }
-            PA = 0;
 
+        } else {
+            comprobarTurno();
         }
 
-        comprobarTurno();
 
     }
 
     private void quitarBalon() {
         for (int i = 0; i < campo.length; i++) {
             for (int j = 0; j < campo[0].length; j++) {
-                if (campo[i][j] != null){
-                    if (campo[i][j].isTieneBalon()){
+                if (campo[i][j] != null) {
+                    if (campo[i][j].isTieneBalon()) {
                         campo[i][j].setTieneBalon(false);
                     }
                 }

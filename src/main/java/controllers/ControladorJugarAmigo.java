@@ -144,6 +144,32 @@ public class ControladorJugarAmigo {
                         } else {
                             ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
                         }
+                    } else if (i == 5 || i == 16 || i == 17) { // Medias lunas
+                        if (i == 5) {
+                            if (j == 5) {
+                                ruta = "/images/campo/verdeClaroEsquinaInferiorIzquierda.jpg";
+                            } else if (j == 7) {
+                                ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                            } else if (j == 9) {
+                                ruta = "/images/campo/verdeClaroEsquinaSuperiorIzquierda.jpg";
+                            } else {
+                                ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                            }
+                        } else if (i == 16) {
+                            if (j == 6 || j == 8) {
+                                ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
+                            } else {
+                                ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                            }
+                        } else if (i == 17) {
+                            if (j == 5) {
+                                ruta = "/images/campo/verdeClaroBordeArriba.jpg";
+                            } else if (j == 9) {
+                                ruta = "/images/campo/verdeClaroBordeAbajo.jpg";
+                            } else {
+                                ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                            }
+                        }
                     } else if (i == 10 || i == 11) { // Centro del campo
                         if (i == 10) {
                             ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
@@ -193,6 +219,32 @@ public class ControladorJugarAmigo {
                             ruta = "/images/campo/verdeOscuroBordeArriba.jpg";
                         } else {
                             ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
+                        }
+                    } else if (i == 4 || i == 5 || i == 16) { // Medias lunas
+                        if (i == 4){
+                            if (j == 5){
+                                ruta = "/images/campo/verdeOscuroBordeArriba.jpg";
+                            } else if (j == 9) {
+                                ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
+                            } else {
+                                ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                            }
+                        } else if (i == 5) {
+                            if (j == 6 || j == 8){
+                                ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
+                            } else {
+                                ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                            }
+                        } else if (i == 16) {
+                            if (j == 5){
+                                ruta = "/images/campo/verdeOscuroEsquinaInferiorDerecha.jpg";
+                            } else if (j == 7) {
+                                ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                            } else if (j == 9) {
+                                ruta = "/images/campo/verdeOscuroEsquinaSuperiorDerecha.jpg";
+                            } else {
+                                ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                            }
                         }
                     } else if (i == 10 || i == 11) { // Centro del campo
                         if (i == 10) {
@@ -554,11 +606,11 @@ public class ControladorJugarAmigo {
         for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
             for (int j = ultimaColumnaSeleccionada - 1; j <= ultimaColumnaSeleccionada + 1; j++) {
                 if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
-                    if (borderPane.getJuego().getCampo()[i][j] != null){
-                        if (ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)){
+                    if (borderPane.getJuego().getCampo()[i][j] != null) {
+                        if (ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)) {
                             //Creo la casilla iluminada y la añado
                             Rectangle casillaIluminada = crearCasillaIluminada();
-                            casillaIluminada.setId(i+"-"+j);
+                            casillaIluminada.setId(i + "-" + j);
                             StackPane casillaRival = (StackPane) gridPane.lookup("#" + j + "-" + i);
 
                             int filaIluminada = i;
@@ -600,11 +652,11 @@ public class ControladorJugarAmigo {
         for (int i = ultimaFilaSeleccionada - 1; i <= ultimaFilaSeleccionada + 1; i++) {
             for (int j = ultimaColumnaSeleccionada - 1; j <= ultimaColumnaSeleccionada + 1; j++) {
                 if (i >= 0 && i <= 14 && j >= 0 && j <= 21) { // Evito el OutOfBoundsException
-                    if (borderPane.getJuego().getCampo()[i][j] != null){
-                        if (ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)){
+                    if (borderPane.getJuego().getCampo()[i][j] != null) {
+                        if (ComprobarAcciones.hayRivalEn(borderPane.getJuego(), i, j)) {
                             //Creo la casilla iluminada y la añado
                             Rectangle casillaIluminada = crearCasillaIluminada();
-                            casillaIluminada.setId(i+"-"+j);
+                            casillaIluminada.setId(i + "-" + j);
                             StackPane casillaRival = (StackPane) gridPane.lookup("#" + j + "-" + i);
 
                             int filaIluminada = i;

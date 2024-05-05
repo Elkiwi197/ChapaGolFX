@@ -175,14 +175,15 @@ public abstract class ComprobarAcciones {
     public static boolean esPenalti(boolean turno, int filaDelantero, int columnaDelantero) {
         boolean penalti = false;
         if (turno) { // Si la falta la hace el equipo local
-            if (filaDelantero >= 3 && filaDelantero<= 11 && columnaDelantero >= 0 && columnaDelantero <= 3){
-                    penalti = true;
-                }
+            if (filaDelantero >= 3 && filaDelantero <= 11 && columnaDelantero >= 18 && columnaDelantero <= 21) {
+                penalti = true;
+            }
         } else { // Si la falta la hace el equipo visitante
-            if (filaDelantero >= 3 && filaDelantero<= 11 && columnaDelantero >= 18 && columnaDelantero <= 21){
+
+            if (filaDelantero >= 3 && filaDelantero <= 11 && columnaDelantero >= 0 && columnaDelantero <= 3) {
                 penalti = true;
             }
         }
-        return penalti ;
+        return penalti;
     }
 }

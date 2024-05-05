@@ -40,10 +40,10 @@ public class DAOequipos {
         Jugador[] titularesBarcelona = new Jugador[11];
 
         plantillaBarcelona.add(new Portero("Ter Stegen", 1, "PO", 86, 85, 87, 90, 47, 85, 86, 85, 87, 90, 47, 85));
-        plantillaBarcelona.add(new Jugador("Joao Cancelo", 2, "LD", 81, 73, 85, 84, 80, 72));
+        plantillaBarcelona.add(new Jugador("Joao Cancelo", 2, "LI", 81, 73, 85, 84, 80, 72));
         plantillaBarcelona.add(new Jugador("Joules Koundé", 23, "CB", 84, 60, 80, 76, 87, 82));
         plantillaBarcelona.add(new Jugador("Ronald Araújo", 4, "CB", 79, 51, 65, 62, 86, 84));
-        plantillaBarcelona.add(new Jugador("Alejandro Balde", 3, "LI", 91, 48, 73, 78, 75, 64));
+        plantillaBarcelona.add(new Jugador("Alejandro Balde", 3, "LD", 91, 48, 73, 78, 75, 64));
         plantillaBarcelona.add(new Jugador("Pedri", 8, "MC", 78, 69, 82, 88, 70, 74));
         plantillaBarcelona.add(new Jugador("Ilkay Gundogan", 22, "MC", 75, 85, 87, 89, 77, 78));
         plantillaBarcelona.add(new Jugador("Frenkie de Jong", 21, "MC", 82, 69, 86, 87, 77, 78));
