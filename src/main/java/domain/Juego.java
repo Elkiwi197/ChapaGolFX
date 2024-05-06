@@ -703,105 +703,109 @@ public class Juego {
         boolean interceptado = false;
 
         campo[filaPasador][columnaPasador].setTieneBalon(false);
-        if (pase >= probabilidad) { // Si el pase es bueno
-            campo[filaReceptor][columnaReceptor].setTieneBalon(true);
-        } else { // Si el pase es malo
-            if (ComprobarAcciones.hayRivalAlrededor(this, filaReceptor, columnaReceptor, turno)) { // Si hay rival cerca del receptor
-                for (int i = 0; i < 4; i++) { // 1/4 de que el balon caiga en el rival
-                    int fila = (int) (Math.random() * 3) + filaReceptor - 1;
-                    int columna = (int) (Math.random() * 3) + columnaReceptor - 1;
+        if (!ComprobarAcciones.esFueraDeJuego(this, filaReceptor, columnaReceptor)) {
+            if (pase >= probabilidad) { // Si el pase es bueno
+                campo[filaReceptor][columnaReceptor].setTieneBalon(true);
+            } else { // Si el pase es malo
+                if (ComprobarAcciones.hayRivalAlrededor(this, filaReceptor, columnaReceptor, turno)) { // Si hay rival cerca del receptor
+                    for (int i = 0; i < 4; i++) { // 1/4 de que el balon caiga en el rival
+                        int fila = (int) (Math.random() * 3) + filaReceptor - 1;
+                        int columna = (int) (Math.random() * 3) + columnaReceptor - 1;
 
-                    if (ComprobarAcciones.hayRivalEn(this, fila, columna)) {
-                        campo[fila][columna].setTieneBalon(true);
-                        interceptado = true;
-                    }
-                }
-            }
-            if (!interceptado) { // Si el balon sale de banda
-
-                // Quito al receptor de la banda si lo hubiera
-                int filaBanda;
-                if (filaReceptor < 7) {
-                    filaBanda = 0;
-                } else {
-                    filaBanda = 14;
-                }
-                if (campo[filaBanda][columnaReceptor] != null) {
-                    boolean movido = false;
-                    while (!movido) {
-                        int filaRandom = (int) (Math.random() * 14);
-                        int columnaRandom = (int) (Math.random() * 21);
-
-
-                        if (campo[filaRandom][columnaRandom] == null) {
-                            moverJugador(filaBanda, columnaReceptor, filaRandom, columnaRandom);
-                            movido = true;
+                        if (ComprobarAcciones.hayRivalEn(this, fila, columna)) {
+                            campo[fila][columna].setTieneBalon(true);
+                            interceptado = true;
                         }
                     }
                 }
+                if (!interceptado) { // Si el balon sale de banda
 
-                // Pongo al rival para sacar
-                if (turno) { // Si el equipo local falla el pase
-                    for (int i = 0; i < campo.length; i++) {
-                        for (int j = 0; j < campo[0].length; j++) {
-                            if (filaReceptor < 7) { // Si es la banda de arriba
-                                if (campo[i][j] == equipoVisitante.getTitulares()[5]) {
-                                    campo[i][j].setTieneBalon(true);
-                                    moverJugador(i, j, 0, columnaReceptor);
-                                    i = campo.length;
-                                    j = campo[0].length;
-                                    break;
+                    // Quito al receptor de la banda si lo hubiera
+                    int filaBanda;
+                    if (filaReceptor < 7) {
+                        filaBanda = 0;
+                    } else {
+                        filaBanda = 14;
+                    }
+                    if (campo[filaBanda][columnaReceptor] != null) {
+                        boolean movido = false;
+                        while (!movido) {
+                            int filaRandom = (int) (Math.random() * 14);
+                            int columnaRandom = (int) (Math.random() * 21);
+
+
+                            if (campo[filaRandom][columnaRandom] == null) {
+                                moverJugador(filaBanda, columnaReceptor, filaRandom, columnaRandom);
+                                movido = true;
+                            }
+                        }
+                    }
+
+                    // Pongo al rival para sacar
+                    if (turno) { // Si el equipo local falla el pase
+                        for (int i = 0; i < campo.length; i++) {
+                            for (int j = 0; j < campo[0].length; j++) {
+                                if (filaReceptor < 7) { // Si es la banda de arriba
+                                    if (campo[i][j] == equipoVisitante.getTitulares()[5]) {
+                                        campo[i][j].setTieneBalon(true);
+                                        moverJugador(i, j, 0, columnaReceptor);
+                                        i = campo.length;
+                                        j = campo[0].length;
+                                        break;
+                                    }
+                                } else { // Si es la banda de abajo
+                                    if (campo[i][j] == equipoVisitante.getTitulares()[7]) {
+                                        campo[i][j].setTieneBalon(true);
+                                        moverJugador(i, j, 14, columnaReceptor);
+                                        i = campo.length;
+                                        j = campo[0].length;
+                                        break;
+                                    }
                                 }
-                            } else { // Si es la banda de abajo
-                                if (campo[i][j] == equipoVisitante.getTitulares()[7]) {
-                                    campo[i][j].setTieneBalon(true);
-                                    moverJugador(i, j, 14, columnaReceptor);
-                                    i = campo.length;
-                                    j = campo[0].length;
-                                    break;
+                            }
+                        }
+                    } else { // Si el equipo visitante falla el pase
+                        for (int i = 0; i < campo.length; i++) {
+                            for (int j = 0; j < campo[0].length; j++) {
+                                if (filaReceptor < 7) { // Si es la banda de arriba
+                                    if (campo[i][j] == equipoLocal.getTitulares()[7]) {
+                                        campo[i][j].setTieneBalon(true);
+                                        moverJugador(i, j, 0, columnaReceptor);
+                                        i = campo.length;
+                                        j = campo[0].length;
+                                        break;
+                                    }
+                                } else { // Si es la banda de abajo
+                                    if (campo[i][j] == equipoLocal.getTitulares()[5]) {
+                                        campo[i][j].setTieneBalon(true);
+                                        moverJugador(i, j, 14, columnaReceptor);
+                                        i = campo.length;
+                                        j = campo[0].length;
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
-                } else { // Si el equipo visitante falla el pase
-                    for (int i = 0; i < campo.length; i++) {
-                        for (int j = 0; j < campo[0].length; j++) {
-                            if (filaReceptor < 7) { // Si es la banda de arriba
-                                if (campo[i][j] == equipoLocal.getTitulares()[7]) {
-                                    campo[i][j].setTieneBalon(true);
-                                    moverJugador(i, j, 0, columnaReceptor);
-                                    i = campo.length;
-                                    j = campo[0].length;
-                                    break;
-                                }
-                            } else { // Si es la banda de abajo
-                                if (campo[i][j] == equipoLocal.getTitulares()[5]) {
-                                    campo[i][j].setTieneBalon(true);
-                                    moverJugador(i, j, 14, columnaReceptor);
-                                    i = campo.length;
-                                    j = campo[0].length;
-                                    break;
-                                }
-                            }
-                        }
-                    }
                 }
             }
-        }
-        if (interceptado) {
-            System.out.println("Pase interceptado");
-        } else {
-            if (pase >= probabilidad) {
-                System.out.println("Pase correcto");
+            if (interceptado) {
+                System.out.println("Pase interceptado");
             } else {
-                System.out.println("Salio de banda");
+                if (pase >= probabilidad) {
+                    System.out.println("Pase correcto");
+                } else {
+                    System.out.println("Salio de banda");
+                }
             }
-        }
-        if (pase < probabilidad) {
-            PA = 0;
-            comprobarTurno(); // Cambia el turno
-        } else {
-            PA--;
+            if (pase < probabilidad) {
+                PA = 0;
+                comprobarTurno(); // Cambia el turno
+            } else {
+                PA--;
+            }
+        } else { // Si es fuera de juego
+            System.out.println("FUERA DE JUEGO");
         }
 
     }
@@ -842,22 +846,22 @@ public class Juego {
                 case 5, 6, 7:
                     resultado = "parada del portero";
                     break;
-                case 8:
+                case 8, 9:
                     resultado = "palo y fuera";
                     break;
-                case 9, 10:
+                case 10, 11:
                     resultado = "palo y rebote";
                     break;
-                case 11:
+                case 12:
                     resultado = "larguero y fuera";
                     break;
-                case 12:
+                case 13:
                     resultado = "larguero y rebote";
                     break;
-                case 13:
+                case 14:
                     resultado = "cruceta y rebote";
                     break;
-                case 14, 15:
+                case 15:
                     resultado = "corner";
                     break;
             }
@@ -935,6 +939,7 @@ public class Juego {
     }
 
     public void hacerEntrada(int filaDefensa, int columnaDefensa, int filaDelantero, int columnaDelantero) {
+        //HACER LESION
         boolean falta = false;
         int entrada = (int) (Math.random() * campo[filaDefensa][columnaDefensa].getDef() + 1);
         int reflejos = (int) (Math.random() * campo[filaDelantero][columnaDelantero].getPac() + 1);
