@@ -24,7 +24,7 @@ public class DAOequipos {
         plantillaRealMadrid.add(new Jugador("Dani Carvajal", 2, "LD", 82, 54, 76, 79, 77, 79));
         plantillaRealMadrid.add(new Jugador("Jude Bellingham", 5, "MC", 76, 75, 79, 85, 78, 82));
         plantillaRealMadrid.add(new Jugador("Toni Kroos", 8, "MC", 51, 80, 90, 81, 70, 71));
-        plantillaRealMadrid.add(new Jugador("Luka Modri", 10, "MC", 81, 80, 91, 90, 75, 70));
+        plantillaRealMadrid.add(new Jugador("Luka Modric", 10, "MC", 81, 80, 91, 90, 75, 70));
         plantillaRealMadrid.add(new Jugador("Eduardo Camavinga", 12, "MC", 79, 66, 80, 82, 76, 80));
         plantillaRealMadrid.add(new Jugador("Vinicius Junior", 7, "DC", 97, 85, 81, 92, 31, 72));
         plantillaRealMadrid.add(new Jugador("Rodrygo Goes", 11, "DC", 91, 86, 83, 90, 35, 66));
@@ -117,6 +117,42 @@ public class DAOequipos {
         }
         girona.setTitulares(titularesGirona);
         liga.add(girona);
+
+
+        Equipo racing = new Equipo("Racing de Santander", 0, null, "4-3-3", Color.WHITE, Color.LIME, Color.BLACK, null, null, false);
+        List<Jugador> plantillaRacing = new ArrayList<>();
+        Jugador[] titularesRacing = new Jugador[11];
+
+        plantillaRacing.add(new Portero("Jokin Ezkieta", 13, "PO", 67, 66, 68, 68, 44, 67, 67, 66, 68, 68, 44, 67));
+        plantillaRacing.add(new Jugador("Álvaro Mantilla", 2, "LI", 52, 26, 56, 53, 62, 66));
+        plantillaRacing.add(new Jugador("Germán", 5, "CB", 45, 40, 57, 54, 76, 78));
+        plantillaRacing.add(new Jugador("Manu Hernando", 18, "CB", 60, 42, 49, 58, 66, 70));
+        plantillaRacing.add(new Jugador("Dani Fernández",   23, "LD", 64, 34, 54, 62, 64, 60));
+        plantillaRacing.add(new Jugador("Íñigo Sainz-Maza", 6, "MC", 72, 36, 58, 65, 64, 69));
+        plantillaRacing.add(new Jugador("Peque", 17, "MC", 67, 56, 59, 66, 35, 46));
+        plantillaRacing.add(new Jugador("Iván Morante", 16, "MC", 64, 62, 62, 64, 57, 59));
+        plantillaRacing.add(new Jugador("Íñigo Vicente", 10, "DC", 75, 68, 73, 74, 47, 56));
+        plantillaRacing.add(new Jugador("Juan Carlos Arana", 9, "DC", 66, 67, 54, 62, 33, 57));
+        plantillaRacing.add(new Jugador("Jordi Mboula", 8, "DC", 87, 69, 63, 75, 32, 66));
+        //SUPLENTES
+        plantillaRacing.add(new Portero("Miquel Parera", 1, "PO", 72, 66, 64, 72, 38, 63, 72, 66, 64, 72, 38, 63));
+        plantillaRacing.add(new Portero("Germán Fernández", 22, "PO", 56, 60, 54, 61, 30, 58, 56, 60, 54, 61, 30, 58)); // Su dorsal en el segundo equipo es el 1
+        plantillaRacing.add(new Jugador("Rubén Alves", 15, "CB", 69, 44, 50, 60, 68, 71));
+        plantillaRacing.add(new Jugador("Pol Moreno", 4, "CB", 57, 28, 50, 40, 67, 70));
+        plantillaRacing.add(new Jugador("Saúl", 3, "CB", 66, 45, 64, 66, 68, 63));
+        plantillaRacing.add(new Jugador("Marco Sangalli", 7, "MC", 68, 69, 66, 66, 53, 61));
+        plantillaRacing.add(new Jugador("Lago Junior", 20, "MC", 87, 69, 61, 71, 33, 72));
+        plantillaRacing.add(new Jugador("Aritz Aldasoro", 21, "MC", 68, 63, 64, 68, 62, 63));
+        plantillaRacing.add(new Jugador("Grenier", 19, "MC", 36, 73, 79, 74, 62, 68));
+        plantillaRacing.add(new Jugador("Andrés Martín", 11 , "DC", 78, 67, 64, 68, 27, 65));
+        plantillaRacing.add(new Jugador("Ekain", 14, "DC", 69, 67, 59, 68, 29, 61));
+
+        racing.setPlantilla(plantillaRacing);
+        for (int i = 0; i < 11; i++) {
+            titularesRacing[i] = racing.getPlantilla().get(i);
+        }
+        racing.setTitulares(titularesRacing);
+        liga.add(racing);
 
     }
 

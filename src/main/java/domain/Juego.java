@@ -281,7 +281,6 @@ public class Juego {
                     case "4-4-2":
                         //Portero
                         campo[7][0] = equipoLocal.getTitulares()[0];
-                        campo[7][0].setTieneBalon(true);
                         //Defensas
                         campo[4][4] = equipoLocal.getTitulares()[1];
                         campo[6][4] = equipoLocal.getTitulares()[2];
@@ -299,7 +298,6 @@ public class Juego {
                     case "4-3-3":
                         //Portero
                         campo[7][0] = equipoLocal.getTitulares()[0];
-                        campo[7][0].setTieneBalon(true);
                         //Defensas
                         campo[4][4] = equipoLocal.getTitulares()[1];
                         campo[6][4] = equipoLocal.getTitulares()[2];
@@ -609,7 +607,7 @@ public class Juego {
         actualizarCampoConsola();
     }
 
-    public void tirarApuerta(int filaJugador, int columnaJugador) {
+    public String tirarApuerta(int filaJugador, int columnaJugador) {
         int distancia;
         int jugadoresEnBarrera = 0;
         boolean hayPortero = false;
@@ -618,6 +616,9 @@ public class Juego {
         int remate;
         int parada;
         String resultado;
+
+        //El jugador tira
+        quitarBalon();
 
         if (turno) { // Calcula la distancia hasta la porteria derecha
             distancia = ComprobarAcciones.calcularDistanciaReal(filaJugador, columnaJugador, 7, 21);
@@ -655,8 +656,7 @@ public class Juego {
             parada = 0;
         }
 
-        //El jugador tira
-        campo[filaJugador][columnaJugador].setTieneBalon(false);
+
         // Compara las estadisticas para ver si hay gol o no
         if (remate > parada) {
             System.out.println("Fue gol");
@@ -670,40 +670,22 @@ public class Juego {
         }
 
         // Accion de los posibles resultados del tiro
-        resultado = resultadoDelTiro(remate > parada);
+        resultado = resultadoDelTiro(remate > parada, rematador);
         System.out.println(resultado);
-        if (resultado.contains("rebote")) {
-            hacerRechace();
-        } else if (resultado.contains("fuera")) {
-            PA = 0;
-            comprobarTurno();
-            cargarJugadoresEnCampoRAM(Jugada.SAQUE_PUERTA);
-        } else if (resultado.contains("gol")) {
-            PA = 0;
-            comprobarTurno();
-            cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
-        } else if (resultado.contains("corner")) {
-            cargarJugadoresEnCampoRAM(Jugada.CORNER);
-        } else if (resultado.contains("portero")) {
-            PA = 0;
-            comprobarTurno();
-            if (turno) {
-                campo[7][0].setTieneBalon(true);
-            } else {
-                campo[7][21].setTieneBalon(true);
-            }
-        }
+
 
         comprobarTurno();
+        return resultado;
     }
 
-    public void pasarBalon(int filaPasador, int columnaPasador, int filaReceptor, int columnaReceptor) {
+    public String pasarBalon(int filaPasador, int columnaPasador, int filaReceptor, int columnaReceptor) {
+        String resultado = "";
         int pase = (int) (Math.random() * campo[filaPasador][columnaPasador].getPas()) + 1;
         int probabilidad = (int) (Math.random() * 10) * ComprobarAcciones.calcularDistanciaReal(filaPasador, columnaPasador, filaReceptor, columnaReceptor);
         boolean interceptado = false;
 
         campo[filaPasador][columnaPasador].setTieneBalon(false);
-        if (!ComprobarAcciones.esFueraDeJuego(this, filaReceptor, columnaReceptor)) {
+        if (!ComprobarAcciones.esFueraDeJuego(this, filaReceptor, columnaReceptor, columnaPasador)) {
             if (pase >= probabilidad) { // Si el pase es bueno
                 campo[filaReceptor][columnaReceptor].setTieneBalon(true);
             } else { // Si el pase es malo
@@ -715,11 +697,12 @@ public class Juego {
                         if (ComprobarAcciones.hayRivalEn(this, fila, columna)) {
                             campo[fila][columna].setTieneBalon(true);
                             interceptado = true;
+                            resultado = campo[fila][columna].getNombre() + "\ninterceptó el pase";
+                            break;
                         }
                     }
                 }
                 if (!interceptado) { // Si el balon sale de banda
-
                     // Quito al receptor de la banda si lo hubiera
                     int filaBanda;
                     if (filaReceptor < 7) {
@@ -727,62 +710,48 @@ public class Juego {
                     } else {
                         filaBanda = 14;
                     }
-                    if (campo[filaBanda][columnaReceptor] != null) {
-                        boolean movido = false;
-                        while (!movido) {
-                            int filaRandom = (int) (Math.random() * 14);
-                            int columnaRandom = (int) (Math.random() * 21);
-
-
-                            if (campo[filaRandom][columnaRandom] == null) {
-                                moverJugador(filaBanda, columnaReceptor, filaRandom, columnaRandom);
-                                movido = true;
-                            }
-                        }
-                    }
+                    apartarJugador(filaBanda, columnaReceptor);
 
                     // Pongo al rival para sacar
                     if (turno) { // Si el equipo local falla el pase
+                        int sacador;
+                        if (filaBanda == 0) {
+                            sacador = 7;
+                        } else {
+                            sacador = 5;
+                        }
+                        while (equipoVisitante.getTitulares()[sacador] == null) {
+                            sacador++;
+                        }
                         for (int i = 0; i < campo.length; i++) {
                             for (int j = 0; j < campo[0].length; j++) {
-                                if (filaReceptor < 7) { // Si es la banda de arriba
-                                    if (campo[i][j] == equipoVisitante.getTitulares()[5]) {
-                                        campo[i][j].setTieneBalon(true);
-                                        moverJugador(i, j, 0, columnaReceptor);
-                                        i = campo.length;
-                                        j = campo[0].length;
-                                        break;
-                                    }
-                                } else { // Si es la banda de abajo
-                                    if (campo[i][j] == equipoVisitante.getTitulares()[7]) {
-                                        campo[i][j].setTieneBalon(true);
-                                        moverJugador(i, j, 14, columnaReceptor);
-                                        i = campo.length;
-                                        j = campo[0].length;
-                                        break;
-                                    }
+                                if (campo[i][j] == equipoVisitante.getTitulares()[sacador]) {
+                                    campo[i][j].setTieneBalon(true);
+                                    moverJugador(i, j, filaBanda, columnaReceptor);
+                                    i = campo.length;
+                                    j = campo[0].length;
+                                    break;
                                 }
                             }
                         }
                     } else { // Si el equipo visitante falla el pase
+                        int sacador;
+                        if (filaBanda == 0) {
+                            sacador = 5;
+                        } else {
+                            sacador = 7;
+                        }
+                        while (equipoLocal.getTitulares()[sacador] == null) {
+                            sacador++;
+                        }
                         for (int i = 0; i < campo.length; i++) {
                             for (int j = 0; j < campo[0].length; j++) {
-                                if (filaReceptor < 7) { // Si es la banda de arriba
-                                    if (campo[i][j] == equipoLocal.getTitulares()[7]) {
-                                        campo[i][j].setTieneBalon(true);
-                                        moverJugador(i, j, 0, columnaReceptor);
-                                        i = campo.length;
-                                        j = campo[0].length;
-                                        break;
-                                    }
-                                } else { // Si es la banda de abajo
-                                    if (campo[i][j] == equipoLocal.getTitulares()[5]) {
-                                        campo[i][j].setTieneBalon(true);
-                                        moverJugador(i, j, 14, columnaReceptor);
-                                        i = campo.length;
-                                        j = campo[0].length;
-                                        break;
-                                    }
+                                if (campo[i][j] == equipoLocal.getTitulares()[sacador]) {
+                                    campo[i][j].setTieneBalon(true);
+                                    moverJugador(i, j, filaBanda, columnaReceptor);
+                                    i = campo.length;
+                                    j = campo[0].length;
+                                    break;
                                 }
                             }
                         }
@@ -790,12 +759,11 @@ public class Juego {
                 }
             }
             if (interceptado) {
-                System.out.println("Pase interceptado");
             } else {
                 if (pase >= probabilidad) {
-                    System.out.println("Pase correcto");
+                    resultado = devolverJugador(filaPasador, columnaPasador).getNombre() + " para \n" + devolverJugador(filaReceptor, columnaReceptor).getNombre();
                 } else {
-                    System.out.println("Salio de banda");
+                    resultado = devolverJugador(filaPasador, columnaPasador).getNombre() + " midió mal y el \nbalón salió de banda";
                 }
             }
             if (pase < probabilidad) {
@@ -805,12 +773,14 @@ public class Juego {
                 PA--;
             }
         } else { // Si es fuera de juego
-            System.out.println("FUERA DE JUEGO");
+            resultado = "Fuera de juego";
         }
+
+        return resultado;
 
     }
 
-    public String resultadoDelTiro(boolean esGol) {
+    public String resultadoDelTiro(boolean esGol, Jugador rematador) {
         String resultado = null;
         int random;
         if (esGol) {
@@ -821,48 +791,74 @@ public class Juego {
                     random = (int) (Math.random() * 5 + 5);
                     if (turno) {
                         if (ComprobarAcciones.hayRivalEn(this, random, 21)) {
-                            resultado = "gol en propia de " + campo[random][21].getNombre();
+                            resultado = "gol en propia\n de " + campo[random][21].getNombre();
                             salir = true;
                         } else {
                             if (ComprobarAcciones.hayRivalEn(this, random, 0)) {
-                                resultado = "gol en propia de " + campo[random][0].getNombre();
+                                resultado = "gol en propia\n de " + campo[random][0].getNombre();
                                 salir = true;
                             }
                         }
                     }
                 } while (!salir);
             } else {
-                resultado = "gol";
+                resultado = "GOL DE " + rematador.getNombre().toUpperCase();
+                PA = 0;
+                comprobarTurno();
+                cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
             }
         } else {
             random = (int) (Math.random() * 15 + 1);
             switch (random) {
                 case 1, 2, 3:
-                    resultado = "fuera";
+                    resultado = rematador.getNombre() + " la mandó fuera";
+                    PA = 0;
+                    comprobarTurno();
+                    cargarJugadoresEnCampoRAM(Jugada.SAQUE_PUERTA);
                     break;
                 case 4:
-                    resultado = "alta y fuera";
+                    resultado = "A " + rematador.getNombre() + " se le fue alta";
+                    PA = 0;
+                    comprobarTurno();
+                    cargarJugadoresEnCampoRAM(Jugada.SAQUE_PUERTA);
                     break;
                 case 5, 6, 7:
-                    resultado = "parada del portero";
+                    resultado = rematador.getNombre() + " tiró al muñeco";
+                    PA = 0;
+                    comprobarTurno();
+                    if (turno) {
+                        campo[7][0].setTieneBalon(true);
+                    } else {
+                        campo[7][21].setTieneBalon(true);
+                    }
                     break;
                 case 8, 9:
-                    resultado = "palo y fuera";
+                    resultado = rematador.getNombre() + " le dio al\n palo y salió fuera";
+                    PA = 0;
+                    comprobarTurno();
+                    cargarJugadoresEnCampoRAM(Jugada.SAQUE_PUERTA);
                     break;
                 case 10, 11:
-                    resultado = "palo y rebote";
+                    resultado = rematador.getNombre() + " le dio al\n palo y rebotó";
+                    hacerRechace();
                     break;
                 case 12:
-                    resultado = "larguero y fuera";
+                    resultado = rematador.getNombre() + " le dio al\n larguero y salió fuera";
+                    PA = 0;
+                    comprobarTurno();
+                    cargarJugadoresEnCampoRAM(Jugada.SAQUE_PUERTA);
                     break;
                 case 13:
-                    resultado = "larguero y rebote";
+                    resultado = rematador.getNombre() + " le dio al\n larguero y rebotó";
+                    hacerRechace();
                     break;
                 case 14:
-                    resultado = "cruceta y rebote";
+                    resultado = rematador.getNombre() + " le dio a\n la cruceta y rebotó";
+                    hacerRechace();
                     break;
                 case 15:
-                    resultado = "corner";
+                    resultado = rematador.getNombre() + " tiró pero\n salió de córner";
+                    cargarJugadoresEnCampoRAM(Jugada.CORNER);
                     break;
             }
         }
@@ -909,7 +905,6 @@ public class Juego {
             }
         } else {
             // El balon se queda botando y sale de fondo
-            System.out.println("NO HAY JUGADOR EN EL AREA"); // BORRAR
             System.out.println("El balon reboto pero boto en el campo y salio por la linea de fondo");
             PA = 0;
             comprobarTurno();
@@ -918,15 +913,18 @@ public class Juego {
 
     }
 
-    public void regatear(int filaRegateador, int columnaRegateador, int filaDefensor, int columnaDefensor) {
+    public String regatear(int filaRegateador, int columnaRegateador, int filaDefensor, int columnaDefensor) {
+        String resultado = "";
         int regate = (int) (Math.random() * campo[filaRegateador][columnaRegateador].getDri() + 1);
         int defensa = (int) (Math.random() * campo[filaDefensor][columnaDefensor].getDef() + 1);
 
         if (regate > defensa) { // Si el regate es exitoso
             Jugador aux = campo[filaDefensor][columnaDefensor];
+            resultado = campo[filaRegateador][columnaRegateador].getNombre() + " se fue de \n" + campo[filaDefensor][columnaDefensor].getNombre();
             campo[filaDefensor][columnaDefensor] = campo[filaRegateador][columnaRegateador];
             campo[filaRegateador][columnaRegateador] = aux;
         } else { // Si el regate no es exitoso
+            resultado = campo[filaDefensor][columnaDefensor].getNombre() + " se la quitó a \n" + campo[filaRegateador][columnaRegateador].getNombre();
             Jugador aux = campo[filaRegateador][columnaRegateador];
             campo[filaRegateador][columnaRegateador].setTieneBalon(false);
             campo[filaDefensor][columnaDefensor].setTieneBalon(true);
@@ -935,11 +933,12 @@ public class Juego {
             PA = 0;
         }
         comprobarTurno();
-
+        return resultado;
     }
 
-    public void hacerEntrada(int filaDefensa, int columnaDefensa, int filaDelantero, int columnaDelantero) {
+    public String hacerEntrada(int filaDefensa, int columnaDefensa, int filaDelantero, int columnaDelantero) {
         //HACER LESION
+        String resultado = "";
         boolean falta = false;
         int entrada = (int) (Math.random() * campo[filaDefensa][columnaDefensa].getDef() + 1);
         int reflejos = (int) (Math.random() * campo[filaDelantero][columnaDelantero].getPac() + 1);
@@ -948,34 +947,58 @@ public class Juego {
 
         if (campo[filaDelantero][columnaDelantero].isTieneBalon()) { // Si el delantero tiene el balon
             if (entrada > reflejos) { // Si la entrada es exitosa
+                resultado = campo[filaDefensa][columnaDefensa].getNombre() + " se la robó a \n" + campo[filaDelantero][columnaDelantero].getNombre();
                 campo[filaDelantero][columnaDelantero].setTieneBalon(false);
                 campo[filaDefensa][columnaDefensa].setTieneBalon(true);
             } else { // Si la entrada no es exitosa
                 if (entrada <= 10) { // Si es menor o igual que 10 se saca roja
+                    resultado = campo[filaDefensa][columnaDefensa].getNombre() + " le clavó los\n tacos a " + campo[filaDelantero][columnaDelantero].getNombre() + ", ROJA";
                     System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " clavo los tacos, roja");
                     campo[filaDefensa][columnaDefensa] = null;
                 } else if (entrada <= 30) { // Si es menor o igual que 30 se saca amarilla
                     if (!campo[filaDefensa][columnaDefensa].isTieneAmarilla()) { // Si no tiene amarilla
+                        resultado = campo[filaDefensa][columnaDefensa].getNombre() + " pisó a \n" + campo[filaDelantero][columnaDelantero].getNombre() + ", AMARILLA";
                         System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " pisó a" + campo[filaDelantero][columnaDelantero].getNombre() + ", amarilla");
                         campo[filaDefensa][columnaDefensa].setTieneAmarilla(true);
                     } else { // Si tiene amarilla (doble amarilla)
+                        resultado = campo[filaDefensa][columnaDefensa].getNombre() + " recibió doble amarilla\n y va a ser expulsado";
                         System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " cometió dos faltas de amarilla, roja");
                         campo[filaDefensa][columnaDefensa].setTieneAmarilla(false);
                         campo[filaDefensa][columnaDefensa] = null;
                     }
+                } else {
+                    resultado = campo[filaDefensa][columnaDefensa].getNombre() + " hizo falta a \n" + campo[filaDelantero][columnaDelantero].getNombre();
                 }
                 falta = true;
             }
         } else { // Si el delantero no tiene el balon
+            resultado = campo[filaDefensa][columnaDefensa].getNombre() + " agredió a \n" +  campo[filaDelantero][columnaDelantero].getNombre() + ", ROJA";
             System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " hizo entrada a un jugador sin balon, roja");
+            if (turno) {
+                equipoLocal.getPlantilla().add(campo[filaDefensa][columnaDefensa]);
+                for (int i = 0; i < equipoLocal.getTitulares().length; i++) {
+                    if (equipoLocal.getTitulares()[i] == campo[filaDefensa][columnaDefensa]) {
+                        equipoLocal.getTitulares()[i] = null;
+                    }
+                }
+            } else {
+                equipoVisitante.getPlantilla().add(campo[filaDefensa][columnaDefensa]);
+                for (int i = 0; i < equipoVisitante.getTitulares().length; i++) {
+                    if (equipoVisitante.getTitulares()[i] == campo[filaDefensa][columnaDefensa]) {
+                        equipoVisitante.getTitulares()[i] = null;
+                    }
+                }
+            }
             campo[filaDefensa][columnaDefensa] = null;
             falta = true;
         }
         if (falta) {
+
             quitarBalon();
             PA = 0;
             comprobarTurno();
             if (ComprobarAcciones.esPenalti(turno, filaDelantero, columnaDelantero)) {
+                resultado = resultado.concat(", PENALTI");
                 System.out.println("PENALTI");
                 cargarJugadoresEnCampoRAM(Jugada.PENALTI);
             } else {
@@ -985,6 +1008,7 @@ public class Juego {
         } else {
             comprobarTurno();
         }
+        return resultado;
 
 
     }
@@ -993,9 +1017,23 @@ public class Juego {
         for (int i = 0; i < campo.length; i++) {
             for (int j = 0; j < campo[0].length; j++) {
                 if (campo[i][j] != null) {
-                    if (campo[i][j].isTieneBalon()) {
-                        campo[i][j].setTieneBalon(false);
-                    }
+                    campo[i][j].setTieneBalon(false);
+                }
+            }
+        }
+    }
+
+    private void apartarJugador(int fila, int columna) {
+        if (campo[fila][columna] != null) {
+            boolean movido = false;
+            while (!movido) {
+                int filaRandom = (int) (Math.random() * 14);
+                int columnaRandom = (int) (Math.random() * 21);
+
+
+                if (campo[filaRandom][columnaRandom] == null) {
+                    moverJugador(fila, columna, filaRandom, columnaRandom);
+                    movido = true;
                 }
             }
         }

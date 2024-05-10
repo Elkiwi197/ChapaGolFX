@@ -30,6 +30,11 @@ public class ControladorJugarAmigo {
     public Label labelPA;
     public Label labelMarcador;
     public Label labelTurno;
+    public ImageView porteriaLocal;
+    public ImageView porteriaVisitante;
+    public AnchorPane pantalla;
+    public ImageView comentarista;
+    public Label labelComentarista;
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane;
@@ -47,8 +52,12 @@ public class ControladorJugarAmigo {
     }
 
     public void init() {
+        pantalla.setStyle("-fx-background-color: #ADADAD");
+        labelMarcador.setStyle("-fx-background-color: #4A21C2");
+        labelComentarista.setStyle("-fx-background-color: #FFFFFF");
+        labelComentarista.setOpacity(0.75);
+        labelComentarista.setText("Bienvenidos a este \n" + borderPane.getJuego().getEquipoLocal().getNombre() + " - " + borderPane.getJuego().getEquipoVisitante().getNombre());
         ocultarOpciones();
-        cargarBalon();
         cargarEquipos();
         cargarCampo();
         cargarJugadores();
@@ -56,7 +65,26 @@ public class ControladorJugarAmigo {
         borderPane.getJuego().setPA(5);
 
 
-        // cargarFotos();
+
+         cargarFotos();
+    }
+
+    private void cargarFotos() {
+        Image imageBalon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/balon.png")));
+        Image fotoPorteriaLocal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/porteriaLocal.jpg")));
+        Image fotoPorteriaVisitante = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/porteriaVisitante.jpg")));
+        Image fotoComentarista = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/comentaristas/Maldini.jpg")));
+
+        balon.setImage(imageBalon);
+        balon.setFitHeight(10);
+        balon.setFitWidth(10);
+        porteriaLocal.setImage(fotoPorteriaLocal);
+        porteriaVisitante.setImage(fotoPorteriaVisitante);
+        comentarista.setImage(fotoComentarista);
+
+
+
+
     }
 
     private void cargarEquipos() {
@@ -81,16 +109,6 @@ public class ControladorJugarAmigo {
 
 
     }
-
-    private void cargarBalon() {
-        String ruta = "/images/balon.png";
-        Image imageBalon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(ruta)));
-
-        balon.setImage(imageBalon);
-        balon.setFitHeight(10);
-        balon.setFitWidth(10);
-    }
-
 
     private void cargarCampo() {
         Pane pane;
@@ -382,12 +400,12 @@ public class ControladorJugarAmigo {
                                 // Si es un portero
                                 camiseta.setFill(equipoLocal.getColorTerciario());
                             } else {
-                                camiseta.setFill(equipoLocal.getColorPrincipal());
                                 // Si es un jugador de campo
+                                camiseta.setFill(equipoLocal.getColorPrincipal());
                             }
                             // Cargar dorsales
                             dorsal.setFill(equipoLocal.getColorSecundario());
-                        } else {
+                        } else { // Si es visitante
                             if (jugador.getClass().getSimpleName().equals("Portero")) {
                                 // Si es un portero
                                 camiseta.setFill(equipoVisitante.getColorTerciario());
@@ -399,7 +417,7 @@ public class ControladorJugarAmigo {
                             dorsal.setFill(equipoVisitante.getColorSecundario());
                         }
                     } else { // Si los colores de las camisetas son iguales
-                        if (i <= 10) { // Si es jugador local
+                        if (ComprobarAcciones.esJugadorLocal(borderPane.getJuego(), j, i) ){ // Si es jugador local
                             if (jugador.getClass().getSimpleName().equals("Portero")) {
                                 // Si es un portero
                                 camiseta.setFill(equipoLocal.getColorTerciario());
@@ -409,7 +427,7 @@ public class ControladorJugarAmigo {
                             }
                             // Cargar dorsales
                             dorsal.setFill(equipoLocal.getColorSecundario());
-                        } else {
+                        } else { // Si es jugador visitante
                             if (jugador.getClass().getSimpleName().equals("Portero")) {
                                 // Si es un portero
                                 camiseta.setFill(equipoVisitante.getColorTerciario());
@@ -580,11 +598,10 @@ public class ControladorJugarAmigo {
                         casillaIluminada.setOnMouseClicked(e -> {
                             System.out.println("PULSADO PASE: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
 
-                            borderPane.getJuego().pasarBalon(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+                            labelComentarista.setText(borderPane.getJuego().pasarBalon(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada));
 
                             ocultarCasillasIluminadas();
                             cargarJugadores();
-                            // consumirPA();
                             borderPane.getJuego().comprobarTurno();
                         });
 
@@ -620,7 +637,7 @@ public class ControladorJugarAmigo {
                             casillaIluminada.setOnMouseClicked(e -> {
                                 System.out.println("PULSADO REGATE: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
 
-                                borderPane.getJuego().regatear(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+                                labelComentarista.setText(borderPane.getJuego().regatear(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada));
 
                                 ocultarCasillasIluminadas();
                                 cargarJugadores();
@@ -638,7 +655,7 @@ public class ControladorJugarAmigo {
     }
 
     public void tirarApuerta(ActionEvent actionEvent) {
-        borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada);
+        labelComentarista.setText(borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada));
         ocultarOpciones();
         actualizarAvisos();
         cargarJugadores();
@@ -666,7 +683,7 @@ public class ControladorJugarAmigo {
                             casillaIluminada.setOnMouseClicked(e -> {
                                 System.out.println("PULSADO ENTRADA: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
 
-                                borderPane.getJuego().hacerEntrada(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
+                                labelComentarista.setText(borderPane.getJuego().hacerEntrada(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada));
 
                                 ocultarCasillasIluminadas();
                                 cargarJugadores();

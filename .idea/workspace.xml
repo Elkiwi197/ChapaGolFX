@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="15 commit - penalti hecho, si es roja no elimina el jugador">
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="16 commit - Girona añadido, suplentes añadidos, fuera de juego no funciona">
+      <change afterPath="$PROJECT_DIR$/src/test/java/dao/DAOequiposTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/ComprobarAcciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ComprobarAcciones.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/porteriaLocal.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/porteriaLocal.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/porteriaVisitante.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/porteriaVisitante.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +27,7 @@
         <option value="FxmlFile" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -53,8 +60,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/1DAM/PROGRAMACION/ChapaGol/ComprobacionesRapidasProbabilidad",
+    "last_opened_file_path": "D:/1DAM/PROGRAMACION/Ej7JavaFX",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,6 +79,12 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\1DAM\PROGRAMACION\ChapaGol\ChapaGolFX\src\main\resources\images\campo" />
       <recent name="D:\1DAM\PROGRAMACION\ChapaGol\ChapaGolFX\src\main\resources\fxml" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="dao" />
     </key>
   </component>
   <component name="RunManager">
@@ -123,7 +138,12 @@
       <workItem from="1714752358629" duration="7417000" />
       <workItem from="1714923489156" duration="10270000" />
       <workItem from="1714993563948" duration="8025000" />
-      <workItem from="1715013181318" duration="4347000" />
+      <workItem from="1715013181318" duration="6259000" />
+      <workItem from="1715070403678" duration="5545000" />
+      <workItem from="1715091689754" duration="6331000" />
+      <workItem from="1715271405504" duration="3912000" />
+      <workItem from="1715282158885" duration="5805000" />
+      <workItem from="1715329503941" duration="8208000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -245,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714933181743</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="16 commit - Girona añadido, suplentes añadidos, fuera de juego no funciona">
+      <option name="closed" value="true" />
+      <created>1715030195368</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1715030195368</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +296,7 @@
     <MESSAGE value="13 commit - Pase testeado y regate hecho" />
     <MESSAGE value="14 commit - Hacer falta hecho" />
     <MESSAGE value="15 commit - penalti hecho, si es roja no elimina el jugador" />
-    <option name="LAST_COMMIT_MESSAGE" value="15 commit - penalti hecho, si es roja no elimina el jugador" />
+    <MESSAGE value="16 commit - Girona añadido, suplentes añadidos, fuera de juego no funciona" />
+    <option name="LAST_COMMIT_MESSAGE" value="16 commit - Girona añadido, suplentes añadidos, fuera de juego no funciona" />
   </component>
 </project>

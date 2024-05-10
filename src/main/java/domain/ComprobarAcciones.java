@@ -187,57 +187,69 @@ public abstract class ComprobarAcciones {
         return penalti;
     }
 
-    public static boolean esFueraDeJuego(Juego juego, int filaReceptor, int columnaReceptor) {
+    public static boolean esFueraDeJuego(Juego juego, int filaReceptor, int columnaReceptor, int columnaPasador) {
         int rivalesDelante = 0;
         int rivalesEnLinea = 0;
+        boolean paseAtras = false;
         boolean hayFueraDeJuego = false;
-        if (juego.isTurno()){ // Si es el turno del equipo local
-            for (int i = juego.getCampo().length-1; i > columnaReceptor; i--) {
-                for (int j = juego.getCampo()[0].length-1; j >= 0; j--) {
-                    if (juego.getCampo()[i][j] != null){
-                        if (hayRivalEn(juego, i, j)){
-                            rivalesDelante++;
-                        } else {
-                            break;
+        if (juego.isTurno()) {
+            if (columnaPasador >= columnaReceptor) {
+                paseAtras = true;
+            }
+        } else {
+            if (columnaPasador <= columnaReceptor) {
+                paseAtras = true;
+            }
+        }
+        if (!paseAtras) {
+            if (juego.isTurno()) { // Si es el turno del equipo local
+                for (int i = juego.getCampo()[0].length - 1; i > columnaReceptor; i--) {
+                    for (int j = juego.getCampo().length - 1; j >= 0; j--) {
+                        if (juego.getCampo()[j][i] != null) {
+                            if (hayRivalEn(juego, j, i)) {
+                                rivalesDelante++;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else { // Si es el turno del equipo visitante
+                for (int i = 0; i < juego.getCampo().length; i++) {
+                    for (int j = 0; j < columnaReceptor; j++) {
+                        if (juego.getCampo()[i][j] != null) {
+                            if (hayRivalEn(juego, i, j)) {
+                                rivalesDelante++;
+                            } else {
+                                break;
+                            }
                         }
                     }
                 }
             }
-        } else { // Si es el turno del equipo visitante
-            for (int i = 0; i < juego.getCampo().length; i++) {
-                for (int j = 0; j < columnaReceptor; j++) {
-                    if (juego.getCampo()[i][j] != null){
-                        if (hayRivalEn(juego, i, j)){
-                            rivalesDelante++;
-                        } else {
-                            break;
+            if (rivalesDelante < 2) { // Si no hay rivales suficientes delante, se determina el fuera de juego con los que estan en linea
+                for (int i = 0; i < juego.getCampo().length; i++) {
+                    if (juego.getCampo()[i][columnaReceptor] != null) {
+                        if (hayRivalEn(juego, i, columnaReceptor)) {
+                            rivalesEnLinea++;
+                        }
+                    }
+                }
+                for (int i = 0; i < juego.getCampo().length; i++) { // Hago un random por cada rival en linea y si gana el pasador sumo el rival en linea a los rivales delante
+                    if (juego.getCampo()[i][columnaReceptor] != null) {
+                        if (hayRivalEn(juego, i, columnaReceptor)) {
+                            int defensa = (int) (Math.random() * juego.getCampo()[i][columnaReceptor].getPac());
+                            int ataque = (int) (Math.random() * juego.getCampo()[filaReceptor][columnaReceptor].getPac() * rivalesEnLinea);
+                            if (ataque > defensa) {
+                                rivalesDelante++;
+                            }
                         }
                     }
                 }
             }
-        }
-        if (rivalesDelante < 2) { // Si no hay rivales suficientes delante, se determina el fuera de juego con los que estan en linea
-            for (int i = 0; i < juego.getCampo().length; i++) {
-                if (juego.getCampo()[i][columnaReceptor] != null) {
-                    if (hayRivalEn(juego, i, columnaReceptor)) {
-                        rivalesEnLinea++;
-                    }
-                }
+            if (rivalesDelante < 2) {
+                hayFueraDeJuego = true;
             }
-        }
-        for (int i = 0; i < rivalesEnLinea; i++) { // Hago un random por cada rival en linea y si gana el pasador sumo el rival en linea a los rivales delante
-            if (juego.getCampo()[i][columnaReceptor] != null){
-                if (hayRivalEn(juego, i, columnaReceptor)){
-                    int defensa = (int) (Math.random()*juego.getCampo()[i][columnaReceptor].getPac());
-                    int ataque = (int) (Math.random()*juego.getCampo()[i][columnaReceptor].getPac() * rivalesEnLinea);
-                    if (ataque > defensa){
-                        rivalesDelante++;
-                    }
-                }
-            }
-        }
-        if (rivalesDelante < 2){
-            hayFueraDeJuego = true;
         }
         return hayFueraDeJuego;
     }
