@@ -60,7 +60,7 @@
             <Font name="Barlow Condensed ExtraBold" size="38.0" />
          </font>
       </Label>
-      <Label fx:id="labelMarcador" alignment="CENTER" layoutX="31.0" layoutY="450.0" prefHeight="50.0" prefWidth="660.0" text="MARCADOR" textFill="WHITE">
+      <Label fx:id="labelMarcador" alignment="TOP_CENTER" layoutX="31.0" layoutY="450.0" prefHeight="156.0" prefWidth="660.0" text="MARCADOR" textFill="WHITE">
          <font>
             <Font name="Consolas" size="31.0" />
          </font>
@@ -73,5 +73,15 @@
       <ImageView fx:id="porteriaVisitante" fitHeight="90.0" fitWidth="30.0" layoutX="691.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="comentarista" fitHeight="206.0" fitWidth="256.0" layoutX="737.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="labelComentarista" alignment="CENTER" contentDisplay="CENTER" layoutX="763.0" layoutY="144.0" prefHeight="50.0" prefWidth="203.0" text="Bienvenidos a este nuevo partido" textAlignment="CENTER" />
+      <Label fx:id="labelGoleadoresLocal" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="31.0" layoutY="515.0" prefHeight="90.0" prefWidth="325.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelGoleadoresVisitante" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="361.0" layoutY="515.0" prefHeight="90.0" prefWidth="325.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="21.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

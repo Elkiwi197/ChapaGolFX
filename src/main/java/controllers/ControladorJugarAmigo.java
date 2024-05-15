@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 
 import java.util.*;
 
+
 public class ControladorJugarAmigo {
 
     public Button botonMover;
@@ -35,6 +36,8 @@ public class ControladorJugarAmigo {
     public AnchorPane pantalla;
     public ImageView comentarista;
     public Label labelComentarista;
+    public Label labelGoleadoresLocal;
+    public Label labelGoleadoresVisitante;
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane;
@@ -65,8 +68,7 @@ public class ControladorJugarAmigo {
         borderPane.getJuego().setPA(5);
 
 
-
-         cargarFotos();
+        cargarFotos();
     }
 
     private void cargarFotos() {
@@ -81,8 +83,6 @@ public class ControladorJugarAmigo {
         porteriaLocal.setImage(fotoPorteriaLocal);
         porteriaVisitante.setImage(fotoPorteriaVisitante);
         comentarista.setImage(fotoComentarista);
-
-
 
 
     }
@@ -239,8 +239,8 @@ public class ControladorJugarAmigo {
                             ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
                         }
                     } else if (i == 4 || i == 5 || i == 16) { // Medias lunas
-                        if (i == 4){
-                            if (j == 5){
+                        if (i == 4) {
+                            if (j == 5) {
                                 ruta = "/images/campo/verdeOscuroBordeArriba.jpg";
                             } else if (j == 9) {
                                 ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
@@ -248,13 +248,13 @@ public class ControladorJugarAmigo {
                                 ruta = "/images/campo/verdeOscuroSinBordes.jpg";
                             }
                         } else if (i == 5) {
-                            if (j == 6 || j == 8){
+                            if (j == 6 || j == 8) {
                                 ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
                             } else {
                                 ruta = "/images/campo/verdeOscuroSinBordes.jpg";
                             }
                         } else if (i == 16) {
-                            if (j == 5){
+                            if (j == 5) {
                                 ruta = "/images/campo/verdeOscuroEsquinaInferiorDerecha.jpg";
                             } else if (j == 7) {
                                 ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
@@ -417,7 +417,7 @@ public class ControladorJugarAmigo {
                             dorsal.setFill(equipoVisitante.getColorSecundario());
                         }
                     } else { // Si los colores de las camisetas son iguales
-                        if (ComprobarAcciones.esJugadorLocal(borderPane.getJuego(), j, i) ){ // Si es jugador local
+                        if (ComprobarAcciones.esJugadorLocal(borderPane.getJuego(), j, i)) { // Si es jugador local
                             if (jugador.getClass().getSimpleName().equals("Portero")) {
                                 // Si es un portero
                                 camiseta.setFill(equipoLocal.getColorTerciario());
@@ -449,7 +449,6 @@ public class ControladorJugarAmigo {
                     double posDorsalY = centroY;
                     double centroBalonX = centroX;
 
-                    // NO AGREGA BIEN LOS JUGADORES CON BALON
 
                     // Si el jugador tiene el balon mueve la chapa al lado correspondiente
                     // del pane y le mete el balon en el lado contrario
@@ -655,7 +654,9 @@ public class ControladorJugarAmigo {
     }
 
     public void tirarApuerta(ActionEvent actionEvent) {
+        int goles = borderPane.getJuego().getGolesLocal() + borderPane.getJuego().getGolesVisitante();
         labelComentarista.setText(borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada));
+
         ocultarOpciones();
         actualizarAvisos();
         cargarJugadores();
@@ -704,7 +705,7 @@ public class ControladorJugarAmigo {
      * Quita la iluminacion de las casillas iluminadas
      */
     private void ocultarCasillasIluminadas() {
-        for (String coordenadas : casillasIluminadas) {
+        casillasIluminadas.forEach(coordenadas -> {
             int fila = Integer.parseInt(coordenadas.split("-")[0]);
             int columna = Integer.parseInt(coordenadas.split("-")[1]);
             StackPane stackPane = (StackPane) devolverStackPane(fila, columna);
@@ -712,7 +713,8 @@ public class ControladorJugarAmigo {
                 // Elimina los cuadrados rosas de esta celda
                 stackPane.getChildren().removeIf(node -> node instanceof Rectangle);
             }
-        }
+        });
+
         casillasIluminadas.clear();
     }
 
@@ -724,6 +726,8 @@ public class ControladorJugarAmigo {
             labelTurno.setText("Turno de " + borderPane.getJuego().getEquipoVisitante().getNombre());
         }
         labelMarcador.setText(borderPane.getJuego().getEquipoLocal().getNombre() + " " + borderPane.getJuego().getGolesLocal() + " - " + borderPane.getJuego().getGolesVisitante() + " " + borderPane.getJuego().getEquipoVisitante().getNombre());
+        labelGoleadoresLocal.setText(borderPane.getJuego().getGoleadoresLocal());
+        labelGoleadoresVisitante.setText(borderPane.getJuego().getGoleadoresVisitante());
     }
 
 

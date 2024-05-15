@@ -1,7 +1,10 @@
 package domain;
 
 
-public class Jugador implements Cloneable {
+import java.util.Comparator;
+import java.util.Objects;
+
+public class Jugador implements Cloneable, Comparable {
     private String nombre;
     private int dorsal;
     private String posicion;
@@ -131,5 +134,16 @@ public class Jugador implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Jugador jugador = (Jugador) o;
+        return Integer.compare(dorsal, jugador.getDorsal());
+    }
+
+    @Override
+    public String toString() {
+        return STR."Jugador{nombre='\{nombre}\{'\''}, dorsal=\{dorsal}, posicion='\{posicion}\{'\''}, tieneBalon=\{tieneBalon}, tieneAmarilla=\{tieneAmarilla}, pac=\{pac}, sho=\{sho}, pas=\{pas}, dri=\{dri}, def=\{def}, phy=\{phy}\{'}'}";
     }
 }

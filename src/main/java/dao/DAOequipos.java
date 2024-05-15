@@ -5,10 +5,10 @@ import domain.Jugador;
 import domain.Portero;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.TransformationList;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DAOequipos {
     private List<Equipo> liga = new ArrayList<>();
@@ -35,9 +35,9 @@ public class DAOequipos {
         plantillaRealMadrid.add(new Jugador("Rüdiger", 22, "CB", 82, 54, 71, 66, 84, 86));
         plantillaRealMadrid.add(new Jugador("Fran García", 20, "LI", 89, 49, 69, 77, 71, 68));
         plantillaRealMadrid.add(new Jugador("Lucas Vázquez", 17, "LD", 81, 73, 80, 80, 73, 69));
-        plantillaRealMadrid.add(new Jugador("Ceballos", 19, "MC", 63, 71, 78, 82, 70, 67));
+        plantillaRealMadrid.add(new Jugador("Dani Ceballos", 19, "MC", 63, 71, 78, 82, 70, 67));
         plantillaRealMadrid.add(new Jugador("Tchouaméni", 18, "MC", 73, 69, 79, 78, 81, 81));
-        plantillaRealMadrid.add(new Jugador("Arda Güler", 0, "MC", 72, 70, 80, 81, 52, 50));
+        plantillaRealMadrid.add(new Jugador("Arda Güler", 24, "MC", 72, 70, 80, 81, 52, 50));
         plantillaRealMadrid.add(new Jugador("Brahim Díaz", 21, "DC", 81, 71, 77, 83, 30, 49));
         plantillaRealMadrid.add(new Jugador("Joselu", 14, "DC", 63, 84, 69, 74, 33, 77));
         realMadrid.setPlantilla(plantillaRealMadrid);
@@ -72,7 +72,7 @@ public class DAOequipos {
         plantillaBarcelona.add(new Jugador("Marcos Alonso", 17, "LI", 51, 74, 81, 77, 78, 76));
         plantillaBarcelona.add(new Jugador("Sergi Roberto", 20, "LD", 74, 63, 79, 77, 75, 73));
         plantillaBarcelona.add(new Jugador("Oriol Romeu", 18, "MC", 43, 54, 69, 67, 79, 82));
-        plantillaBarcelona.add(new Jugador("Raphinha", 11 , "DC", 91, 79, 78, 86, 53, 73));
+        plantillaBarcelona.add(new Jugador("Raphinha", 11, "DC", 91, 79, 78, 86, 53, 73));
         plantillaBarcelona.add(new Jugador("Ferrán Torres", 7, "DC", 83, 79, 78, 83, 35, 68));
         plantillaBarcelona.add(new Jugador("Ansu Fati", 31, "DC", 89, 76, 72, 81, 30, 53));
 
@@ -87,7 +87,7 @@ public class DAOequipos {
         List<Jugador> plantillaGirona = new ArrayList<>();
         Jugador[] titularesGirona = new Jugador[11];
 
-        // METER DORSALES
+        // TITULARES
         plantillaGirona.add(new Portero("Gazzaniga", 13, "PO", 77, 79, 78, 76, 57, 77, 77, 79, 78, 76, 57, 77));
         plantillaGirona.add(new Jugador("Miguel Gutiérrez", 3, "LI", 77, 53, 70, 74, 69, 65));
         plantillaGirona.add(new Jugador("Daley Blind", 17, "CB", 35, 62, 80, 78, 81, 66));
@@ -107,7 +107,7 @@ public class DAOequipos {
         plantillaGirona.add(new Jugador("Arnau Martínez", 4, "LD", 79, 50, 72, 76, 76, 70));
         plantillaGirona.add(new Jugador("Borja García", 10, "MC", 72, 70, 74, 75, 60, 65));
         plantillaGirona.add(new Jugador("Toni Villa", 19, "MC", 74, 65, 73, 77, 53, 48));
-        plantillaGirona.add(new Jugador("Portu", 24, "MC", 81, 74, 72, 75, 56,  76));
+        plantillaGirona.add(new Jugador("Portu", 24, "MC", 81, 74, 72, 75, 56, 76));
         plantillaGirona.add(new Jugador("Stuani", 7, "DC", 66, 80, 69, 70, 48, 84));
 
 
@@ -127,12 +127,12 @@ public class DAOequipos {
         plantillaRacing.add(new Jugador("Álvaro Mantilla", 2, "LI", 52, 26, 56, 53, 62, 66));
         plantillaRacing.add(new Jugador("Germán", 5, "CB", 45, 40, 57, 54, 76, 78));
         plantillaRacing.add(new Jugador("Manu Hernando", 18, "CB", 60, 42, 49, 58, 66, 70));
-        plantillaRacing.add(new Jugador("Dani Fernández",   23, "LD", 64, 34, 54, 62, 64, 60));
+        plantillaRacing.add(new Jugador("Dani Fernández", 23, "LD", 64, 34, 54, 62, 64, 60));
         plantillaRacing.add(new Jugador("Íñigo Sainz-Maza", 6, "MC", 72, 36, 58, 65, 64, 69));
         plantillaRacing.add(new Jugador("Peque", 17, "MC", 67, 56, 59, 66, 35, 46));
         plantillaRacing.add(new Jugador("Iván Morante", 16, "MC", 64, 62, 62, 64, 57, 59));
         plantillaRacing.add(new Jugador("Íñigo Vicente", 10, "DC", 75, 68, 73, 74, 47, 56));
-        plantillaRacing.add(new Jugador("Juan Carlos Arana", 9, "DC", 66, 67, 54, 62, 33, 57));
+        plantillaRacing.add(new Jugador("Juan Carlos Arana", 9, "DC", 66, 99, 54, 62, 33, 57));
         plantillaRacing.add(new Jugador("Jordi Mboula", 8, "DC", 87, 69, 63, 75, 32, 66));
         //SUPLENTES
         plantillaRacing.add(new Portero("Miquel Parera", 1, "PO", 72, 66, 64, 72, 38, 63, 72, 66, 64, 72, 38, 63));
@@ -144,7 +144,7 @@ public class DAOequipos {
         plantillaRacing.add(new Jugador("Lago Junior", 20, "MC", 87, 69, 61, 71, 33, 72));
         plantillaRacing.add(new Jugador("Aritz Aldasoro", 21, "MC", 68, 63, 64, 68, 62, 63));
         plantillaRacing.add(new Jugador("Grenier", 19, "MC", 36, 73, 79, 74, 62, 68));
-        plantillaRacing.add(new Jugador("Andrés Martín", 11 , "DC", 78, 67, 64, 68, 27, 65));
+        plantillaRacing.add(new Jugador("Andrés Martín", 11, "DC", 78, 67, 64, 68, 27, 65));
         plantillaRacing.add(new Jugador("Ekain", 14, "DC", 69, 67, 59, 68, 29, 61));
 
         racing.setPlantilla(plantillaRacing);
@@ -158,7 +158,6 @@ public class DAOequipos {
 
     public ObservableList<String> devolverListaEquipos() {
         ObservableList<String> lista = FXCollections.observableArrayList();
-        ;
         for (Equipo equipo : liga) {
             lista.add(equipo.getNombre());
         }
@@ -177,5 +176,60 @@ public class DAOequipos {
 
     public Equipo devolverEquipoRepetido(String nombreEquipo) {
         return new Equipo();
+    }
+
+    public Jugador devolverJugador(String nombreJugador, String nombreEquipo) {
+        Equipo equipo = new Equipo();
+        Jugador jugador = new Jugador();
+        for (Equipo equipoLiga : liga) {
+            if (equipoLiga.getNombre().equals(nombreEquipo)) {
+                equipo = equipoLiga;
+                break;
+            }
+        }
+        for (Jugador jugadorEquipo : equipo.getPlantilla()) {
+            if (jugadorEquipo.getNombre().equals(nombreJugador)) {
+                jugador = jugadorEquipo;
+                break;
+            }
+        }
+        return jugador;
+    }
+
+    public void cambiarJugadorDeEquipo(String equipoInicial, String equipoFinal, Jugador jugador) {
+        Equipo equipoOrigen = devolverEquipo(equipoInicial);
+        Equipo equipoLlegada = devolverEquipo(equipoFinal);
+        Set<Integer> dorsalesOcupados = new HashSet<>();
+        boolean dorsalRepetido = true;
+
+        equipoLlegada.getPlantilla().forEach(p -> dorsalesOcupados.add(p.getDorsal()));
+        do {
+            for (int dorsalOcupado : dorsalesOcupados) {
+                if (dorsalOcupado == jugador.getDorsal()) {
+                    jugador.setDorsal((int) (Math.random() * 99) + 1);
+                } else {
+                    dorsalRepetido = false;
+                }
+            }
+        } while (dorsalRepetido);
+        equipoLlegada.getPlantilla().add(jugador);
+        eliminarJugador(equipoOrigen.getNombre(), jugador);
+    }
+
+    public TreeSet<Jugador> devolverJugadoresEquipo(String nombreEquipo) {
+        Equipo equipo = devolverEquipo(nombreEquipo);
+        TreeSet<Jugador> listaJugadores = new TreeSet<>();
+        equipo.getPlantilla().forEach(p -> listaJugadores.add(p));
+        return listaJugadores;
+    }
+
+    public void eliminarJugador(String nombreEquipo, Jugador jugador) {
+        Equipo equipo = devolverEquipo(nombreEquipo);
+        equipo.getPlantilla().remove(jugador);
+        for (int i = 0; i < equipo.getTitulares().length; i++) {
+            if (equipo.getTitulares()[i] == jugador) {
+                equipo.getTitulares()[i] = null;
+            }
+        }
     }
 }

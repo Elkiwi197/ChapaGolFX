@@ -3,13 +3,57 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorLandingAdministrador">
    <children>
       <ChoiceBox fx:id="selectorEquipo" layoutX="83.0" layoutY="49.0" prefWidth="150.0" />
-      <ListView layoutX="58.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="botonModificarJugador" layoutX="427.0" layoutY="87.0" mnemonicParsing="false" text="Modificar jugador" />
-      <Button fx:id="botonMoverJugadorEquipo" layoutX="398.0" layoutY="136.0" mnemonicParsing="false" text="Mover jugador a otro equipo" />
-      <Button fx:id="botonEliminarJugador" layoutX="432.0" layoutY="187.0" mnemonicParsing="false" text="Eliminar jugador" />
+      <ListView fx:id="listaJugadores" layoutX="58.0" layoutY="100.0" prefHeight="441.0" prefWidth="200.0" />
+      <Button fx:id="botonModificarJugador" layoutX="342.0" layoutY="269.0" mnemonicParsing="false" onAction="#mostrarEstadisticas" prefHeight="77.0" prefWidth="111.0" text="Modificar jugador" />
+      <Button fx:id="botonMoverJugadorEquipo" layoutX="313.0" layoutY="111.0" mnemonicParsing="false" onAction="#mostrarMoverJugador" prefHeight="77.0" prefWidth="170.0" text="Mover jugador a otro equipo" />
+      <Button fx:id="botonEliminarJugador" layoutX="347.0" layoutY="463.0" mnemonicParsing="false" onAction="#eliminarJugador" prefHeight="77.0" prefWidth="103.0" text="Eliminar jugador" />
+      <Pane fx:id="paneMoverJugador" layoutX="551.0" layoutY="94.0" prefHeight="113.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="botonMoverJugador" layoutX="75.0" layoutY="75.0" mnemonicParsing="false" onAction="#moverJugador" text="Mover" />
+            <ChoiceBox fx:id="selectorEquipoMoverJugador" layoutX="25.0" layoutY="14.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneModificarJugador" layoutX="524.0" layoutY="207.0" prefHeight="399.0" prefWidth="480.0">
+         <children>
+            <Label fx:id="labelNombre" layoutX="72.0" layoutY="16.0" prefHeight="25.0" prefWidth="50.0" text="Nombre" />
+            <Label fx:id="labelDorsal" layoutX="188.0" layoutY="20.0" prefHeight="17.0" prefWidth="40.0" text="Dorsal" />
+            <Label fx:id="labelPosicion" layoutX="303.0" layoutY="20.0" text="Posición" />
+            <TextField fx:id="inputNombre" layoutX="44.0" layoutY="41.0" prefHeight="25.0" prefWidth="103.0" />
+            <TextField fx:id="inputPosicion" layoutX="273.0" layoutY="41.0" prefHeight="25.0" prefWidth="103.0" />
+            <Spinner fx:id="spinnerDorsal" editable="true" layoutX="177.0" layoutY="41.0" prefHeight="25.0" prefWidth="64.0" />
+            <Label fx:id="labelPace" layoutX="85.0" layoutY="97.0" text="Pace" />
+            <Label fx:id="labelShot" layoutX="197.0" layoutY="97.0" text="Shot" />
+            <Label fx:id="labelPass" layoutX="313.0" layoutY="97.0" text="Pass" />
+            <Label fx:id="labelDribling" layoutX="80.0" layoutY="172.0" text="Dribling" />
+            <Label fx:id="labelDefense" layoutX="194.0" layoutY="172.0" text="Defense" />
+            <Label fx:id="labelPhysique" layoutX="301.0" layoutY="174.0" text="Physique" />
+            <Spinner fx:id="spinnerPace" layoutX="65.0" layoutY="123.0" prefHeight="25.0" prefWidth="64.0" />
+            <Spinner fx:id="spinnerShot" layoutX="178.0" layoutY="123.0" prefHeight="25.0" prefWidth="64.0" />
+            <Spinner fx:id="spinnerPass" layoutX="293.0" layoutY="123.0" prefHeight="25.0" prefWidth="64.0" />
+            <Spinner fx:id="spinnerDribling" layoutX="69.0" layoutY="199.0" prefHeight="25.0" prefWidth="64.0" />
+            <Spinner fx:id="spinnerDefense" layoutX="183.0" layoutY="199.0" prefHeight="25.0" prefWidth="64.0" />
+            <Spinner fx:id="spinnerPhysique" layoutX="293.0" layoutY="199.0" prefHeight="25.0" prefWidth="64.0" />
+            <Pane fx:id="paneEstadisticasPortero" layoutY="243.0" prefHeight="159.0" prefWidth="381.0">
+               <children>
+                  <Label fx:id="labelDiving" layoutX="82.0" layoutY="14.0" text="Diving" />
+                  <Label fx:id="labelHandling" layoutX="185.0" layoutY="14.0" text="Handling" />
+                  <Label fx:id="labelKicking" layoutX="302.0" layoutY="14.0" text="Kicking" />
+                  <Label fx:id="labelSpeed" layoutX="193.0" layoutY="81.0" text="Speed" />
+                  <Label fx:id="labelReflexes" layoutX="77.0" layoutY="81.0" text="Relfexes" />
+                  <Label fx:id="labelPositioning" layoutX="292.0" layoutY="81.0" text="Positioning" />
+                  <Spinner fx:id="spinnerDiving" layoutX="67.0" layoutY="39.0" prefHeight="25.0" prefWidth="64.0" />
+                  <Spinner fx:id="spinnerReflexes" layoutX="67.0" layoutY="108.0" prefHeight="25.0" prefWidth="64.0" />
+                  <Spinner fx:id="spinnerHandling" layoutX="178.0" layoutY="39.0" prefHeight="25.0" prefWidth="64.0" />
+                  <Spinner fx:id="spinnerKicking" layoutX="290.0" layoutY="39.0" prefHeight="25.0" prefWidth="64.0" />
+                  <Spinner fx:id="spinnerSpeed" layoutX="178.0" layoutY="108.0" prefHeight="25.0" prefWidth="64.0" />
+                  <Spinner fx:id="spinnerPositioning" layoutX="290.0" layoutY="108.0" prefHeight="25.0" prefWidth="64.0" />
+               </children></Pane>
+            <Button fx:id="botonGuardarCambios" layoutX="404.0" layoutY="199.0" mnemonicParsing="false" onAction="#guardarEstadisticas" text="Guardar" />
+         </children>
+      </Pane>
+      <Button fx:id="botonSalirAlogin" layoutX="854.0" mnemonicParsing="false" onAction="#salirAlogin" prefHeight="43.0" prefWidth="150.0" text="Salir" />
    </children>
 </AnchorPane>

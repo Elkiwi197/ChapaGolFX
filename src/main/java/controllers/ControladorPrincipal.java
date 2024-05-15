@@ -2,6 +2,7 @@ package controllers;
 
 import domain.Equipo;
 import domain.Juego;
+import domain.Jugador;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 public class ControladorPrincipal implements Initializable {
     @FXML
@@ -59,7 +61,7 @@ public class ControladorPrincipal implements Initializable {
         cargarLogin(); //CAMBIAR A CARGAR  LOGIN
     }
 
-    private void cargarLogin() {
+    public void cargarLogin() {
         try {
             if (loginAnchorPane == null) {
                 loginAnchorPane = loaderLogin.load(getClass().getResourceAsStream("/fxml/login_page.fxml"));
@@ -93,6 +95,7 @@ public class ControladorPrincipal implements Initializable {
                 controladorLandingAdministrador.setBorderPane(this);
             }
             pantallaPrincipal.setCenter(landingAdministradorAnchorPane);
+            controladorLandingAdministrador.init();
         } catch (IOException e) {
             System.out.println("Error al cargar landing administrador");
         }
@@ -122,8 +125,8 @@ public class ControladorPrincipal implements Initializable {
             // If para comprobar si esta repetido
             Equipo local;
             Equipo visitante;
-                local = serviceEquipos.devolverEquipo(equipoJ1);
-                visitante = serviceEquipos.devolverEquipo(equipoJ2);
+            local = serviceEquipos.devolverEquipo(equipoJ1);
+            visitante = serviceEquipos.devolverEquipo(equipoJ2);
             juego.jugarAmigo(local, visitante);
             controladorJugarAmigo.init();
             pantallaPrincipal.setCenter(jugarAmigoAnchorPane);
@@ -135,5 +138,21 @@ public class ControladorPrincipal implements Initializable {
 
     public ObservableList<String> devolverListaEquipos() {
         return serviceEquipos.devolverListaEquipos();
+    }
+
+    public TreeSet<Jugador> devolverJugadoresEquipo(String nombreEquipo) {
+        return serviceEquipos.devolverJugadoresEquipo(nombreEquipo);
+    }
+
+    public Jugador devolverJugador(String nombreJugador, String nombreEquipo) {
+        return serviceEquipos.devolverJugador(nombreJugador, nombreEquipo);
+    }
+
+    public void cambiarJugadorDeEquipo(String equipoInicial, String equipoFinal, Jugador jugador) {
+        serviceEquipos.cambiarJugadorDeEquipo(equipoInicial, equipoFinal, jugador);
+    }
+
+    public void eliminarJugador(String nombreEquipo, Jugador jugador) {
+        serviceEquipos.eliminarJugador(nombreEquipo, jugador);
     }
 }

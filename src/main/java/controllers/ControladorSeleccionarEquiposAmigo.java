@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import service.ServiceEquipos;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public class ControladorSeleccionarEquiposAmigo {
         ObservableList<String> equipos = borderPane.devolverListaEquipos();
         selectorEquipoJ1.getItems().setAll(equipos);
         selectorEquipoJ2.getItems().setAll(equipos);
+
+
     }
 
     public void cargarJugarAmigo(ActionEvent actionEvent) {
@@ -35,4 +38,5 @@ public class ControladorSeleccionarEquiposAmigo {
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         borderPane = controladorPrincipal;
     }
+
 }

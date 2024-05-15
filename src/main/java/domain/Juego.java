@@ -2,6 +2,9 @@ package domain;
 
 import common.Jugada;
 
+import java.util.IllegalFormatCodePointException;
+
+
 public class Juego {
     private Jugador[][] campo = new Jugador[15][22];
     private Equipo equipoLocal = new Equipo(); //J1
@@ -9,9 +12,27 @@ public class Juego {
     private boolean turno; // True = local, false = visitante
     private int golesLocal;
     private int golesVisitante;
+    private String goleadoresLocal = "";
+    private String goleadoresVisitante = "";
     private int PA;
 
     public Juego() {
+    }
+
+    public String getGoleadoresLocal() {
+        return goleadoresLocal;
+    }
+
+    public void setGoleadoresLocal(String goleadoresLocal) {
+        this.goleadoresLocal = goleadoresLocal;
+    }
+
+    public String getGoleadoresVisitante() {
+        return goleadoresVisitante;
+    }
+
+    public void setGoleadoresVisitante(String goleadoresVisitante) {
+        this.goleadoresVisitante = goleadoresVisitante;
     }
 
     public Jugador[][] getCampo() {
@@ -75,6 +96,9 @@ public class Juego {
             PA = 5;
             turno = !turno;
         }
+        if (golesLocal + golesVisitante == 4){
+
+        }
     }
 
     public void jugarAmigo(Equipo local, Equipo visitante) {
@@ -84,6 +108,7 @@ public class Juego {
 
         cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
         actualizarCampoConsola();
+
 
     }
 
@@ -133,9 +158,29 @@ public class Juego {
                             campo[8][6] = equipoLocal.getTitulares()[7];
                             campo[10][6] = equipoLocal.getTitulares()[8];
                             //Delanteros
-                            campo[6][10] = equipoLocal.getTitulares()[9];
-                            campo[7][10] = equipoLocal.getTitulares()[10];
-                            campo[7][10].setTieneBalon(true);
+                            if (equipoLocal.getTitulares()[10] == null){
+                                for (int i = 0; i < equipoLocal.getTitulares().length; i++) {
+                                    if (equipoLocal.getTitulares()[10-i] != null){
+                                        for (int j = 0; j < 15; j++) {
+                                            for (int k = 0; k < 22; k++) {
+                                                if (campo[j][k] == equipoLocal.getTitulares()[10-i]){
+                                                    campo[j][k] = null;
+                                                }
+                                            }
+                                        }
+                                        campo[7][10] = equipoLocal.getTitulares()[10-i];
+                                        campo[7][10].setTieneBalon(true);
+                                        break;
+                                    }
+                                }
+                            } else {
+                                campo[6][10] = equipoLocal.getTitulares()[9];
+                                campo[7][10] = equipoLocal.getTitulares()[10];
+                                campo[7][10].setTieneBalon(true);
+                                //COMPROBAR
+                            }
+
+
                             break;
                         case "4-3-3":
                             //Portero
@@ -661,8 +706,10 @@ public class Juego {
         if (remate > parada) {
             System.out.println("Fue gol");
             if (turno) {
+                goleadoresLocal = goleadoresLocal.concat(campo[filaJugador][columnaJugador].getNombre() + "\n");
                 golesLocal++;
             } else {
+                goleadoresVisitante = goleadoresVisitante.concat(campo[filaJugador][columnaJugador].getNombre() + "\n");
                 golesVisitante++;
             }
         } else {
@@ -805,8 +852,8 @@ public class Juego {
                 resultado = "GOL DE " + rematador.getNombre().toUpperCase();
                 PA = 0;
                 comprobarTurno();
-                cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
             }
+            cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
         } else {
             random = (int) (Math.random() * 15 + 1);
             switch (random) {
@@ -940,6 +987,7 @@ public class Juego {
         //HACER LESION
         String resultado = "";
         boolean falta = false;
+        boolean roja = false;
         int entrada = (int) (Math.random() * campo[filaDefensa][columnaDefensa].getDef() + 1);
         int reflejos = (int) (Math.random() * campo[filaDelantero][columnaDelantero].getPac() + 1);
         int fuerzaDefensa = (int) (Math.random() * campo[filaDefensa][columnaDefensa].getPhy() + 1);
@@ -954,7 +1002,7 @@ public class Juego {
                 if (entrada <= 10) { // Si es menor o igual que 10 se saca roja
                     resultado = campo[filaDefensa][columnaDefensa].getNombre() + " le clavó los\n tacos a " + campo[filaDelantero][columnaDelantero].getNombre() + ", ROJA";
                     System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " clavo los tacos, roja");
-                    campo[filaDefensa][columnaDefensa] = null;
+                    roja = true;
                 } else if (entrada <= 30) { // Si es menor o igual que 30 se saca amarilla
                     if (!campo[filaDefensa][columnaDefensa].isTieneAmarilla()) { // Si no tiene amarilla
                         resultado = campo[filaDefensa][columnaDefensa].getNombre() + " pisó a \n" + campo[filaDelantero][columnaDelantero].getNombre() + ", AMARILLA";
@@ -963,8 +1011,7 @@ public class Juego {
                     } else { // Si tiene amarilla (doble amarilla)
                         resultado = campo[filaDefensa][columnaDefensa].getNombre() + " recibió doble amarilla\n y va a ser expulsado";
                         System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " cometió dos faltas de amarilla, roja");
-                        campo[filaDefensa][columnaDefensa].setTieneAmarilla(false);
-                        campo[filaDefensa][columnaDefensa] = null;
+                        roja = true;
                     }
                 } else {
                     resultado = campo[filaDefensa][columnaDefensa].getNombre() + " hizo falta a \n" + campo[filaDelantero][columnaDelantero].getNombre();
@@ -972,8 +1019,12 @@ public class Juego {
                 falta = true;
             }
         } else { // Si el delantero no tiene el balon
-            resultado = campo[filaDefensa][columnaDefensa].getNombre() + " agredió a \n" +  campo[filaDelantero][columnaDelantero].getNombre() + ", ROJA";
+            resultado = campo[filaDefensa][columnaDefensa].getNombre() + " agredió a \n" + campo[filaDelantero][columnaDelantero].getNombre() + ", ROJA";
             System.out.println(campo[filaDefensa][columnaDefensa].getNombre() + " hizo entrada a un jugador sin balon, roja");
+            roja = true;
+            falta = true;
+        }
+        if (roja) {
             if (turno) {
                 equipoLocal.getPlantilla().add(campo[filaDefensa][columnaDefensa]);
                 for (int i = 0; i < equipoLocal.getTitulares().length; i++) {
@@ -990,7 +1041,6 @@ public class Juego {
                 }
             }
             campo[filaDefensa][columnaDefensa] = null;
-            falta = true;
         }
         if (falta) {
 
