@@ -146,9 +146,8 @@ public class ControladorPrincipal implements Initializable {
                 modificarEquipoAnchorPane = loaderModificarEquipo.load(getClass().getResourceAsStream("/fxml/modificar_equipo.fxml"));
                 controladorModificarEquipo = loaderModificarEquipo.getController();
                 controladorModificarEquipo.setBorderPane(this);
+                controladorModificarEquipo.init();
             }
-
-            controladorModificarEquipo.init();
             pantallaPrincipal.setCenter(modificarEquipoAnchorPane);
         } catch (IOException e) {
             System.out.println("Error al cargar jugar con un amigo");
