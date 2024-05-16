@@ -42,4 +42,11 @@ public class ServiceEquipos {
     public void eliminarJugador(String nombreEquipo, Jugador jugador) {
         daoEquipos.eliminarJugador(nombreEquipo, jugador);
     }
+    public void anadirJugador(Jugador jugador, String nombreEquipo){
+        daoEquipos.anadirJugador(jugador, nombreEquipo);
+    }
+
+    public ObservableList<String> devolverListaEquiposJugables() {
+        return daoEquipos.devolverListaEquiposJugables();
+    }
 }

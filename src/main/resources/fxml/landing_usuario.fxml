@@ -5,14 +5,12 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorLandingUsuario">
    <children>
-      <Button fx:id="botonJugarLiga" layoutX="77.0" layoutY="149.0" mnemonicParsing="false" text="Jugar liga" />
-      <Button fx:id="botonVerMercado" layoutX="233.0" layoutY="226.0" mnemonicParsing="false" text="Ver mercado" />
-      <Button fx:id="botonModificarEquipo" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" text="Modificar equipo" />
+      <Button fx:id="botonModificarEquipo" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" onAction="#cargarModificarEquipo" text="Modificar equipo" />
       <Label fx:id="labelClasificacion" layoutX="447.0" layoutY="63.0" text="Clasificacion" />
       <TableView fx:id="tablaClasificacion" layoutX="365.0" layoutY="100.0" prefHeight="200.0" prefWidth="217.0">
         <columns>
-          <TableColumn prefWidth="168.0" text="Equipo" />
-          <TableColumn minWidth="0.0" prefWidth="48.66668701171875" text="Puntos" />
+          <TableColumn fx:id="columnaNombreEquipo" prefWidth="168.0" text="Equipo" />
+          <TableColumn fx:id="columnaPuntosEquipo" minWidth="0.0" prefWidth="48.66668701171875" text="Puntos" />
         </columns>
       </TableView>
       <Button fx:id="botonJugarAmigo" layoutX="207.0" layoutY="149.0" mnemonicParsing="false" onAction="#cargarSeleccionarEquipoAmigo" text="Jugar contra un amigo" />

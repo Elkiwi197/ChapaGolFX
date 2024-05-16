@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorModificarEquipo">
+   <children>
+      <Pane fx:id="paneCampo" layoutX="574.0" prefHeight="600.0" prefWidth="425.0">
+         <children>
+            <StackPane fx:id="stackPaneJugador0" layoutX="172.0" layoutY="486.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador1" layoutX="25.0" layoutY="377.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador2" layoutX="125.0" layoutY="377.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador3" layoutX="224.0" layoutY="377.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador4" layoutX="322.0" layoutY="377.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador5" layoutX="25.0" layoutY="218.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador6" layoutX="125.0" layoutY="218.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador7" layoutX="224.0" layoutY="218.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador8" layoutX="322.0" layoutY="218.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador9" layoutX="99.0" layoutY="52.0" prefHeight="100.0" prefWidth="100.0" />
+            <StackPane fx:id="stackPaneJugador10" layoutX="245.0" layoutY="52.0" prefHeight="100.0" prefWidth="100.0" />
+         </children></Pane>
+      <ListView fx:id="listaPlantilla" layoutX="48.0" layoutY="79.0" prefHeight="456.0" prefWidth="200.0" />
+      <Button fx:id="botonAtras" layoutY="573.0" mnemonicParsing="false" onAction="#cargarLandingUsuario" text="Atrás" />
+      <Pane layoutX="248.0" layoutY="79.0" prefHeight="456.0" prefWidth="323.0" />
+      <ChoiceBox fx:id="selectorAlineacion" layoutX="335.0" layoutY="23.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="selectorEquipo" layoutX="73.0" layoutY="23.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

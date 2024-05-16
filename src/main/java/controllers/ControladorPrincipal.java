@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import service.ServiceEquipos;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
@@ -26,12 +25,14 @@ public class ControladorPrincipal implements Initializable {
     private FXMLLoader loaderLandingAdministrador = new FXMLLoader();
     private FXMLLoader loaderSeleccionarEquiposAmigo = new FXMLLoader();
     private FXMLLoader loaderJugarAmigo = new FXMLLoader();
+    private FXMLLoader loaderModificarEquipo = new FXMLLoader();
     //CONTROLADORES
     public ControladorLoginPage controladorLoginPage;
     public ControladorLandingUsuario controladorLandingUsuario;
     public ControladorLandingAdministrador controladorLandingAdministrador;
     public ControladorSeleccionarEquiposAmigo controladorSeleccionarEquiposAmigo;
     public ControladorJugarAmigo controladorJugarAmigo;
+    public ControladorModificarEquipo controladorModificarEquipo;
     //PANES
     @FXML
     private AnchorPane loginAnchorPane;
@@ -43,6 +44,8 @@ public class ControladorPrincipal implements Initializable {
     private AnchorPane seleccionarEquipoAmigoAnchorPane;
     @FXML
     private AnchorPane jugarAmigoAnchorPane;
+    @FXML
+    private AnchorPane modificarEquipoAnchorPane;
     //CLASES DE LOGICA
     ServiceEquipos serviceEquipos = new ServiceEquipos();
     Juego juego = new Juego();
@@ -82,6 +85,7 @@ public class ControladorPrincipal implements Initializable {
                 controladorLandingUsuario.setBorderPane(this);
             }
             pantallaPrincipal.setCenter(landingUsuarioAnchorPane);
+            controladorLandingUsuario.init();
         } catch (IOException e) {
             System.out.println("Error al cargar landing usuario");
         }
@@ -136,6 +140,22 @@ public class ControladorPrincipal implements Initializable {
 
     }
 
+    public void cargarModificarEquipo() {
+        try {
+            if (modificarEquipoAnchorPane == null) {
+                modificarEquipoAnchorPane = loaderModificarEquipo.load(getClass().getResourceAsStream("/fxml/modificar_equipo.fxml"));
+                controladorModificarEquipo = loaderModificarEquipo.getController();
+                controladorModificarEquipo.setBorderPane(this);
+            }
+
+            controladorModificarEquipo.init();
+            pantallaPrincipal.setCenter(modificarEquipoAnchorPane);
+        } catch (IOException e) {
+            System.out.println("Error al cargar jugar con un amigo");
+        }
+
+    }
+
     public ObservableList<String> devolverListaEquipos() {
         return serviceEquipos.devolverListaEquipos();
     }
@@ -154,5 +174,17 @@ public class ControladorPrincipal implements Initializable {
 
     public void eliminarJugador(String nombreEquipo, Jugador jugador) {
         serviceEquipos.eliminarJugador(nombreEquipo, jugador);
+    }
+
+    public void anadirJugador(Jugador jugador, String nombreEquipo) {
+        serviceEquipos.anadirJugador(jugador, nombreEquipo);
+    }
+
+    public Equipo devolverEquipo(String nombreEquipo) {
+        return serviceEquipos.devolverEquipo(nombreEquipo);
+    }
+
+    public ObservableList<String> devolverListaEquiposJugables() {
+        return serviceEquipos.devolverListaEquiposJugables();
     }
 }

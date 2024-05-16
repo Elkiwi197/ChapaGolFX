@@ -85,4 +85,15 @@ public class Portero extends Jugador {
     public void setPos(int pos) {
         this.pos = pos;
     }
+
+    public void inicalizarEstadisticas(){
+        super.inicializarEstadisticas();
+
+        div = 80;
+        han = 80;
+        kic = 80;
+        ref = 80;
+        spd = 80;
+        pos = 80;
+    }
 }

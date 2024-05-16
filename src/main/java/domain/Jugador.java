@@ -20,6 +20,7 @@ public class Jugador implements Cloneable, Comparable {
     int phy;
 
     public Jugador() {
+
     }
 
     public Jugador(String nombre, int dorsal, String posicion) {
@@ -134,6 +135,16 @@ public class Jugador implements Cloneable, Comparable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void inicializarEstadisticas(){
+        pac = 80;
+        sho = 80;
+        pas = 80;
+        dri = 80;
+        def = 80;
+        phy = 80;
+        dorsal = 1;
     }
 
     @Override

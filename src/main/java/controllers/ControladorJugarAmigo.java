@@ -446,8 +446,6 @@ public class ControladorJugarAmigo {
                     double centroX = pane.getWidth() / 2;
                     double centroY = pane.getHeight() / 2;
                     double posDorsalX = centroX;
-                    double posDorsalY = centroY;
-                    double centroBalonX = centroX;
 
 
                     // Si el jugador tiene el balon mueve la chapa al lado correspondiente

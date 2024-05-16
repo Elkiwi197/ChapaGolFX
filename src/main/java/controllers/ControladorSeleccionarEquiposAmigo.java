@@ -24,7 +24,8 @@ public class ControladorSeleccionarEquiposAmigo {
     }
 
     private void cargarValoresChoiceBox() {
-        ObservableList<String> equipos = borderPane.devolverListaEquipos();
+        ObservableList<String> equipos = borderPane.devolverListaEquiposJugables();
+
         selectorEquipoJ1.getItems().setAll(equipos);
         selectorEquipoJ2.getItems().setAll(equipos);
 

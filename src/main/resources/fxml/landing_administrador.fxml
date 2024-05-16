@@ -7,9 +7,9 @@
    <children>
       <ChoiceBox fx:id="selectorEquipo" layoutX="83.0" layoutY="49.0" prefWidth="150.0" />
       <ListView fx:id="listaJugadores" layoutX="58.0" layoutY="100.0" prefHeight="441.0" prefWidth="200.0" />
-      <Button fx:id="botonModificarJugador" layoutX="342.0" layoutY="269.0" mnemonicParsing="false" onAction="#mostrarEstadisticas" prefHeight="77.0" prefWidth="111.0" text="Modificar jugador" />
+      <Button fx:id="botonModificarJugador" layoutX="314.0" layoutY="225.0" mnemonicParsing="false" onAction="#mostrarModificarJugador" prefHeight="77.0" prefWidth="170.0" text="Modificar jugador" />
       <Button fx:id="botonMoverJugadorEquipo" layoutX="313.0" layoutY="111.0" mnemonicParsing="false" onAction="#mostrarMoverJugador" prefHeight="77.0" prefWidth="170.0" text="Mover jugador a otro equipo" />
-      <Button fx:id="botonEliminarJugador" layoutX="347.0" layoutY="463.0" mnemonicParsing="false" onAction="#eliminarJugador" prefHeight="77.0" prefWidth="103.0" text="Eliminar jugador" />
+      <Button fx:id="botonEliminarJugador" layoutX="313.0" layoutY="463.0" mnemonicParsing="false" onAction="#eliminarJugador" prefHeight="77.0" prefWidth="170.0" text="Eliminar jugador" />
       <Pane fx:id="paneMoverJugador" layoutX="551.0" layoutY="94.0" prefHeight="113.0" prefWidth="200.0">
          <children>
             <Button fx:id="botonMoverJugador" layoutX="75.0" layoutY="75.0" mnemonicParsing="false" onAction="#moverJugador" text="Mover" />
@@ -36,6 +36,8 @@
             <Spinner fx:id="spinnerDribling" layoutX="69.0" layoutY="199.0" prefHeight="25.0" prefWidth="64.0" />
             <Spinner fx:id="spinnerDefense" layoutX="183.0" layoutY="199.0" prefHeight="25.0" prefWidth="64.0" />
             <Spinner fx:id="spinnerPhysique" layoutX="293.0" layoutY="199.0" prefHeight="25.0" prefWidth="64.0" />
+            <Button fx:id="botonGuardarCambios" layoutX="404.0" layoutY="199.0" mnemonicParsing="false" onAction="#guardarEstadisticas" prefHeight="43.0" prefWidth="59.0" text="Guardar" />
+            <Button fx:id="botonAnadirJugador" layoutX="404.0" layoutY="199.0" mnemonicParsing="false" onAction="#anadirJugador" prefHeight="43.0" prefWidth="59.0" text="Añadir" />
             <Pane fx:id="paneEstadisticasPortero" layoutY="243.0" prefHeight="159.0" prefWidth="381.0">
                <children>
                   <Label fx:id="labelDiving" layoutX="82.0" layoutY="14.0" text="Diving" />
@@ -51,9 +53,10 @@
                   <Spinner fx:id="spinnerSpeed" layoutX="178.0" layoutY="108.0" prefHeight="25.0" prefWidth="64.0" />
                   <Spinner fx:id="spinnerPositioning" layoutX="290.0" layoutY="108.0" prefHeight="25.0" prefWidth="64.0" />
                </children></Pane>
-            <Button fx:id="botonGuardarCambios" layoutX="404.0" layoutY="199.0" mnemonicParsing="false" onAction="#guardarEstadisticas" text="Guardar" />
          </children>
       </Pane>
       <Button fx:id="botonSalirAlogin" layoutX="854.0" mnemonicParsing="false" onAction="#salirAlogin" prefHeight="43.0" prefWidth="150.0" text="Salir" />
+      <Button fx:id="botonAnadirJugadorNormal" layoutX="313.0" layoutY="331.0" mnemonicParsing="false" onAction="#mostrarAnadirJugadorNormal" prefHeight="43.0" prefWidth="170.0" text="Añadir jugador de campo" />
+      <Button fx:id="botonAnadirPortero" layoutX="313.0" layoutY="396.0" mnemonicParsing="false" onAction="#mostrarAnadirPortero" prefHeight="43.0" prefWidth="170.0" text="Añadir portero" />
    </children>
 </AnchorPane>

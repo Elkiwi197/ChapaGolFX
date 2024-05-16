@@ -26,6 +26,9 @@ public class ControladorLandingAdministrador {
     public Button botonModificarJugador;
     public Button botonMoverJugadorEquipo;
     public Button botonEliminarJugador;
+    public Button botonAnadirPortero;
+    public Button botonAnadirJugadorNormal;
+    public Button botonAnadirJugador;
     public ChoiceBox selectorEquipo;
     public ChoiceBox selectorEquipoMoverJugador;
     public TextField inputNombre;
@@ -72,30 +75,30 @@ public class ControladorLandingAdministrador {
 
     public void init() {
         cargarSelectorEquipos();
-        cargarEventListeners();
         actualizarSpinners();
+        cargarEventListeners();
         ocultarPanes();
 
     }
 
     private void actualizarSpinners() {
         dorsalesRepetidos.clear();
-        Equipo equipoSeleccionado = borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString());
+        Equipo equipoSeleccionado = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
         equipoSeleccionado.getPlantilla().forEach(j -> dorsalesRepetidos.add(j.getDorsal()));
 
-        spinnerDorsal.setValueFactory(new SpinnerValoresExcluidos(0, 99, 0, dorsalesRepetidos));
-        spinnerPace.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerShot.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerPass.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerDribling.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerDefense.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerPhysique.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerDiving.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerReflexes.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerHandling.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerKicking.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerSpeed.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
-        spinnerPositioning.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0));
+        spinnerDorsal.setValueFactory(new SpinnerValoresExcluidos(1, 99, 1, dorsalesRepetidos));
+        spinnerPace.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerShot.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerPass.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerDribling.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerDefense.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerPhysique.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerDiving.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerReflexes.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerHandling.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerKicking.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerSpeed.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
+        spinnerPositioning.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 80));
 
     }
 
@@ -127,6 +130,7 @@ public class ControladorLandingAdministrador {
         jugador = null;
         cargarEstadisticas();
         ocultarPanes();
+        actualizarSpinners();
     }
 
 
@@ -197,13 +201,41 @@ public class ControladorLandingAdministrador {
 
     public void mostrarMoverJugador(ActionEvent actionEvent) {
         ocultarPanes();
-        if (jugador != null) {
+        if (jugadorEstaEnPlantilla()) {
             paneMoverJugador.setVisible(true);
         }
     }
 
-    public void mostrarEstadisticas(ActionEvent actionEvent) {
+    public void mostrarModificarJugador(ActionEvent actionEvent) {
+        if (jugadorEstaEnPlantilla()) {
+            mostrarEstadisticas();
+            botonGuardarCambios.setVisible(true);
+            botonAnadirJugador.setVisible(false);
+        } else {
+            ocultarPanes();
+        }
+    }
+
+    public void mostrarAnadirJugadorNormal(ActionEvent actionEvent) {
+        jugador = new Jugador();
+        jugador.inicializarEstadisticas();
+        mostrarEstadisticas();
+        botonGuardarCambios.setVisible(false);
+        botonAnadirJugador.setVisible(true);
+
+    }
+
+    public void mostrarAnadirPortero(ActionEvent actionEvent) {
+        jugador = new Portero();
+        jugador.inicializarEstadisticas();
+        mostrarEstadisticas();
+        botonGuardarCambios.setVisible(false);
+        botonAnadirJugador.setVisible(true);
+    }
+
+    public void mostrarEstadisticas() {
         ocultarPanes();
+        cargarEstadisticas();
         if (jugador != null) {
             paneModificarJugador.setVisible(true);
 
@@ -213,7 +245,6 @@ public class ControladorLandingAdministrador {
                 paneEstadisticasPortero.setVisible(false);
             }
         }
-
     }
 
     public void guardarEstadisticas(ActionEvent actionEvent) {
@@ -235,6 +266,27 @@ public class ControladorLandingAdministrador {
             ((Portero) jugador).setSpd(spinnerSpeed.getValue());
             ((Portero) jugador).setPos(spinnerPositioning.getValue());
         }
+
+    }
+
+
+
+    /*
+    Añade el jugador al equipo del selector de equipos
+     */
+
+    public void anadirJugador(ActionEvent actionEvent) {
+        guardarEstadisticas(actionEvent);
+        borderPane.anadirJugador(jugador, selectorEquipo.getValue().toString());
+        cargarJugadoresEquipoSeleccionado(selectorEquipo.getValue().toString());
+        limpiarCacheJugador();
+
+    }
+
+    private boolean jugadorEstaEnPlantilla() {
+        Equipo equipoActual = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
+
+        return equipoActual.getPlantilla().stream().anyMatch(j -> j.equals(jugador));
     }
 
     public void salirAlogin(ActionEvent actionEvent) {

@@ -156,16 +156,14 @@ public class DAOequipos {
 
     }
 
-    public ObservableList<String> devolverListaEquipos() {
+    public ObservableList<String> devolverListaEquipos()  {
         ObservableList<String> lista = FXCollections.observableArrayList();
-        for (Equipo equipo : liga) {
-            lista.add(equipo.getNombre());
-        }
+        liga.forEach(e -> lista.add(e.getNombre()));
         return lista;
     }
 
     public Equipo devolverEquipo(String nombreEquipo) {
-        Equipo equipo = new Equipo();
+        Equipo equipo = null;
         for (Equipo equipoDevolver : liga) {
             if (equipoDevolver.getNombre().equals(nombreEquipo)) {
                 equipo = (Equipo) equipoDevolver.clone();
@@ -179,41 +177,13 @@ public class DAOequipos {
     }
 
     public Jugador devolverJugador(String nombreJugador, String nombreEquipo) {
-        Equipo equipo = new Equipo();
-        Jugador jugador = new Jugador();
-        for (Equipo equipoLiga : liga) {
-            if (equipoLiga.getNombre().equals(nombreEquipo)) {
-                equipo = equipoLiga;
-                break;
-            }
-        }
-        for (Jugador jugadorEquipo : equipo.getPlantilla()) {
-            if (jugadorEquipo.getNombre().equals(nombreJugador)) {
-                jugador = jugadorEquipo;
-                break;
-            }
-        }
-        return jugador;
+        Equipo equipo = devolverEquipo(nombreEquipo);
+        return equipo.getPlantilla().stream().filter(j -> j.getNombre().equals(nombreJugador)).findFirst().get();
     }
 
     public void cambiarJugadorDeEquipo(String equipoInicial, String equipoFinal, Jugador jugador) {
-        Equipo equipoOrigen = devolverEquipo(equipoInicial);
-        Equipo equipoLlegada = devolverEquipo(equipoFinal);
-        Set<Integer> dorsalesOcupados = new HashSet<>();
-        boolean dorsalRepetido = true;
-
-        equipoLlegada.getPlantilla().forEach(p -> dorsalesOcupados.add(p.getDorsal()));
-        do {
-            for (int dorsalOcupado : dorsalesOcupados) {
-                if (dorsalOcupado == jugador.getDorsal()) {
-                    jugador.setDorsal((int) (Math.random() * 99) + 1);
-                } else {
-                    dorsalRepetido = false;
-                }
-            }
-        } while (dorsalRepetido);
-        equipoLlegada.getPlantilla().add(jugador);
-        eliminarJugador(equipoOrigen.getNombre(), jugador);
+        anadirJugador(jugador, equipoFinal);
+        eliminarJugador(equipoInicial, jugador);
     }
 
     public TreeSet<Jugador> devolverJugadoresEquipo(String nombreEquipo) {
@@ -231,5 +201,39 @@ public class DAOequipos {
                 equipo.getTitulares()[i] = null;
             }
         }
+    }
+    public void anadirJugador(Jugador jugador, String nombreEquipo){
+        Set<Integer> dorsalesOcupados = new HashSet<>();
+        Equipo equipo = devolverEquipo(nombreEquipo);
+        boolean dorsalRepetido = true;
+
+        equipo.getPlantilla().forEach(j -> dorsalesOcupados.add(j.getDorsal()));
+        do {
+            for (int dorsalOcupado : dorsalesOcupados) {
+                if (dorsalOcupado == jugador.getDorsal()) {
+                    jugador.setDorsal((int) (Math.random() * 99) + 1);
+                } else {
+                    dorsalRepetido = false;
+                }
+            }
+        } while (dorsalRepetido);
+        equipo.getPlantilla().add(jugador);
+    }
+
+    public ObservableList<String> devolverListaEquiposJugables() {
+        ObservableList<String> lista = FXCollections.observableArrayList();
+        boolean jugable;
+        for (Equipo equipo: liga) {
+            jugable = true;
+            for (int i = 0; i < 11; i++) {
+                if (equipo.getTitulares()[i] == null){
+                    jugable = false;
+                }
+            }
+            if (jugable){
+                lista.add(equipo.getNombre());
+            }
+        }
+        return lista;
     }
 }
