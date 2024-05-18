@@ -47,6 +47,7 @@ public class ControladorModificarEquipo {
     // Clases de lógica
     StackPane[] arrayTitulares = {stackPaneJugador0, stackPaneJugador1, stackPaneJugador2, stackPaneJugador3, stackPaneJugador4, stackPaneJugador5, stackPaneJugador6, stackPaneJugador7, stackPaneJugador8, stackPaneJugador9, stackPaneJugador10};
 
+    Jugador jugadorSeleccionado;
 
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         borderPane = controladorPrincipal;
@@ -127,6 +128,8 @@ public class ControladorModificarEquipo {
 
     private void colocarChapasTitulares() {
         Equipo equipo = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
+        equipo.setAlineacion(selectorAlineacion.getSelectionModel().getSelectedItem().toString());
+
 //        equipo.setAlineacion(selectorAlineacion.getValue().toString());
         if (equipo.getAlineacion().equals("4-4-2")) { // Si la alineacion es 4-4-2
             arrayTitulares[0].setLayoutX(172);
@@ -211,6 +214,7 @@ public class ControladorModificarEquipo {
             }
         }
         colocarChapasTitulares();
+        cargarEventListeners();
     }
 
     private StackPane crearStackPaneTitular(Jugador jugador) {
@@ -247,14 +251,31 @@ public class ControladorModificarEquipo {
         listaPlantilla.setOnMouseClicked(evento -> {
             String jugador = listaPlantilla.getSelectionModel().getSelectedItem().toString().substring(3);
             System.out.println(jugador);
+            jugadorSeleccionado = borderPane.serviceEquipos.devolverJugador(jugador, selectorEquipo.getValue().toString());
         });
         selectorEquipo.setOnAction(evento -> {
             Equipo equipo = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
+            jugadorSeleccionado = null;
             cargarListaJugadores();
             actualizarSelectorAlineacion(equipo);
             cargarTitulares();
         });
-
+        selectorAlineacion.setOnAction(evento -> {
+            Equipo equipo = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
+            equipo.setAlineacion(selectorAlineacion.getSelectionModel().getSelectedItem().toString());
+            System.out.println(selectorAlineacion.getSelectionModel().getSelectedItem().toString());
+            cargarTitulares();
+        });
+        for (int i = 0; i < arrayTitulares.length; i++) {
+            int finalI = i;
+            arrayTitulares[i].setOnMouseClicked(evento -> {
+                System.out.println("Titular clicado: " + finalI);
+                if (jugadorSeleccionado != null) {
+                    borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[finalI] = jugadorSeleccionado;
+                }
+                cargarTitulares();
+            });
+        }
     }
 
 

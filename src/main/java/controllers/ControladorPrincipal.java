@@ -131,7 +131,7 @@ public class ControladorPrincipal implements Initializable {
             Equipo visitante;
             local = serviceEquipos.devolverEquipo(equipoJ1);
             visitante = serviceEquipos.devolverEquipo(equipoJ2);
-            juego.jugarAmigo(local, visitante);
+            juego.jugarAmigo(serviceEquipos.devolverEquipo(equipoJ1), serviceEquipos.devolverEquipo(equipoJ2));
             controladorJugarAmigo.init();
             pantallaPrincipal.setCenter(jugarAmigoAnchorPane);
         } catch (IOException e) {
@@ -185,5 +185,13 @@ public class ControladorPrincipal implements Initializable {
 
     public ObservableList<String> devolverListaEquiposJugables() {
         return serviceEquipos.devolverListaEquiposJugables();
+    }
+
+    public void sumarPuntos() {
+        serviceEquipos.sumarPuntos(juego.getGolesLocal(), juego.getGolesVisitante(), juego.getEquipoLocal(), juego.getEquipoVisitante());
+    }
+
+    public void actualizarClasificacion() {
+        serviceEquipos.actualizarClasificacion();
     }
 }

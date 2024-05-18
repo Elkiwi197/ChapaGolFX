@@ -1,10 +1,18 @@
 package domain;
 
 import common.Jugada;
+import lombok.Data;
+import service.ServiceEquipos;
 
-import java.util.IllegalFormatCodePointException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Date;
 
 
+@Data
 public class Juego {
     private Jugador[][] campo = new Jugador[15][22];
     private Equipo equipoLocal = new Equipo(); //J1
@@ -15,96 +23,54 @@ public class Juego {
     private String goleadoresLocal = "";
     private String goleadoresVisitante = "";
     private int PA;
+    private LocalDate fechaInicio;
 
-    public Juego() {
-    }
-
-    public String getGoleadoresLocal() {
-        return goleadoresLocal;
-    }
-
-    public void setGoleadoresLocal(String goleadoresLocal) {
-        this.goleadoresLocal = goleadoresLocal;
-    }
-
-    public String getGoleadoresVisitante() {
-        return goleadoresVisitante;
-    }
-
-    public void setGoleadoresVisitante(String goleadoresVisitante) {
-        this.goleadoresVisitante = goleadoresVisitante;
-    }
-
-    public Jugador[][] getCampo() {
-        return campo;
-    }
-
-    public void setCampo(Jugador[][] campo) {
-        this.campo = campo;
-    }
-
-    public Equipo getEquipoLocal() {
-        return equipoLocal;
-    }
-
-    public void setEquipoLocal(Equipo equipoLocal) {
-        this.equipoLocal = equipoLocal;
-    }
-
-    public Equipo getEquipoVisitante() {
-        return equipoVisitante;
-    }
-
-    public void setEquipoVisitante(Equipo equipoVisitante) {
-        this.equipoVisitante = equipoVisitante;
-    }
-
-    public boolean isTurno() {
-        return turno;
-    }
-
-    public void setTurno(boolean turno) {
-        this.turno = turno;
-    }
-
-    public int getPA() {
-        return PA;
-    }
-
-    public void setPA(int PA) {
-        this.PA = PA;
-    }
-
-    public int getGolesLocal() {
-        return golesLocal;
-    }
-
-    public void setGolesLocal(int golesLocal) {
-        this.golesLocal = golesLocal;
-    }
-
-    public int getGolesVisitante() {
-        return golesVisitante;
-    }
-
-    public void setGolesVisitante(int golesVisitante) {
-        this.golesVisitante = golesVisitante;
-    }
 
     public void comprobarTurno() {
         if (PA == 0) {
             PA = 5;
             turno = !turno;
         }
-        if (golesLocal + golesVisitante == 4){
+        if (golesLocal + golesVisitante == 4) {
 
         }
     }
+
+    public boolean comprobarFinal() {
+        boolean finalPartido = false;
+        int expulsados = 0;
+        if (golesLocal + golesVisitante > 3) {
+            finalPartido = true;
+        }
+        for (int i = 0; i < 11; i++) {
+            if (equipoLocal.getTitulares()[i] == null) {
+                expulsados++;
+            }
+        }
+        if (expulsados >= 3) {
+            finalPartido = true;
+        }
+        expulsados = 0;
+        for (int i = 0; i < 11; i++) {
+            if (equipoVisitante.getTitulares()[i] == null) {
+                expulsados++;
+            }
+        }
+        if (expulsados >= 3) {
+            finalPartido = true;
+        }
+        return finalPartido;
+    }
+
 
     public void jugarAmigo(Equipo local, Equipo visitante) {
         turno = true;
         equipoLocal = local;
         equipoVisitante = visitante;
+        golesLocal = 0;
+        golesVisitante = 0;
+        PA = 5;
+        
 
         cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
         actualizarCampoConsola();
@@ -158,17 +124,17 @@ public class Juego {
                             campo[8][6] = equipoLocal.getTitulares()[7];
                             campo[10][6] = equipoLocal.getTitulares()[8];
                             //Delanteros
-                            if (equipoLocal.getTitulares()[10] == null){
+                            if (equipoLocal.getTitulares()[10] == null) {
                                 for (int i = 0; i < equipoLocal.getTitulares().length; i++) {
-                                    if (equipoLocal.getTitulares()[10-i] != null){
+                                    if (equipoLocal.getTitulares()[10 - i] != null) {
                                         for (int j = 0; j < 15; j++) {
                                             for (int k = 0; k < 22; k++) {
-                                                if (campo[j][k] == equipoLocal.getTitulares()[10-i]){
+                                                if (campo[j][k] == equipoLocal.getTitulares()[10 - i]) {
                                                     campo[j][k] = null;
                                                 }
                                             }
                                         }
-                                        campo[7][10] = equipoLocal.getTitulares()[10-i];
+                                        campo[7][10] = equipoLocal.getTitulares()[10 - i];
                                         campo[7][10].setTieneBalon(true);
                                         break;
                                     }
@@ -722,6 +688,7 @@ public class Juego {
 
 
         comprobarTurno();
+        comprobarFinal();
         return resultado;
     }
 
@@ -1058,6 +1025,7 @@ public class Juego {
         } else {
             comprobarTurno();
         }
+        comprobarFinal();
         return resultado;
 
 
@@ -1088,4 +1056,51 @@ public class Juego {
             }
         }
     }
+
+    public void rendirse() {
+        if (turno) {
+            golesVisitante = 4;
+        } else {
+            golesLocal = 4;
+        }
+    }
+
+    public void finalizarPartido() {
+        guardarPartido();
+        resetearEquipos();
+    }
+
+
+    private void resetearEquipos() {
+        equipoLocal.getPlantilla().forEach(j -> {
+            j.setTieneAmarilla(false);
+            j.setTieneBalon(false);
+        });
+        equipoVisitante.getPlantilla().forEach(j -> {
+            j.setTieneAmarilla(false);
+            j.setTieneBalon(false);
+        });
+    }
+
+
+    private void guardarPartido() {
+        try {
+            FileWriter fileWriter = new FileWriter("partidosGuardados.txt", true);
+            String resultado = "| " + equipoLocal.getNombre() + " " + golesLocal + " - " + golesVisitante + " " + equipoVisitante.getNombre() + " |";
+            for (int i = 0; i < resultado.length(); i++) {
+                fileWriter.write("-");
+            }
+            fileWriter.write('\n' + resultado + '\n');
+            for (int i = 0; i < resultado.length(); i++) {
+                fileWriter.write("-");
+            }
+            fileWriter.write("\n");
+            fileWriter.close();
+            System.out.println("Partido guardado en el fichero correctamente");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="19 commit - Modificar equipo a medias">
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores">
+      <change afterPath="$PROJECT_DIR$/equipo.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/partidosGuardados.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/modificar_equipo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/modificar_equipo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Portero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Portero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +62,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Juego.executor": "Run",
     "Application.Launcher.executor": "Run",
     "Attach to process.pid 9988.executor": "ProcessAttachDebug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -86,7 +99,20 @@
       <recent name="dao" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Juego" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="domain.Juego" />
+      <module name="ChapaGolFX" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.chapagolfx.Launcher" />
       <module name="ChapaGolFX" />
@@ -103,6 +129,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Launcher" />
+        <item itemvalue="Application.Juego" />
       </list>
     </recent_temporary>
   </component>
@@ -156,7 +183,13 @@
       <workItem from="1715697166786" duration="5926000" />
       <workItem from="1715711571423" duration="26364000" />
       <workItem from="1715785540276" duration="11342000" />
-      <workItem from="1715805916782" duration="25164000" />
+      <workItem from="1715805916782" duration="25238000" />
+      <workItem from="1715852700727" duration="1204000" />
+      <workItem from="1715855562340" duration="1074000" />
+      <workItem from="1715863418753" duration="1550000" />
+      <workItem from="1715948952572" duration="593000" />
+      <workItem from="1715961478528" duration="14071000" />
+      <workItem from="1716033710201" duration="10929000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -310,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715820615333</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores">
+      <option name="closed" value="true" />
+      <created>1715832479636</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1715832479636</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +379,8 @@
     <MESSAGE value="18 commit - CRUD administrador hecho" />
     <MESSAGE value="18 commit - CRUD administrador hecho, notaciones lambda" />
     <MESSAGE value="19 commit - Modificar equipo a medias" />
-    <option name="LAST_COMMIT_MESSAGE" value="19 commit - Modificar equipo a medias" />
+    <MESSAGE value="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores" />
+    <option name="LAST_COMMIT_MESSAGE" value="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -347,8 +389,34 @@
           <properties class="java.lang.ClassCastException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
+          <line>280</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="controllers.ControladorPrincipal" memberName="juego" />
+        <PinnedItemInfo parentTag="javafx.scene.layout.Region$$Lambda/0x000002370711aad8" memberName="arg$1" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="borderPane.juego" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

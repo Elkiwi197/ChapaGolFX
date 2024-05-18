@@ -1,5 +1,9 @@
 package domain;
+import lombok.Data;
 
+
+
+@Data
 public class Portero extends Jugador {
     private int div;
     private int han;
@@ -20,9 +24,7 @@ public class Portero extends Jugador {
         this.pos = pos;
     }
 
-    public Portero(String nombre, int dorsal, String posicion, int pac, int sho, int pas, int dri, int def, int phy) {
-        super(nombre, dorsal, posicion, pac, sho, pas, dri, def, phy);
-    }
+
 
     public Portero(String nombre, int dorsal, String posicion, int pac, int sho, int pas, int dri, int def, int phy, int div, int han, int kic, int ref, int spd, int pos) {
         super(nombre, dorsal, posicion, pac, sho, pas, dri, def, phy);
@@ -38,53 +40,6 @@ public class Portero extends Jugador {
         super(nombre, dorsal, posicion);
     }
 
-    public int getDiv() {
-        return div;
-    }
-
-    public void setDiv(int div) {
-        this.div = div;
-    }
-
-    public int getHan() {
-        return han;
-    }
-
-    public void setHan(int han) {
-        this.han = han;
-    }
-
-    public int getKic() {
-        return kic;
-    }
-
-    public void setKic(int kic) {
-        this.kic = kic;
-    }
-
-    public int getRef() {
-        return ref;
-    }
-
-    public void setRef(int ref) {
-        this.ref = ref;
-    }
-
-    public int getSpd() {
-        return spd;
-    }
-
-    public void setSpd(int spd) {
-        this.spd = spd;
-    }
-
-    public int getPos() {
-        return pos;
-    }
-
-    public void setPos(int pos) {
-        this.pos = pos;
-    }
 
     public void inicalizarEstadisticas(){
         super.inicializarEstadisticas();

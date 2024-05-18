@@ -23,10 +23,6 @@ public class ServiceEquipos {
         return daoEquipos.devolverEquipo(nombreEquipo);
     }
 
-    public Equipo devolverEquipoRepetido(String nombreEquipo) {
-        return daoEquipos.devolverEquipoRepetido(nombreEquipo);
-    }
-
     public TreeSet<Jugador> devolverJugadoresEquipo(String nombreEquipo) {
         return daoEquipos.devolverJugadoresEquipo(nombreEquipo);
     }
@@ -48,5 +44,13 @@ public class ServiceEquipos {
 
     public ObservableList<String> devolverListaEquiposJugables() {
         return daoEquipos.devolverListaEquiposJugables();
+    }
+
+    public void actualizarClasificacion() {
+        daoEquipos.actualizarClasificacion();
+    }
+
+    public void sumarPuntos(int golesLocal, int golesVisitante, Equipo equipoLocal, Equipo equipoVisitante) {
+        daoEquipos.sumarPuntos(golesLocal, golesVisitante, equipoLocal, equipoVisitante);
     }
 }

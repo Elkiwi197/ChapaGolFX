@@ -1,17 +1,24 @@
 package dao;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import domain.Equipo;
 import domain.Jugador;
 import domain.Portero;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.TransformationList;
 import javafx.scene.paint.Color;
+import com.google.gson.Gson;
 
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class DAOequipos {
     private List<Equipo> liga = new ArrayList<>();
+    private Map<String, Integer> clasificacion = new LinkedHashMap<>();
 
     public void init() {
         Equipo realMadrid = new Equipo("Real Madrid", 0, null, "4-4-2", Color.WHITE, Color.DARKBLUE, Color.GREENYELLOW, null, null, false);
@@ -47,7 +54,7 @@ public class DAOequipos {
         realMadrid.setTitulares(titularesRealMadrid);
         liga.add(realMadrid);
 
-        Equipo barcelona = new Equipo("FC Barcelona", 0, null, "4-3-3", Color.RED, Color.BLUE, Color.ORANGE, null, null, false);
+        Equipo barcelona = new Equipo("Barcelona", 0, null, "4-3-3", Color.RED, Color.BLUE, Color.ORANGE, null, null, false);
         List<Jugador> plantillaBarcelona = new ArrayList<>();
         Jugador[] titularesBarcelona = new Jugador[11];
 
@@ -83,7 +90,7 @@ public class DAOequipos {
         barcelona.setTitulares(titularesBarcelona);
         liga.add(barcelona);
 
-        Equipo girona = new Equipo("Girona FC", 0, null, "4-3-3", Color.RED, Color.WHITE, Color.GREENYELLOW, null, null, false);
+        Equipo girona = new Equipo("Girona", 0, null, "4-3-3", Color.RED, Color.WHITE, Color.GREENYELLOW, null, null, false);
         List<Jugador> plantillaGirona = new ArrayList<>();
         Jugador[] titularesGirona = new Jugador[11];
 
@@ -119,7 +126,7 @@ public class DAOequipos {
         liga.add(girona);
 
 
-        Equipo racing = new Equipo("Racing de Santander", 0, null, "4-3-3", Color.WHITE, Color.LIME, Color.BLACK, null, null, false);
+        Equipo racing = new Equipo("Real Racing Club", 0, null, "4-3-3", Color.WHITE, Color.LIME, Color.BLACK, null, null, false);
         List<Jugador> plantillaRacing = new ArrayList<>();
         Jugador[] titularesRacing = new Jugador[11];
 
@@ -154,9 +161,13 @@ public class DAOequipos {
         racing.setTitulares(titularesRacing);
         liga.add(racing);
 
+
+        liga.forEach(e -> {
+            clasificacion.put(e.getNombre(), e.getPuntos());
+        });
     }
 
-    public ObservableList<String> devolverListaEquipos()  {
+    public ObservableList<String> devolverListaEquipos() {
         ObservableList<String> lista = FXCollections.observableArrayList();
         liga.forEach(e -> lista.add(e.getNombre()));
         return lista;
@@ -166,14 +177,10 @@ public class DAOequipos {
         Equipo equipo = null;
         for (Equipo equipoDevolver : liga) {
             if (equipoDevolver.getNombre().equals(nombreEquipo)) {
-                equipo = (Equipo) equipoDevolver.clone();
+                equipo = equipoDevolver;
             }
         }
         return equipo;
-    }
-
-    public Equipo devolverEquipoRepetido(String nombreEquipo) {
-        return new Equipo();
     }
 
     public Jugador devolverJugador(String nombreJugador, String nombreEquipo) {
@@ -188,9 +195,7 @@ public class DAOequipos {
 
     public TreeSet<Jugador> devolverJugadoresEquipo(String nombreEquipo) {
         Equipo equipo = devolverEquipo(nombreEquipo);
-        TreeSet<Jugador> listaJugadores = new TreeSet<>();
-        equipo.getPlantilla().forEach(p -> listaJugadores.add(p));
-        return listaJugadores;
+        return new TreeSet<>(equipo.getPlantilla());
     }
 
     public void eliminarJugador(String nombreEquipo, Jugador jugador) {
@@ -202,20 +207,25 @@ public class DAOequipos {
             }
         }
     }
-    public void anadirJugador(Jugador jugador, String nombreEquipo){
+
+    public void anadirJugador(Jugador jugador, String nombreEquipo) {
         Set<Integer> dorsalesOcupados = new HashSet<>();
         Equipo equipo = devolverEquipo(nombreEquipo);
         boolean dorsalRepetido = true;
 
         equipo.getPlantilla().forEach(j -> dorsalesOcupados.add(j.getDorsal()));
         do {
-            for (int dorsalOcupado : dorsalesOcupados) {
-                if (dorsalOcupado == jugador.getDorsal()) {
-                    jugador.setDorsal((int) (Math.random() * 99) + 1);
-                } else {
-                    dorsalRepetido = false;
-                }
+            dorsalRepetido = dorsalesOcupados.stream().anyMatch(d -> d == jugador.getDorsal());
+            if (dorsalRepetido) {
+                jugador.setDorsal((int) (Math.random() * 99) + 1);
             }
+//            for (int dorsalOcupado : dorsalesOcupados) {
+//                if (dorsalOcupado == jugador.getDorsal()) {
+//                    jugador.setDorsal((int) (Math.random() * 99) + 1);
+//                } else {
+//                    dorsalRepetido = false;
+//                }
+//            }
         } while (dorsalRepetido);
         equipo.getPlantilla().add(jugador);
     }
@@ -223,17 +233,61 @@ public class DAOequipos {
     public ObservableList<String> devolverListaEquiposJugables() {
         ObservableList<String> lista = FXCollections.observableArrayList();
         boolean jugable;
-        for (Equipo equipo: liga) {
+        for (Equipo equipo : liga) {
             jugable = true;
             for (int i = 0; i < 11; i++) {
-                if (equipo.getTitulares()[i] == null){
+                if (equipo.getTitulares()[i] == null) {
                     jugable = false;
                 }
             }
-            if (jugable){
+            if (jugable) {
                 lista.add(equipo.getNombre());
             }
         }
         return lista;
+    }
+
+    public void sumarPuntos(int golesLocal, int golesVisitante, Equipo equipoLocal, Equipo equipoVisitante) {
+        Equipo local = devolverEquipo(equipoLocal.getNombre());
+        Equipo visitante = devolverEquipo(equipoVisitante.getNombre());
+        if (golesVisitante == golesLocal) { // Si fue empate
+            local.setPuntos(local.getPuntos() + 1);
+            visitante.setPuntos(visitante.getPuntos() + 1);
+        } else { // Si gano alguien
+            if (golesLocal > golesVisitante) {
+                local.setPuntos(local.getPuntos() + 3);
+            } else {
+                visitante.setPuntos(visitante.getPuntos() + 3);
+            }
+        }
+        System.out.println("Puntos sumados");
+    }
+
+    public void actualizarClasificacion() {
+        liga.sort(new Comparator<Equipo>() {
+            @Override
+            public int compare(Equipo o1, Equipo o2) { // Compara por puntos y si no en orden alfabetico
+                int comparador = Integer.compare(o2.getPuntos(), o1.getPuntos());
+                if (comparador == 0) {
+                    comparador = o1.getNombre().compareToIgnoreCase(o2.getNombre());
+                }
+                return comparador;
+            }
+        });
+        clasificacion.clear();
+        liga.forEach(e -> {
+            clasificacion.put(e.getNombre(), e.getPuntos());
+        });
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(clasificacion);
+        System.out.println("Guardando equipo");
+        try (FileWriter writer = new FileWriter("equipo.json")) {
+            writer.write(json);
+        } catch (IOException e) {
+            System.out.println("No se pudo escribir en el fichero ");
+            e.printStackTrace();
+        }
+        System.out.println("Equipo guardado");
+
     }
 }

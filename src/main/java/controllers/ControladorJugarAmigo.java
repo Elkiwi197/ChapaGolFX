@@ -38,9 +38,14 @@ public class ControladorJugarAmigo {
     public Label labelComentarista;
     public Label labelGoleadoresLocal;
     public Label labelGoleadoresVisitante;
+    public Pane paneBotones;
+    public Button botonAcabarTurno;
+    public Button botonRendirse;
+    public Button botonSalirMenuPrincipal;
+    public Pane paneSalir;
     private ControladorPrincipal borderPane;
 
-    public GridPane gridPane;
+    public GridPane gridPane = new GridPane();
     private Equipo equipoLocal = new Equipo();
     private Equipo equipoVisitante = new Equipo();
     private ImageView balon = new ImageView();
@@ -48,7 +53,8 @@ public class ControladorJugarAmigo {
     private int ultimaFilaSeleccionada;
     private int ultimaColumnaSeleccionada;
 
-    private Set<String> casillasIluminadas = new HashSet<>();
+    private Set<String> casillasIluminadas = new TreeSet<>();
+
 
     public void setBorderPane(ControladorPrincipal controladorPrincipal) {
         borderPane = controladorPrincipal;
@@ -61,12 +67,11 @@ public class ControladorJugarAmigo {
         labelComentarista.setOpacity(0.75);
         labelComentarista.setText("Bienvenidos a este \n" + borderPane.getJuego().getEquipoLocal().getNombre() + " - " + borderPane.getJuego().getEquipoVisitante().getNombre());
         ocultarOpciones();
-        cargarEquipos();
-        cargarCampo();
-        cargarJugadores();
         actualizarAvisos();
-        borderPane.getJuego().setPA(5);
-
+        cargarCampo();
+        cargarEquipos();
+        cargarJugadores();
+        paneSalir.setVisible(false);
 
         cargarFotos();
     }
@@ -91,22 +96,8 @@ public class ControladorJugarAmigo {
         //Preguntar a Gema si se puede hacer de otra forma mejor
         //Preguntar a Gema si esto crea objetos nuevos con nuevas direcciones de RAM
 
-        equipoLocal.setNombre(borderPane.getJuego().getEquipoLocal().getNombre());
-        equipoLocal.setTitulares(borderPane.getJuego().getEquipoLocal().getTitulares());
-        equipoLocal.setPlantilla(borderPane.getJuego().getEquipoLocal().getPlantilla());
-        equipoLocal.setAlineacion(borderPane.getJuego().getEquipoLocal().getAlineacion());
-        equipoLocal.setColorPrincipal(borderPane.getJuego().getEquipoLocal().getColorPrincipal());
-        equipoLocal.setColorSecundario(borderPane.getJuego().getEquipoLocal().getColorSecundario());
-        equipoLocal.setColorTerciario(borderPane.getJuego().getEquipoLocal().getColorTerciario());
-
-        equipoVisitante.setNombre(borderPane.getJuego().getEquipoVisitante().getNombre());
-        equipoVisitante.setTitulares(borderPane.getJuego().getEquipoVisitante().getTitulares());
-        equipoVisitante.setPlantilla(borderPane.getJuego().getEquipoVisitante().getPlantilla());
-        equipoVisitante.setAlineacion(borderPane.getJuego().getEquipoVisitante().getAlineacion());
-        equipoVisitante.setColorPrincipal(borderPane.getJuego().getEquipoVisitante().getColorPrincipal());
-        equipoVisitante.setColorSecundario(borderPane.getJuego().getEquipoVisitante().getColorSecundario());
-        equipoVisitante.setColorTerciario(borderPane.getJuego().getEquipoVisitante().getColorTerciario());
-
+        equipoLocal = borderPane.getJuego().getEquipoLocal();
+        equipoVisitante = borderPane.getJuego().getEquipoVisitante();
 
     }
 
@@ -387,6 +378,7 @@ public class ControladorJugarAmigo {
                     StackPane stackPane = new StackPane();
                     Jugador jugador = borderPane.getJuego().devolverJugador(j, i);
 
+
                     // Cargar camisetas
 
 
@@ -439,6 +431,10 @@ public class ControladorJugarAmigo {
                             dorsal.setFill(equipoVisitante.getColorPrincipal());
                         }
                     }
+                    if (jugador.isTieneAmarilla()){ // Si tiene amarilla
+                        camiseta.setStroke(Color.YELLOW);
+                        camiseta.setStrokeWidth(3);
+                    }
 
                     dorsal.setFont(Font.font("Arial", FontWeight.BOLD, 12));
 
@@ -489,7 +485,6 @@ public class ControladorJugarAmigo {
      */
     public void mostrarOpciones(int fila, int columna) {
         ocultarOpciones();
-        //ocultarCasillasIluminadas();
         actualizarAvisos();
         if (borderPane.getJuego().getCampo()[fila][columna] != null) {
             if (ComprobarAcciones.esTurnoDeJugador(borderPane.getJuego(), fila, columna)) {
@@ -545,6 +540,7 @@ public class ControladorJugarAmigo {
 
                     // Creacion del evento
                     cuadradoGuia.setOnMouseClicked(e -> {
+                        ocultarCasillasIluminadas();
                         System.out.println("PULSADO CASILLA ILUMINADA: FILA " + filaIluminada + "   COLUMNA " + columnaIluminada);
                         borderPane.getJuego().moverJugador(ultimaFilaSeleccionada, ultimaColumnaSeleccionada, filaIluminada, columnaIluminada);
                         //cargarJugadores();
@@ -613,6 +609,7 @@ public class ControladorJugarAmigo {
     }
 
     public void regatear(ActionEvent actionEvent) {
+        ocultarCasillasIluminadas();
         iluminarRivalesRegateables();
     }
 
@@ -656,11 +653,16 @@ public class ControladorJugarAmigo {
         labelComentarista.setText(borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada));
 
         ocultarOpciones();
-        actualizarAvisos();
-        cargarJugadores();
+        if (borderPane.getJuego().comprobarFinal()){
+            finalizarPartido();
+        } else {
+            actualizarAvisos();
+            cargarJugadores();
+        }
     }
 
     public void hacerEntrada(ActionEvent actionEvent) {
+        ocultarCasillasIluminadas();
         iluminarRivalesEntrables();
     }
 
@@ -687,6 +689,10 @@ public class ControladorJugarAmigo {
                                 ocultarCasillasIluminadas();
                                 cargarJugadores();
                                 //consumirPA();
+                                if (borderPane.getJuego().comprobarFinal()){
+                                    acabarTurno(null);
+                                    rendirse(null);
+                                }
                                 borderPane.getJuego().comprobarTurno();
                             });
 
@@ -698,6 +704,7 @@ public class ControladorJugarAmigo {
             }
         }
     }
+
 
     /**
      * Quita la iluminacion de las casillas iluminadas
@@ -744,5 +751,36 @@ public class ControladorJugarAmigo {
         borderPane.getJuego().setPA(borderPane.getJuego().getPA() - 1);
         borderPane.getJuego().comprobarTurno();
         actualizarAvisos();
+    }
+
+
+    private void finalizarPartido() {
+        System.out.println("Partido acabado");
+        actualizarAvisos();
+        paneBotones.setVisible(false);
+        paneSalir.setVisible(true);
+        borderPane.getJuego().finalizarPartido();
+        borderPane.sumarPuntos();
+        borderPane.actualizarClasificacion();
+    }
+
+    public void acabarTurno(ActionEvent actionEvent) {
+        borderPane.getJuego().setPA(0);
+        borderPane.getJuego().comprobarTurno();
+        ocultarOpciones();
+        ocultarCasillasIluminadas();
+        actualizarAvisos();
+    }
+
+    public void rendirse(ActionEvent actionEvent) {
+        borderPane.getJuego().rendirse();
+        actualizarAvisos();
+        paneBotones.setVisible(false);
+        paneSalir.setVisible(true);
+        finalizarPartido();
+    }
+
+    public void salirMenuPrincipal(ActionEvent actionEvent) {
+        borderPane.cargarLandingUsuario();
     }
 }
