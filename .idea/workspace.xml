@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores">
-      <change afterPath="$PROJECT_DIR$/equipo.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/partidosGuardados.txt" afterDir="false" />
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipo.json" beforeDir="false" afterPath="$PROJECT_DIR$/equipo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/partidosGuardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/partidosGuardados.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Equipo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Portero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Portero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ServiceEquipos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/jugar_amigo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/modificar_equipo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/modificar_equipo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +178,7 @@
       <workItem from="1715863418753" duration="1550000" />
       <workItem from="1715948952572" duration="593000" />
       <workItem from="1715961478528" duration="14071000" />
-      <workItem from="1716033710201" duration="10929000" />
+      <workItem from="1716033710201" duration="13845000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -351,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715832479636</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests">
+      <option name="closed" value="true" />
+      <created>1716051005928</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1716051005928</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +377,8 @@
     <MESSAGE value="18 commit - CRUD administrador hecho, notaciones lambda" />
     <MESSAGE value="19 commit - Modificar equipo a medias" />
     <MESSAGE value="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores" />
-    <option name="LAST_COMMIT_MESSAGE" value="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores" />
+    <MESSAGE value="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -390,19 +388,9 @@
           <option name="timeStamp" value="5" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java</url>
-          <line>130</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
           <line>280</line>
           <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

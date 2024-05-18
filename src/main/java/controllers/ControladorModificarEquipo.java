@@ -2,15 +2,14 @@ package controllers;
 
 import domain.Equipo;
 import domain.Jugador;
+import domain.Portero;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -20,6 +19,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.TreeSet;
@@ -42,6 +42,38 @@ public class ControladorModificarEquipo {
     public StackPane stackPaneJugador9 = new StackPane();
     public StackPane stackPaneJugador10 = new StackPane();
     public Button botonCambiarAlineacion;
+    public Label labelNombre;
+    public Label labelDorsal;
+    public Label labelPosicion;
+    public TextField inputNombre;
+    public TextField inputPosicion;
+    public Label labelPace;
+    public Label labelShot;
+    public Label labelPass;
+    public Label labelDribling;
+    public Label labelDefense;
+    public Label labelPhysique;
+    public Pane paneEstadisticasPortero;
+    public Label labelDiving;
+    public Label labelHandling;
+    public Label labelKicking;
+    public Label labelSpeed;
+    public Label labelReflexes;
+    public Label labelPositioning;
+    public TextField inputDiving;
+    public TextField inputHandling;
+    public TextField inputKicking;
+    public TextField inputReflexes;
+    public TextField inputSpeed;
+    public TextField inputPositioning;
+    public TextField inputDorsal;
+    public TextField inputPace;
+    public TextField inputShot;
+    public TextField inputPass;
+    public TextField inputPhysique;
+    public TextField inputDefense;
+    public TextField inputDribling;
+    public Pane paneEstadisticasJugador;
     private ControladorPrincipal borderPane;
 
     // Clases de lógica
@@ -59,6 +91,7 @@ public class ControladorModificarEquipo {
         cargarListaJugadores();
         cargarTitulares();
         cargarEventListeners();
+        paneEstadisticasJugador.setVisible(false);
     }
 
     private void cargarPaneCampo() {
@@ -252,6 +285,8 @@ public class ControladorModificarEquipo {
             String jugador = listaPlantilla.getSelectionModel().getSelectedItem().toString().substring(3);
             System.out.println(jugador);
             jugadorSeleccionado = borderPane.serviceEquipos.devolverJugador(jugador, selectorEquipo.getValue().toString());
+            cargarEstadisticasJugador(jugadorSeleccionado);
+            paneEstadisticasJugador.setVisible(true);
         });
         selectorEquipo.setOnAction(evento -> {
             Equipo equipo = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
@@ -267,15 +302,49 @@ public class ControladorModificarEquipo {
             cargarTitulares();
         });
         for (int i = 0; i < arrayTitulares.length; i++) {
-            int finalI = i;
+            int pos = i;
             arrayTitulares[i].setOnMouseClicked(evento -> {
-                System.out.println("Titular clicado: " + finalI);
+                boolean repetido = false;
+                System.out.println("Titular clicado: " + pos);
                 if (jugadorSeleccionado != null) {
-                    borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[finalI] = jugadorSeleccionado;
+                    for (int j = 0; j < borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares().length; j++) {
+                        if (borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[j].equals(jugadorSeleccionado)){
+                            repetido = true;
+                        }
+                    }
+                    if (!repetido){
+                        borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[pos] = jugadorSeleccionado;
+                    }
                 }
                 cargarTitulares();
+                jugadorSeleccionado = null;
             });
         }
+    }
+
+    private void cargarEstadisticasJugador(Jugador jugadorSeleccionado) {
+        inputNombre.setText(jugadorSeleccionado.getNombre());
+        inputDorsal.setText(String.valueOf(jugadorSeleccionado.getDorsal()));
+        inputPosicion.setText(jugadorSeleccionado.getPosicion());
+
+        inputPace.setText(String.valueOf(jugadorSeleccionado.getPac()));
+        inputShot.setText(String.valueOf(jugadorSeleccionado.getSho()));
+        inputPass.setText(String.valueOf(jugadorSeleccionado.getPas()));
+        inputDribling.setText(String.valueOf(jugadorSeleccionado.getDri()));
+        inputDefense.setText(String.valueOf(jugadorSeleccionado.getDef()));
+        inputPhysique.setText(String.valueOf(jugadorSeleccionado.getPhy()));
+        if (jugadorSeleccionado.getClass().getSimpleName().equals("Portero")){
+            inputDiving.setText(String.valueOf(((Portero) jugadorSeleccionado).getDiv()));
+            inputHandling.setText(String.valueOf(((Portero) jugadorSeleccionado).getHan()));
+            inputKicking.setText(String.valueOf(((Portero) jugadorSeleccionado).getKic()));
+            inputReflexes.setText(String.valueOf(((Portero) jugadorSeleccionado).getRef()));
+            inputSpeed.setText(String.valueOf(((Portero) jugadorSeleccionado).getSpd()));
+            inputPositioning.setText(String.valueOf(((Portero) jugadorSeleccionado).getPos()));
+            paneEstadisticasPortero.setVisible(true);
+        } else {
+            paneEstadisticasPortero.setVisible(false);
+        }
+
     }
 
 

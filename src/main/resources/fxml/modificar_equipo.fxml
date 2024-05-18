@@ -19,9 +19,46 @@
             <StackPane fx:id="stackPaneJugador9" layoutX="99.0" layoutY="52.0" prefHeight="100.0" prefWidth="100.0" />
             <StackPane fx:id="stackPaneJugador10" layoutX="245.0" layoutY="52.0" prefHeight="100.0" prefWidth="100.0" />
          </children></Pane>
+      <Pane fx:id="paneEstadisticasJugador" layoutX="248.0" layoutY="79.0" prefHeight="456.0" prefWidth="323.0">
+         <children>
+            <Label fx:id="labelNombre" layoutX="77.0" layoutY="14.0" prefHeight="25.0" prefWidth="50.0" text="Nombre" />
+            <Label fx:id="labelDorsal" layoutX="213.0" layoutY="18.0" prefHeight="17.0" prefWidth="40.0" text="Dorsal" />
+            <Label fx:id="labelPosicion" layoutX="273.0" layoutY="18.0" text="Posición" />
+            <TextField fx:id="inputNombre" editable="false" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="175.0" />
+            <TextField fx:id="inputPosicion" editable="false" layoutX="273.0" layoutY="39.0" prefHeight="25.0" prefWidth="44.0" />
+            <Label fx:id="labelPace" layoutX="32.0" layoutY="104.0" text="Pace" />
+            <Label fx:id="labelShot" layoutX="144.0" layoutY="104.0" text="Shot" />
+            <Label fx:id="labelPass" layoutX="260.0" layoutY="104.0" text="Pass" />
+            <Label fx:id="labelDribling" layoutX="23.0" layoutY="179.0" text="Dribling" />
+            <Label fx:id="labelDefense" layoutX="135.0" layoutY="179.0" text="Defense" />
+            <Label fx:id="labelPhysique" layoutX="248.0" layoutY="181.0" text="Physique" />
+            <Pane fx:id="paneEstadisticasPortero" layoutY="267.0" prefHeight="192.0" prefWidth="323.0">
+               <children>
+                  <Label fx:id="labelDiving" layoutX="22.0" layoutY="14.0" text="Diving" />
+                  <Label fx:id="labelHandling" layoutX="136.0" layoutY="14.0" text="Handling" />
+                  <Label fx:id="labelKicking" layoutX="253.0" layoutY="14.0" text="Kicking" />
+                  <Label fx:id="labelSpeed" layoutX="145.0" layoutY="98.0" text="Speed" />
+                  <Label fx:id="labelReflexes" layoutX="17.0" layoutY="98.0" text="Relfexes" />
+                  <Label fx:id="labelPositioning" layoutX="243.0" layoutY="98.0" text="Positioning" />
+                  <TextField fx:id="inputDiving" editable="false" layoutX="17.0" layoutY="50.0" prefHeight="25.0" prefWidth="44.0" />
+                  <TextField fx:id="inputHandling" editable="false" layoutX="138.0" layoutY="50.0" prefHeight="25.0" prefWidth="44.0" />
+                  <TextField fx:id="inputKicking" editable="false" layoutX="250.0" layoutY="50.0" prefHeight="25.0" prefWidth="44.0" />
+                  <TextField fx:id="inputReflexes" editable="false" layoutX="17.0" layoutY="128.0" prefHeight="25.0" prefWidth="44.0" />
+                  <TextField fx:id="inputSpeed" editable="false" layoutX="138.0" layoutY="128.0" prefHeight="25.0" prefWidth="44.0" />
+                  <TextField fx:id="inputPositioning" editable="false" layoutX="250.0" layoutY="128.0" prefHeight="25.0" prefWidth="44.0" />
+               </children></Pane>
+            <TextField fx:id="inputDorsal" editable="false" layoutX="211.0" layoutY="39.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="inputPace" editable="false" layoutX="22.0" layoutY="131.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="inputShot" editable="false" layoutX="134.0" layoutY="131.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="inputPass" editable="false" layoutX="250.0" layoutY="131.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="inputPhysique" editable="false" layoutX="251.0" layoutY="216.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="inputDefense" editable="false" layoutX="134.0" layoutY="216.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="inputDribling" editable="false" layoutX="22.0" layoutY="216.0" prefHeight="25.0" prefWidth="44.0" />
+         </children>
+      </Pane>
+
       <ListView fx:id="listaPlantilla" layoutX="48.0" layoutY="79.0" prefHeight="456.0" prefWidth="200.0" />
       <Button fx:id="botonAtras" layoutY="573.0" mnemonicParsing="false" onAction="#cargarLandingUsuario" text="Atrás" />
-      <Pane layoutX="248.0" layoutY="79.0" prefHeight="456.0" prefWidth="323.0" />
       <ChoiceBox fx:id="selectorAlineacion" layoutX="310.0" layoutY="23.0" prefHeight="25.0" prefWidth="62.0" />
       <ChoiceBox fx:id="selectorEquipo" layoutX="73.0" layoutY="23.0" prefWidth="150.0" />
       <Button fx:id="botonCambiarAlineacion" layoutX="391.0" layoutY="23.0" mnemonicParsing="false" onAction="#cambiarAlineacion" prefHeight="25.0" prefWidth="150.0" text="Seleccionar alineación" />
