@@ -58,29 +58,3 @@ public class ControladorLandingUsuario {
         borderPane.cargarModificarEquipo();
     }
 }
-
-class EquipoPuntos {
-    private final SimpleStringProperty nombreEquipo;
-    private final SimpleIntegerProperty puntosEquipo;
-
-    public EquipoPuntos(String nombreEquipo, int puntosEquipo) {
-        this.nombreEquipo = new SimpleStringProperty(nombreEquipo);
-        this.puntosEquipo = new SimpleIntegerProperty(puntosEquipo);
-    }
-
-    public String getNombreEquipo() {
-        return nombreEquipo.get();
-    }
-
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo.set(nombreEquipo);
-    }
-
-    public int getPuntosEquipo() {
-        return puntosEquipo.get();
-    }
-
-    public void setPuntosEquipo(int puntosEquipo) {
-        this.puntosEquipo.set(puntosEquipo);
-    }
-}

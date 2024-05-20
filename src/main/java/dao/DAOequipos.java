@@ -1,8 +1,6 @@
 package dao;
 
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import domain.Equipo;
 import domain.Jugador;
 import domain.Portero;
@@ -281,7 +279,7 @@ public class DAOequipos {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(clasificacion);
         System.out.println("Guardando equipo");
-        try (FileWriter writer = new FileWriter("equipo.json")) {
+        try (FileWriter writer = new FileWriter("clasificacion.json")) {
             writer.write(json);
         } catch (IOException e) {
             System.out.println("No se pudo escribir en el fichero ");

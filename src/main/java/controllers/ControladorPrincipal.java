@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import lombok.Getter;
 import service.ServiceEquipos;
 
 import java.io.IOException;
@@ -48,15 +49,9 @@ public class ControladorPrincipal implements Initializable {
     private AnchorPane modificarEquipoAnchorPane;
     //CLASES DE LOGICA
     ServiceEquipos serviceEquipos = new ServiceEquipos();
+    @Getter
     Juego juego = new Juego();
 
-    public Juego getJuego() {
-        return juego;
-    }
-
-    public void setJuego(Juego juego) {
-        this.juego = juego;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -126,11 +121,6 @@ public class ControladorPrincipal implements Initializable {
                 controladorJugarAmigo = loaderJugarAmigo.getController();
                 controladorJugarAmigo.setBorderPane(this);
             }
-            // If para comprobar si esta repetido
-            Equipo local;
-            Equipo visitante;
-            local = serviceEquipos.devolverEquipo(equipoJ1);
-            visitante = serviceEquipos.devolverEquipo(equipoJ2);
             juego.jugarAmigo(serviceEquipos.devolverEquipo(equipoJ1), serviceEquipos.devolverEquipo(equipoJ2));
             controladorJugarAmigo.init();
             pantallaPrincipal.setCenter(jugarAmigoAnchorPane);
@@ -146,8 +136,8 @@ public class ControladorPrincipal implements Initializable {
                 modificarEquipoAnchorPane = loaderModificarEquipo.load(getClass().getResourceAsStream("/fxml/modificar_equipo.fxml"));
                 controladorModificarEquipo = loaderModificarEquipo.getController();
                 controladorModificarEquipo.setBorderPane(this);
-                controladorModificarEquipo.init();
             }
+            controladorModificarEquipo.init();
             pantallaPrincipal.setCenter(modificarEquipoAnchorPane);
         } catch (IOException e) {
             System.out.println("Error al cargar jugar con un amigo");

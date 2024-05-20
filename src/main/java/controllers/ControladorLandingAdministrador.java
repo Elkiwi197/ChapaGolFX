@@ -9,12 +9,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ControladorLandingAdministrador {
+    @Setter
     private ControladorPrincipal borderPane;
     public ListView listaJugadores;
     public Pane paneMoverJugador;
@@ -66,11 +70,8 @@ public class ControladorLandingAdministrador {
 
     // Clases de lógica
     private Jugador jugador;
+    private Portero portero;
     private Set<Integer> dorsalesRepetidos = new HashSet<>();
-
-    public void setBorderPane(ControladorPrincipal controladorPrincipal) {
-        borderPane = controladorPrincipal;
-    }
 
 
     public void init() {
@@ -222,6 +223,8 @@ public class ControladorLandingAdministrador {
         mostrarEstadisticas();
         botonGuardarCambios.setVisible(false);
         botonAnadirJugador.setVisible(true);
+        inputPosicion.setText("");
+        inputPosicion.setDisable(false);
 
     }
 
@@ -231,6 +234,8 @@ public class ControladorLandingAdministrador {
         mostrarEstadisticas();
         botonGuardarCambios.setVisible(false);
         botonAnadirJugador.setVisible(true);
+        inputPosicion.setText("PO");
+        inputPosicion.setDisable(true);
     }
 
     public void mostrarEstadisticas() {
@@ -238,7 +243,6 @@ public class ControladorLandingAdministrador {
         cargarEstadisticas();
         if (jugador != null) {
             paneModificarJugador.setVisible(true);
-
             if (jugador.getClass().getSimpleName().equals("Portero")) {
                 paneEstadisticasPortero.setVisible(true);
             } else {
@@ -276,11 +280,23 @@ public class ControladorLandingAdministrador {
      */
 
     public void anadirJugador(ActionEvent actionEvent) {
-        guardarEstadisticas(actionEvent);
-        borderPane.anadirJugador(jugador, selectorEquipo.getValue().toString());
-        cargarJugadoresEquipoSeleccionado(selectorEquipo.getValue().toString());
-        limpiarCacheJugador();
+        Pattern patternPosicion = Pattern.compile("^\\p{Lu}{2}+$");
+        Matcher matcherPosicion;
+        boolean camposValidos = false;
 
+        if (inputPosicion.getText() != null) {
+            matcherPosicion = patternPosicion.matcher(inputPosicion.getText());
+            if (matcherPosicion.find()) {
+                camposValidos = true;
+            }
+
+            if (camposValidos) {
+                guardarEstadisticas(actionEvent);
+                borderPane.anadirJugador(jugador, selectorEquipo.getValue().toString());
+                cargarJugadoresEquipoSeleccionado(selectorEquipo.getValue().toString());
+                limpiarCacheJugador();
+            }
+        }
     }
 
     private boolean jugadorEstaEnPlantilla() {

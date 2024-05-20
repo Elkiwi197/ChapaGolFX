@@ -3,7 +3,6 @@ package domain;
 
 import lombok.Data;
 
-import java.io.Serializable;
 
 
 @Data
@@ -45,14 +44,6 @@ public class Jugador implements Cloneable, Comparable {
         this.phy = phy;
     }
 
-
-    public Jugador clonarJugador(){
-        try {
-            return (Jugador) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void inicializarEstadisticas(){
         pac = 80;

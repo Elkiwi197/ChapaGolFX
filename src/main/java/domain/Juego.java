@@ -2,14 +2,10 @@ package domain;
 
 import common.Jugada;
 import lombok.Data;
-import service.ServiceEquipos;
-
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 
 @Data
@@ -23,16 +19,13 @@ public class Juego {
     private String goleadoresLocal = "";
     private String goleadoresVisitante = "";
     private int PA;
-    private LocalDate fechaInicio;
+    private LocalDate fechaInicioPartido;
 
 
     public void comprobarTurno() {
         if (PA == 0) {
             PA = 5;
             turno = !turno;
-        }
-        if (golesLocal + golesVisitante == 4) {
-
         }
     }
 
@@ -70,7 +63,8 @@ public class Juego {
         golesLocal = 0;
         golesVisitante = 0;
         PA = 5;
-        
+        fechaInicioPartido = LocalDate.now();
+
 
         cargarJugadoresEnCampoRAM(Jugada.SAQUE_CENTRO);
         actualizarCampoConsola();
@@ -621,7 +615,6 @@ public class Juego {
     public String tirarApuerta(int filaJugador, int columnaJugador) {
         int distancia;
         int jugadoresEnBarrera = 0;
-        boolean hayPortero = false;
         Jugador rematador = campo[filaJugador][columnaJugador]; // No deberia dar nullpointer (COMPROBAR)
         Portero portero = null;
         int remate;
@@ -638,7 +631,6 @@ public class Juego {
                     if (ComprobarAcciones.hayRivalEn(this, i, 21)) {  // Comprueba si hay rival en el area pequeña
                         jugadoresEnBarrera += 1;
                         if (campo[i][21].getClass().getSimpleName().equals("Portero")) {// Si ademas es el portero cambia el booleano e inicializa el portero
-                            hayPortero = true;
                             portero = (Portero) campo[i][21];
                         }
                     }
@@ -651,7 +643,6 @@ public class Juego {
                     if (ComprobarAcciones.hayRivalEn(this, i, 0)) { // Comprueba si hay rival en el area pequeña
                         jugadoresEnBarrera += 1;
                         if (campo[i][0].getClass().getSimpleName().equals("Portero")) { // Si ademas es el portero cambia el booleano e inicializa el portero
-                            hayPortero = true;
                             portero = (Portero) campo[i][21];
                         }
                     }
@@ -1087,9 +1078,22 @@ public class Juego {
         try {
             FileWriter fileWriter = new FileWriter("partidosGuardados.txt", true);
             String resultado = "| " + equipoLocal.getNombre() + " " + golesLocal + " - " + golesVisitante + " " + equipoVisitante.getNombre() + " |";
+            String fecha = "|";
+            int divisorFecha = equipoLocal.getNombre().length();
+            int divisorFechaIzquierda = equipoLocal.getNombre().length() + equipoVisitante.getNombre().length() - divisorFecha - 1;
+
+            for (int i = 0; i < divisorFecha; i++) {
+                fecha = fecha.concat(" ");
+            }
+            fecha = fecha.concat(fechaInicioPartido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            for (int i = 0; i < divisorFechaIzquierda; i++) {
+                fecha = fecha.concat(" ");
+            }
+            fecha = fecha.concat("|");
             for (int i = 0; i < resultado.length(); i++) {
                 fileWriter.write("-");
             }
+            fileWriter.write('\n' + fecha);
             fileWriter.write('\n' + resultado + '\n');
             for (int i = 0; i < resultado.length(); i++) {
                 fileWriter.write("-");

@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import lombok.Setter;
 
 import java.util.*;
 
@@ -43,6 +44,7 @@ public class ControladorJugarAmigo {
     public Button botonRendirse;
     public Button botonSalirMenuPrincipal;
     public Pane paneSalir;
+    @Setter
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane = new GridPane();
@@ -55,10 +57,6 @@ public class ControladorJugarAmigo {
 
     private Set<String> casillasIluminadas = new TreeSet<>();
 
-
-    public void setBorderPane(ControladorPrincipal controladorPrincipal) {
-        borderPane = controladorPrincipal;
-    }
 
     public void init() {
         pantalla.setStyle("-fx-background-color: #ADADAD");

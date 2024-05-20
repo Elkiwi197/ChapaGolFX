@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests">
+    <list default="true" id="7e9c666b-172f-4d67-b680-8233d8820e11" name="Changes" comment="22 commit - Modificar jugador muestra las estadisticas del jugador y no admite jugadores repetidos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/equipo.json" beforeDir="false" afterPath="$PROJECT_DIR$/equipo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equipo.json" beforeDir="false" afterPath="$PROJECT_DIR$/clasificacion.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/partidosGuardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/partidosGuardados.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorJugarAmigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingAdministrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorLandingUsuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorModificarEquipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ControladorSeleccionarEquiposAmigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/DAOequipos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ComprobarAcciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ComprobarAcciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Juego.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Portero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Portero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/modificar_equipo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/modificar_equipo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,31 +58,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Juego.executor": "Run",
-    "Application.Launcher.executor": "Run",
-    "Attach to process.pid 9988.executor": "ProcessAttachDebug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/1DAM/PROGRAMACION/ChapaGol/ChapaGolFX",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.25287357",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Juego.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Attach to process.pid 9988.executor&quot;: &quot;ProcessAttachDebug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/1DAM/PROGRAMACION/ChapaGol/ChapaGolFX&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.25287357&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="domain" />
@@ -178,7 +188,9 @@
       <workItem from="1715863418753" duration="1550000" />
       <workItem from="1715948952572" duration="593000" />
       <workItem from="1715961478528" duration="14071000" />
-      <workItem from="1716033710201" duration="13845000" />
+      <workItem from="1716033710201" duration="14269000" />
+      <workItem from="1716140991596" duration="7304000" />
+      <workItem from="1716220798657" duration="13472000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -348,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716051005928</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="22 commit - Modificar jugador muestra las estadisticas del jugador y no admite jugadores repetidos">
+      <option name="closed" value="true" />
+      <created>1716053940141</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1716053940141</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,7 +398,8 @@
     <MESSAGE value="19 commit - Modificar equipo a medias" />
     <MESSAGE value="20 commit - Modificar equipo muestra los jugadores pero no cambia las alineaciones ni cambia los jugadores" />
     <MESSAGE value="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="21 commit - Guarda los partidos en un fichero de texto, guarda la clasificacion en un fichero json y modificar equipo ya funciona a falta de tests" />
+    <MESSAGE value="22 commit - Modificar jugador muestra las estadisticas del jugador y no admite jugadores repetidos" />
+    <option name="LAST_COMMIT_MESSAGE" value="22 commit - Modificar jugador muestra las estadisticas del jugador y no admite jugadores repetidos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -387,11 +408,6 @@
           <properties class="java.lang.ClassCastException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dao/DAOequipos.java</url>
-          <line>280</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>

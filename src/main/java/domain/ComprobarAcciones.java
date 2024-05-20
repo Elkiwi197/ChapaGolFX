@@ -4,28 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ComprobarAcciones {
-    public static boolean movimientoValido(Jugador[][] campo, int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
-        boolean valido = false;
-        if (Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) == 1 || Math.abs(saltoVertical(filaInicial, filaFinal)) == 1 || Math.abs(saltoDiagonal(filaInicial, filaFinal, columnaInicial, columnaFinal)) == 1) {
-            valido = true;
-        }
-        return valido;
-    }
-
-    public static boolean esMovimientoVertical(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
-        return Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) == 0 && Math.abs(saltoVertical(filaInicial, filaFinal)) != 0;
-    }
-
-    /**
-     * @return Booleano que indica si el movimiento es horizontal
-     */
-    public static boolean esMovimientoHorizontal(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
-        return Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) != 0 && Math.abs(saltoVertical(filaInicial, filaFinal)) == 0;
-    }
-
-    /**
-     * @return Booleano que indica si el movimiento es diagonal
-     */
     public static boolean esMovimientoDiagonal(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
         return Math.abs(saltoHorizontal(columnaInicial, columnaFinal)) == Math.abs(saltoVertical(filaInicial, filaFinal));
     }
@@ -47,13 +25,6 @@ public abstract class ComprobarAcciones {
     /**
      * @return número de casillas avanzadas o retrocedidas en diagonal
      */
-    public static int saltoDiagonal(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
-        if (esMovimientoDiagonal(filaInicial, columnaInicial, filaFinal, columnaFinal)) {
-            return saltoVertical(filaInicial, filaFinal);
-        } else {
-            return 0;
-        }
-    }
 
     public static boolean hayJugadorEn(Jugador[][] campo, int fila, int columna) {
         return campo[fila][columna] != null;

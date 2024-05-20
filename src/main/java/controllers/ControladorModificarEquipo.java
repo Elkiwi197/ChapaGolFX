@@ -3,7 +3,6 @@ package controllers;
 import domain.Equipo;
 import domain.Jugador;
 import domain.Portero;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,9 +18,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Stack;
 import java.util.TreeSet;
 
 public class ControladorModificarEquipo {
@@ -163,7 +160,6 @@ public class ControladorModificarEquipo {
         Equipo equipo = borderPane.devolverEquipo(selectorEquipo.getValue().toString());
         equipo.setAlineacion(selectorAlineacion.getSelectionModel().getSelectedItem().toString());
 
-//        equipo.setAlineacion(selectorAlineacion.getValue().toString());
         if (equipo.getAlineacion().equals("4-4-2")) { // Si la alineacion es 4-4-2
             arrayTitulares[0].setLayoutX(172);
             arrayTitulares[0].setLayoutY(477);
@@ -306,13 +302,16 @@ public class ControladorModificarEquipo {
             arrayTitulares[i].setOnMouseClicked(evento -> {
                 boolean repetido = false;
                 System.out.println("Titular clicado: " + pos);
+
                 if (jugadorSeleccionado != null) {
                     for (int j = 0; j < borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares().length; j++) {
-                        if (borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[j].equals(jugadorSeleccionado)){
-                            repetido = true;
+                        if (borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[j] != null) {
+                            if (borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[j].equals(jugadorSeleccionado)) {
+                                repetido = true;
+                            }
                         }
                     }
-                    if (!repetido){
+                    if (!repetido) {
                         borderPane.serviceEquipos.devolverEquipo(selectorEquipo.getValue().toString()).getTitulares()[pos] = jugadorSeleccionado;
                     }
                 }
@@ -333,7 +332,7 @@ public class ControladorModificarEquipo {
         inputDribling.setText(String.valueOf(jugadorSeleccionado.getDri()));
         inputDefense.setText(String.valueOf(jugadorSeleccionado.getDef()));
         inputPhysique.setText(String.valueOf(jugadorSeleccionado.getPhy()));
-        if (jugadorSeleccionado.getClass().getSimpleName().equals("Portero")){
+        if (jugadorSeleccionado.getClass().getSimpleName().equals("Portero")) {
             inputDiving.setText(String.valueOf(((Portero) jugadorSeleccionado).getDiv()));
             inputHandling.setText(String.valueOf(((Portero) jugadorSeleccionado).getHan()));
             inputKicking.setText(String.valueOf(((Portero) jugadorSeleccionado).getKic()));
@@ -354,15 +353,6 @@ public class ControladorModificarEquipo {
         } else if (equipo.getAlineacion().equals("4-3-3")) {
             selectorAlineacion.setValue("4-3-3");
         }
-    }
-
-    public void cambiarAlineacion(ActionEvent actionEvent) {
-        String equipoSeleccionado = selectorEquipo.getValue().toString();
-        String nuevaAlineacion = selectorAlineacion.getValue().toString();
-
-        borderPane.devolverEquipo(equipoSeleccionado).setAlineacion(nuevaAlineacion);
-
-        cargarTitulares();
     }
 
     public void cargarLandingUsuario(ActionEvent actionEvent) {
