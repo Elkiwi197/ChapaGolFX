@@ -1,5 +1,6 @@
 package controllers;
 
+import common.Configuration;
 import domain.Equipo;
 import domain.Jugador;
 import domain.Portero;
@@ -92,7 +93,8 @@ public class ControladorModificarEquipo {
     }
 
     private void cargarPaneCampo() {
-        Image imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/campo.jpg")));
+        Configuration configuration = new Configuration();
+        Image imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream(configuration.devolverRuta("rutaCampoModificarEquipo"))));
         BackgroundImage imagenFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         paneCampo.setBackground(new Background(imagenFondo));
         paneCampo.layout();

@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import java.util.TreeSet;
 
 public class ServiceEquipos {
-    DAOequipos daoEquipos = new DAOequipos();
+    private DAOequipos daoEquipos = new DAOequipos();
 
     public void init() {
         daoEquipos.init();

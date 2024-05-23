@@ -212,6 +212,7 @@ public class ControladorLandingAdministrador {
             mostrarEstadisticas();
             botonGuardarCambios.setVisible(true);
             botonAnadirJugador.setVisible(false);
+            inputPosicion.setDisable(false);
         } else {
             ocultarPanes();
         }
@@ -270,6 +271,7 @@ public class ControladorLandingAdministrador {
             ((Portero) jugador).setSpd(spinnerSpeed.getValue());
             ((Portero) jugador).setPos(spinnerPositioning.getValue());
         }
+        cargarJugadoresEquipoSeleccionado(selectorEquipo.getValue().toString());
 
     }
 

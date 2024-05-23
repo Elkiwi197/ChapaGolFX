@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import lombok.Getter;
+import lombok.Setter;
 import service.ServiceEquipos;
 
 import java.io.IOException;
@@ -77,8 +78,8 @@ public class ControladorPrincipal implements Initializable {
             if (landingUsuarioAnchorPane == null) {
                 landingUsuarioAnchorPane = loaderLandingUsuario.load(getClass().getResourceAsStream("/fxml/landing_usuario.fxml"));
                 controladorLandingUsuario = loaderLandingUsuario.getController();
-                controladorLandingUsuario.setBorderPane(this);
             }
+            controladorLandingUsuario.setBorderPane(this);
             pantallaPrincipal.setCenter(landingUsuarioAnchorPane);
             controladorLandingUsuario.init();
         } catch (IOException e) {
@@ -119,8 +120,10 @@ public class ControladorPrincipal implements Initializable {
             if (jugarAmigoAnchorPane == null) {
                 jugarAmigoAnchorPane = loaderJugarAmigo.load(getClass().getResourceAsStream("/fxml/jugar_amigo.fxml"));
                 controladorJugarAmigo = loaderJugarAmigo.getController();
-                controladorJugarAmigo.setBorderPane(this);
             }
+            controladorJugarAmigo.setBorderPane(this);
+            juego = null;
+            juego= new Juego();
             juego.jugarAmigo(serviceEquipos.devolverEquipo(equipoJ1), serviceEquipos.devolverEquipo(equipoJ2));
             controladorJugarAmigo.init();
             pantallaPrincipal.setCenter(jugarAmigoAnchorPane);

@@ -779,10 +779,39 @@ public class Juego {
             }
         } else { // Si es fuera de juego
             resultado = "Fuera de juego";
+            colocarSaqueFueraDeJuego(filaReceptor, columnaReceptor);
         }
 
         return resultado;
 
+    }
+
+    private void colocarSaqueFueraDeJuego(int fila, int columna) {
+        boolean colocado = false;
+        Jugador[] titulares;
+
+        quitarBalon();
+        apartarJugador(fila, columna);
+        if (turno){
+            titulares = equipoVisitante.getTitulares();
+        } else {
+            titulares = equipoLocal.getTitulares();
+        }
+        do {
+            int pos = (int) (Math.random()*11);
+            if (titulares[pos] != null){
+                for (int i = 0; i < campo.length; i++) {
+                    for (int j = 0; j < campo[0].length; j++) {
+                        if (campo[i][j] == titulares[pos]){
+                            moverJugador(i, j, fila, columna);
+                            colocado = true;
+                        }
+                    }
+                }
+            }
+        } while (!colocado);
+        campo[fila][columna].setTieneBalon(true);
+        PA = 0;
     }
 
     public String resultadoDelTiro(boolean esGol, Jugador rematador) {

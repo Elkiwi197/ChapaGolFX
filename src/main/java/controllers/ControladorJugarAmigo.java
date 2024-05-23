@@ -1,5 +1,6 @@
 package controllers;
 
+import common.Configuration;
 import domain.ComprobarAcciones;
 import domain.Equipo;
 import domain.Jugador;
@@ -48,8 +49,9 @@ public class ControladorJugarAmigo {
     private ControladorPrincipal borderPane;
 
     public GridPane gridPane = new GridPane();
-    private Equipo equipoLocal = new Equipo();
-    private Equipo equipoVisitante = new Equipo();
+
+    private Equipo equipoLocal;
+    private Equipo equipoVisitante;
     private ImageView balon = new ImageView();
 
     private int ultimaFilaSeleccionada;
@@ -59,26 +61,30 @@ public class ControladorJugarAmigo {
 
 
     public void init() {
+
         pantalla.setStyle("-fx-background-color: #ADADAD");
         labelMarcador.setStyle("-fx-background-color: #4A21C2");
         labelComentarista.setStyle("-fx-background-color: #FFFFFF");
         labelComentarista.setOpacity(0.75);
         labelComentarista.setText("Bienvenidos a este \n" + borderPane.getJuego().getEquipoLocal().getNombre() + " - " + borderPane.getJuego().getEquipoVisitante().getNombre());
+        paneSalir.setVisible(false);
+        paneBotones.setVisible(true);
+
+        cargarCampo();
         ocultarOpciones();
         actualizarAvisos();
-        cargarCampo();
+        cargarFotos();
         cargarEquipos();
         cargarJugadores();
-        paneSalir.setVisible(false);
 
-        cargarFotos();
     }
 
     private void cargarFotos() {
-        Image imageBalon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/balon.png")));
-        Image fotoPorteriaLocal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/porteriaLocal.jpg")));
-        Image fotoPorteriaVisitante = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/porteriaVisitante.jpg")));
-        Image fotoComentarista = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/comentaristas/Maldini.jpg")));
+        Configuration configuration = new Configuration();
+        Image imageBalon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(configuration.devolverRuta("rutaBalon"))));
+        Image fotoPorteriaLocal = new Image(Objects.requireNonNull(getClass().getResourceAsStream(configuration.devolverRuta("rutaPorteriaLocal"))));
+        Image fotoPorteriaVisitante = new Image(Objects.requireNonNull(getClass().getResourceAsStream(configuration.devolverRuta("rutaPorteriaVisitante"))));
+        Image fotoComentarista = new Image(Objects.requireNonNull(getClass().getResourceAsStream(configuration.devolverRuta("rutaComentaristaMaldini"))));
 
         balon.setImage(imageBalon);
         balon.setFitHeight(10);
@@ -100,234 +106,307 @@ public class ControladorJugarAmigo {
     }
 
     private void cargarCampo() {
-        Pane pane;
+        Configuration configuration = new Configuration();
         String ruta = "";
+        gridPane.getChildren().clear();
 
 
         for (int i = 0; i < borderPane.getJuego().getCampo()[0].length; i++) {
             for (int j = 0; j < borderPane.getJuego().getCampo().length; j++) {
 
-                pane = new Pane();
-
                 if (j % 2 == 0 && i % 2 == 0 || j % 2 != 0 && i % 2 != 0) {// COLORES CLAROS
 
                     if (i == 0) {// Primera columna (solo verdes claros)
                         if (j == 0 || j == 14) {
-                            ruta = "/images/campo/verdeClaroCuadrado.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroCuadrado");
                         } else if (j == 6) {
-                            ruta = "/images/campo/verdeClaroBordesIzquierdaDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordesIzquierdaDerecha");
                         } else if (j == 8) {
-                            ruta = "/images/campo/verdeClaroBordesIzquierdaDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordesIzquierdaDerecha");
                         } else {
-                            ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeIzquierda");
                         }
                     } else if (i == 21) {// Ultima columna (solo verdes claros)
                         if (j == 3) {
-                            ruta = "/images/campo/verdeClaroEsquinaSuperiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaSuperiorDerecha");
                         } else if (j == 5) {
-                            ruta = "/images/campo/verdeClaroBordesIzquierdaDerechaArriba.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordesIzquierdaDerechaArriba");
+
                         } else if (j == 7) {
-                            ruta = "/images/campo/verdeClaroBordesIzquierdaDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordesIzquierdaDerecha");
+
                         } else if (j == 9) {
-                            ruta = "/images/campo/verdeClaroBordesIzquierdaDerechaAbajo.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordesIzquierdaDerechaAbajo");
+
                         } else if (j == 11) {
-                            ruta = "/images/campo/verdeClaroEsquinaInferiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaInferiorDerecha");
+
                         } else {
-                            ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeDerecha");
+
                         }
                     } else if ((i == 1 || i == 19) && (j == 3 || j == 11)) {// Segunda y decimoctava columna
                         if (j == 3) {
-                            ruta = "/images/campo/verdeClaroBordeArriba.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeArriba");
+
                         } else {
-                            ruta = "/images/campo/verdeClaroBordeAbajo.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeAbajo");
+
                         }
                     } else if ((i == 3 || i == 18) && (j > 2 && j < 12)) {//Cuarta y decimosexta columna
                         if (j == 3) {
-                            ruta = "/images/campo/verdeClaroEsquinaSuperiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaSuperiorDerecha");
+
                         } else if (j == 11) {
-                            ruta = "/images/campo/verdeClaroEsquinaInferiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaInferiorDerecha");
+
                         } else if (i == 3) {
-                            ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeDerecha");
+
                         } else {
-                            ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeIzquierda");
+
                         }
                     } else if (i == 5 || i == 16 || i == 17) { // Medias lunas
                         if (i == 5) {
                             if (j == 5) {
-                                ruta = "/images/campo/verdeClaroEsquinaInferiorIzquierda.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaInferiorIzquierda");
+
                             } else if (j == 7) {
-                                ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroBordeDerecha");
+
                             } else if (j == 9) {
-                                ruta = "/images/campo/verdeClaroEsquinaSuperiorIzquierda.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaSuperiorIzquierda");
+
                             } else {
-                                ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroSinBordes");
+
                             }
                         } else if (i == 16) {
                             if (j == 6 || j == 8) {
-                                ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroBordeIzquierda");
+
                             } else {
-                                ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroSinBordes");
+
                             }
                         } else if (i == 17) {
                             if (j == 5) {
-                                ruta = "/images/campo/verdeClaroBordeArriba.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroBordeArriba");
+
                             } else if (j == 9) {
-                                ruta = "/images/campo/verdeClaroBordeAbajo.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroBordeAbajo");
+
                             } else {
-                                ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroSinBordes");
+
                             }
                         }
                     } else if (i == 10 || i == 11) { // Centro del campo
                         if (i == 10) {
-                            ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeDerecha");
+
                         } else {
-                            ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeIzquierda");
+
                         }
                     } else if (i == 19 && j == 7) { // Punto de penalti
-                        ruta = "/images/campo/verdeClaroCuadrado.jpg";
+                        ruta = configuration.devolverRuta("rutaVerdeClaroCuadrado");
+
                     } else {
-                        ruta = "/images/campo/verdeClaroSinBordes.jpg";
+                        ruta = configuration.devolverRuta("rutaVerdeClaroSinBordes");
+
                     }
                 } else { // COLORES OSCUROS
                     if (i == 0) {//Primera columna (solo verdes oscuros)
                         if (j == 3) {
-                            ruta = "/images/campo/verdeOscuroEsquinaSuperiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaSuperiorIzquierda");
+
                         } else if (j == 11) {
-                            ruta = "/images/campo/verdeOscuroEsquinaInferiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaInferiorIzquierda");
+
                         } else if (j == 5) {
-                            ruta = "/images/campo/verdeOscuroBordesIzquierdaDerechaArriba.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordesIzquierdaDerechaArriba");
+
                         } else if (j == 7) {
-                            ruta = "/images/campo/verdeOscuroBordesIzquierdaDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordesIzquierdaDerecha");
+
                         } else if (j == 9) {
-                            ruta = "/images/campo/verdeOscuroBordesIzquierdaDerechaAbajo.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordesIzquierdaDerechaAbajo");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeIzquierda");
+
                         }
                     } else if (i == 21) {// Ultima columna (solo verdes claros)
                         if (j == 0 || j == 14) {
-                            ruta = "/images/campo/verdeOscuroCuadrado.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroCuadrado");
+
                         } else if (j == 6 || j == 8) {
-                            ruta = "/images/campo/verdeOscuroBordesIzquierdaDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordesIzquierdaDerecha");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeDerecha");
+
                         }
                     } else if ((i == 3 || i == 18) && (j > 2 && j < 12)) {//Cuarta y decimosexta columna
                         if (j == 3) {
-                            ruta = "/images/campo/verdeOscuroEsquinaSuperiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaSuperiorIzquierda");
+
                         } else if (j == 11) {
-                            ruta = "/images/campo/verdeOscuroEsquinaInferiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaInferiorIzquierda");
+
                         } else if (i == 3) {
-                            ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeDerecha");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeIzquierda");
+
                         }
                     } else if ((i == 2 || i == 20) && (j == 3 || j == 11)) { // Segunda y decimoctava columna
                         if (j == 3) {
-                            ruta = "/images/campo/verdeOscuroBordeArriba.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeArriba");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeAbajo");
+
                         }
                     } else if (i == 4 || i == 5 || i == 16) { // Medias lunas
                         if (i == 4) {
                             if (j == 5) {
-                                ruta = "/images/campo/verdeOscuroBordeArriba.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroBordeArriba");
+
                             } else if (j == 9) {
-                                ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroBordeAbajo");
+
                             } else {
-                                ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroSinBordes");
+
                             }
                         } else if (i == 5) {
                             if (j == 6 || j == 8) {
-                                ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroBordeDerecha");
+
                             } else {
-                                ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroSinBordes");
+
                             }
                         } else if (i == 16) {
                             if (j == 5) {
-                                ruta = "/images/campo/verdeOscuroEsquinaInferiorDerecha.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaInferiorDerecha");
+
                             } else if (j == 7) {
-                                ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroBordeIzquierda");
+
                             } else if (j == 9) {
-                                ruta = "/images/campo/verdeOscuroEsquinaSuperiorDerecha.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaSuperiorDerecha");
+
                             } else {
-                                ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeOscuroSinBordes");
+
                             }
                         }
                     } else if (i == 10 || i == 11) { // Centro del campo
                         if (i == 10) {
-                            ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeDerecha");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeIzquierda");
+
                         }
                     } else if (i == 2 && j == 7) { // Punto de penalti
-                        ruta = "/images/campo/verdeOscuroCuadrado.jpg";
+                        ruta = configuration.devolverRuta("rutaVerdeOscuroCuadrado");
+
                     } else {
-                        ruta = "/images/campo/verdeOscuroSinBordes.jpg";
+                        ruta = configuration.devolverRuta("rutaVerdeOscuroSinBordes");
+
                     }
                 }
                 if ((j == 0 || j == 14) && (i != 0 && i != 21)) {// Bordes de arriba y abajo
                     if (j == 0) { // Fila de arriba
                         if (i % 2 == 0) {
                             if (i == 10) {
-                                ruta = "/images/campo/verdeClaroEsquinaSuperiorDerecha.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaSuperiorDerecha");
+
                             } else {
-                                ruta = "/images/campo/verdeClaroBordeArriba.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroBordeArriba");
+
                             }
                         } else if (i == 11) {
-                            ruta = "/images/campo/verdeOscuroEsquinaSuperiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaSuperiorIzquierda");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeArriba.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeArriba");
+
                         }
                     } else { // Fila de abajo
                         if (i % 2 == 0) {
                             if (i == 10) {
-                                ruta = "/images/campo/verdeClaroEsquinaInferiorDerecha.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaInferiorDerecha");
+
                             } else {
-                                ruta = "/images/campo/verdeClaroBordeAbajo.jpg";
+                                ruta = configuration.devolverRuta("rutaVerdeClaroBordeAbajo");
+
                             }
                         } else if (i == 11) {
-                            ruta = "/images/campo/verdeOscuroEsquinaInferiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaInferiorIzquierda");
+
                         } else {
-                            ruta = "/images/campo/verdeOscuroBordeAbajo.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeAbajo");
+
                         }
                     }
                 }
                 if (i >= 9 && i <= 12) { // Galleta
                     if (i == 9) {
                         if (j == 5) {
-                            ruta = "/images/campo/verdeClaroEsquinaInferiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaInferiorDerecha");
+
                         } else if (j == 6) {
-                            ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeIzquierda");
+
                         } else if (j == 7) {
-                            ruta = "/images/campo/verdeClaroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeIzquierda");
+
                         } else if (j == 8) {
-                            ruta = "/images/campo/verdeOscuroBordeIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeIzquierda");
+
                         } else if (j == 9) {
-                            ruta = "/images/campo/verdeClaroEsquinaSuperiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaSuperiorDerecha");
+
                         }
                     } else if (i == 10) {
                         if (j == 5) {
-                            ruta = "/images/campo/verdeOscuroEsquinaSuperiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaSuperiorDerecha");
+
                         } else if (j == 9) {
-                            ruta = "/images/campo/verdeOscuroEsquinaInferiorDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaInferiorDerecha");
+
                         }
                     } else if (i == 11) {
                         if (j == 5) {
-                            ruta = "/images/campo/verdeClaroEsquinaSuperiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaSuperiorIzquierda");
+
                         } else if (j == 9) {
-                            ruta = "/images/campo/verdeClaroEsquinaInferiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroEsquinaInferiorIzquierda");
+
                         }
                     } else {
                         if (j == 5) {
-                            ruta = "/images/campo/verdeOscuroEsquinaInferiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaInferiorIzquierda");
+
                         } else if (j == 6) {
-                            ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeDerecha");
+
                         } else if (j == 7) {
-                            ruta = "/images/campo/verdeOscuroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroBordeDerecha");
+
                         } else if (j == 8) {
-                            ruta = "/images/campo/verdeClaroBordeDerecha.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeClaroBordeDerecha");
+
                         } else if (j == 9) {
-                            ruta = "/images/campo/verdeOscuroEsquinaSuperiorIzquierda.jpg";
+                            ruta = configuration.devolverRuta("rutaVerdeOscuroEsquinaSuperiorIzquierda");
+
                         }
                     }
                 }
@@ -359,6 +438,7 @@ public class ControladorJugarAmigo {
     }
 
     private void cargarJugadores() {
+
         // Primero vacio el campo
         for (int i = 0; i < borderPane.getJuego().getCampo()[0].length; i++) { //22
             for (int j = 0; j < borderPane.getJuego().getCampo().length; j++) { //15
@@ -429,7 +509,7 @@ public class ControladorJugarAmigo {
                             dorsal.setFill(equipoVisitante.getColorPrincipal());
                         }
                     }
-                    if (jugador.isTieneAmarilla()){ // Si tiene amarilla
+                    if (jugador.isTieneAmarilla()) { // Si tiene amarilla
                         camiseta.setStroke(Color.YELLOW);
                         camiseta.setStrokeWidth(3);
                     }
@@ -651,7 +731,7 @@ public class ControladorJugarAmigo {
         labelComentarista.setText(borderPane.getJuego().tirarApuerta(ultimaFilaSeleccionada, ultimaColumnaSeleccionada));
 
         ocultarOpciones();
-        if (borderPane.getJuego().comprobarFinal()){
+        if (borderPane.getJuego().comprobarFinal()) {
             finalizarPartido();
         } else {
             actualizarAvisos();
@@ -687,7 +767,7 @@ public class ControladorJugarAmigo {
                                 ocultarCasillasIluminadas();
                                 cargarJugadores();
                                 //consumirPA();
-                                if (borderPane.getJuego().comprobarFinal()){
+                                if (borderPane.getJuego().comprobarFinal()) {
                                     acabarTurno(null);
                                     rendirse(null);
                                 }
