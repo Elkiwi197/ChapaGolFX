@@ -19,7 +19,7 @@ public class DAOequipos {
     private Map<String, Integer> clasificacion = new LinkedHashMap<>();
 
     public void init() {
-        Equipo realMadrid = new Equipo("Real Madrid", 0, null, "4-4-2", Color.WHITE, Color.DARKBLUE, Color.GREENYELLOW, null, null, false);
+        Equipo realMadrid = new Equipo("Real Madrid", 0, "4-4-2", Color.WHITE, Color.DARKBLUE, Color.GREENYELLOW, null, null);
         List<Jugador> plantillaRealMadrid = new ArrayList<>();
         Jugador[] titularesRealMadrid = new Jugador[11];
         plantillaRealMadrid.add(new Portero("Thibaut Courtois", 1, "PO", 86, 90, 76, 89, 54, 91, 85, 89, 76, 93, 46, 90));
@@ -52,7 +52,7 @@ public class DAOequipos {
         realMadrid.setTitulares(titularesRealMadrid);
         liga.add(realMadrid);
 
-        Equipo barcelona = new Equipo("Barcelona", 0, null, "4-3-3", Color.RED, Color.BLUE, Color.ORANGE, null, null, false);
+        Equipo barcelona = new Equipo("Barcelona", 0, "4-3-3", Color.RED, Color.BLUE, Color.ORANGE, null, null);
         List<Jugador> plantillaBarcelona = new ArrayList<>();
         Jugador[] titularesBarcelona = new Jugador[11];
 
@@ -88,7 +88,7 @@ public class DAOequipos {
         barcelona.setTitulares(titularesBarcelona);
         liga.add(barcelona);
 
-        Equipo girona = new Equipo("Girona", 0, null, "4-3-3", Color.RED, Color.WHITE, Color.GREENYELLOW, null, null, false);
+        Equipo girona = new Equipo("Girona", 0, "4-3-3", Color.RED, Color.WHITE, Color.GREENYELLOW, null, null);
         List<Jugador> plantillaGirona = new ArrayList<>();
         Jugador[] titularesGirona = new Jugador[11];
 
@@ -124,7 +124,7 @@ public class DAOequipos {
         liga.add(girona);
 
 
-        Equipo racing = new Equipo("Real Racing Club", 0, null, "4-3-3", Color.WHITE, Color.LIME, Color.BLACK, null, null, false);
+        Equipo racing = new Equipo("Real Racing Club", 0, "4-3-3", Color.WHITE, Color.LIME, Color.BLACK, null, null);
         List<Jugador> plantillaRacing = new ArrayList<>();
         Jugador[] titularesRacing = new Jugador[11];
 

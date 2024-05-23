@@ -19,7 +19,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.TreeSet;
 
 public class ControladorModificarEquipo {
