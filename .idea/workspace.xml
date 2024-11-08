@@ -196,7 +196,7 @@
       <workItem from="1716406291611" duration="6653000" />
       <workItem from="1716452888235" duration="4170000" />
       <workItem from="1716461989557" duration="2842000" />
-      <workItem from="1731079141430" duration="668000" />
+      <workItem from="1731079141430" duration="1287000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit - fallo al cargar login">
       <option name="closed" value="true" />
@@ -398,7 +398,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731079520439</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="primer commit otnto">
+      <option name="closed" value="true" />
+      <created>1731080161295</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1731080161295</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
