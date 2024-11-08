@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Launcher extends Application {
 
-    //CAMBIO TONTO 1
+    //CAMBIO TONTO 3
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("/fxml/principal.fxml"));
